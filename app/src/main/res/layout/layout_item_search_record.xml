@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/default_height_3"
+    android:background="@color/color_white"
+    >
+
+    <TextView
+        android:id="@+id/tv_title_name"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:text="标题"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/default_padding_2"
+        android:paddingRight="@dimen/default_padding_2"
+
+        />
+    <LinearLayout
+        android:id="@+id/ll_delete"
+        android:layout_width="@dimen/default_height_3"
+        android:layout_height="@dimen/default_height_3"
+        android:gravity="center"
+        android:visibility="gone"
+        >
+
+        <ImageView
+
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@mipmap/image_delete"
+            />
+    </LinearLayout>
+
+</LinearLayout>

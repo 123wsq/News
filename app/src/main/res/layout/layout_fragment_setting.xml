@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_backgroud_color"
+    android:orientation="vertical"
+    >
+    <include layout="@layout/layout_public_titlebar"></include>
+
+    <LinearLayout
+        android:id="@+id/ll_account_setting"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_height_2"
+        android:background="@color/color_white"
+        android:paddingLeft="@dimen/default_padding_2"
+        android:paddingRight="@dimen/default_padding_2"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/default_margin_2"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="@string/str_setting_account_text"
+            android:gravity="center_vertical"
+            />
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@mipmap/image_right"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_clear_cache"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_height_2"
+        android:background="@color/color_white"
+        android:paddingLeft="@dimen/default_padding_2"
+        android:paddingRight="@dimen/default_padding_2"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/default_margin_4"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="@string/str_clear_cache_text"
+            android:gravity="center_vertical"
+            />
+        <TextView
+            android:id="@+id/tv_cache_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1MB"
+            android:layout_marginRight="@dimen/default_margin_2"
+            />
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@mipmap/image_right"
+            />
+    </LinearLayout>
+</LinearLayout>

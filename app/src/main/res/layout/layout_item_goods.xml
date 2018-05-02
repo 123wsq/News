@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/ll_layout"
+
+    >
+
+    <TextView
+        android:id="@+id/tv_goods_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_gray"
+        android:paddingLeft="@dimen/default_padding_2"
+        android:textColor="@color/color_white"
+        />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp">
+            <ImageView
+                android:id="@+id/image_goods_icon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                />
+            <ImageView
+                android:id="@+id/image_tag"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+        </RelativeLayout>
+    <TextView
+        android:id="@+id/tv_goods_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="2"
+        android:text=""
+        android:textColor="@color/black"
+        android:paddingLeft="@dimen/default_padding_2"
+        android:paddingRight="@dimen/default_padding_2"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tv_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:text="@string/str_more_text"
+            android:textColor="@color/color_blue"
+            android:paddingRight="@dimen/default_padding_2"
+            />
+    </LinearLayout>
+
+</LinearLayout>

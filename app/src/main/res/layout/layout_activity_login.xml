@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_white"
+    >
+
+    <include layout="@layout/layout_public_titlebar"></include>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="@dimen/default_height_2"
+        >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/image_round_app_icon"
+                />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/default_height_3"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="@dimen/default_margin_1"
+                    android:layout_marginRight="@dimen/default_margin_1"
+                    android:layout_centerInParent="true"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/default_height_3"
+                        android:gravity="center_vertical"
+                        >
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@mipmap/image_user"
+                            />
+                        <EditText
+                            android:id="@+id/et_username"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingLeft="@dimen/default_padding_2"
+                            android:inputType="number"
+                            android:background="@drawable/shape_edit_no_stroke"
+                            android:hint="@string/str_please_tel_text"
+                            android:textColorHint="@color/color_gray"
+                            android:textSize="@dimen/default_text_size_3"
+                            />
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/default_height_line"
+                        android:background="@color/line_color"
+                        ></View>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/default_height_3"
+                        android:gravity="center_vertical"
+                        >
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@mipmap/image_suo"
+                            />
+                        <EditText
+                            android:id="@+id/et_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:inputType="textPassword"
+                            android:paddingLeft="@dimen/default_padding_2"
+                            android:background="@drawable/shape_edit_no_stroke"
+                            android:hint="@string/str_please_password_text"
+                            android:textColorHint="@color/color_gray"
+                            android:textSize="@dimen/default_text_size_3"
+                            />
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/default_height_line"
+                        android:background="@color/line_color"
+                        ></View>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_margin_2"
+                        >
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="20dp"
+                            />
+                        <TextView
+                            android:id="@+id/tv_no_account_register"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="@string/str_no_account_register_text"
+
+                            />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_login"
+                        style="@style/default_button"
+                        android:text="@string/str_login_text"
+                        android:layout_marginTop="@dimen/default_height_4"
+                        />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:orientation="horizontal"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    >
+                    <ImageView
+                        android:layout_width="@dimen/default_height_2"
+                        android:layout_height="@dimen/default_height_2"
+                        android:src="@mipmap/image_qq_icon"/>
+
+                    <ImageView
+                        android:layout_width="@dimen/default_height_2"
+                        android:layout_height="@dimen/default_height_2"
+                        android:src="@mipmap/image_qq_icon"
+                        android:layout_marginLeft="@dimen/default_height_1"
+                        />
+                </LinearLayout>
+
+            </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

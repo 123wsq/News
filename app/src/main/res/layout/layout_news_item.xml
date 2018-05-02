@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/ll_news_item"
+    >
+
+    <TextView
+        android:id="@+id/tv_item_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="心不善，人不正，大富大贵没有用！"
+        android:singleLine="true"
+        android:textColor="@color/default_main_font_color"
+        android:textSize="@dimen/default_text_size_3"
+        android:layout_marginTop="@dimen/default_margin_3"
+        android:layout_marginLeft="@dimen/default_margin_3"
+        android:layout_marginRight="@dimen/default_margin_3"
+        />
+
+    <LinearLayout
+        android:id="@+id/ll_image_layout"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/default_margin_4"
+        android:layout_marginLeft="@dimen/default_margin_3"
+        android:layout_marginRight="@dimen/default_margin_3"
+        >
+        <ImageView
+            android:id="@+id/iv_image_1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            />
+        <ImageView
+            android:id="@+id/iv_image_2"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:layout_marginLeft="@dimen/default_margin_4"
+            android:layout_marginRight="@dimen/default_margin_4"
+
+            />
+        <ImageView
+            android:id="@+id/iv_image_3"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_text_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        >
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_video_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        >
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_height_4"
+        android:orientation="horizontal"
+        android:layout_marginLeft="@dimen/default_margin_2"
+        android:layout_marginRight="@dimen/default_margin_2"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="@dimen/default_margin_4"
+        >
+
+        <TextView
+            android:id="@+id/tv_recommend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="推荐"
+            android:textSize="@dimen/default_text_size_4"
+            android:textColor="@color/default_color_gray_2"
+            android:paddingLeft="@dimen/default_padding_4"
+            android:paddingRight="@dimen/default_padding_4"
+            android:background="@drawable/shape_edit_stroken"
+            />
+        <TextView
+            android:id="@+id/tv_source"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="腾讯网"
+            android:textSize="@dimen/default_text_size_4"
+            android:textColor="@color/default_color_gray_2"
+            android:layout_marginLeft="@dimen/default_margin_2"
+            />
+        <TextView
+            android:id="@+id/tv_clickNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="8032阅读"
+            android:textSize="@dimen/default_text_size_4"
+            android:textColor="@color/default_color_gray_2"
+            android:layout_marginLeft="@dimen/default_margin_2"
+            />
+    </LinearLayout>
+</LinearLayout>

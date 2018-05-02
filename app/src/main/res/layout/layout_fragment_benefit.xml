@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_backgroud_color"
+    android:orientation="vertical"
+    >
+
+    <include layout="@layout/layout_public_titlebar"></include>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_height_3"
+        android:text="@string/str_benefit_activities_text"
+        android:textColor="@color/color_blue"
+        android:textSize="@dimen/default_text_size_2"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/default_padding_2"
+        android:background="@color/color_white"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_height_line"
+        android:background="@color/color_blue"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/default_margin_3"
+        >
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/refreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_RecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                />
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    </LinearLayout>
+
+</LinearLayout>

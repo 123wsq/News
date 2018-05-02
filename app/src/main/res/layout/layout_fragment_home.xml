@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_white"
+    >
+
+    <LinearLayout
+        android:id="@+id/ll_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_height_2"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/red"
+        >
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:gravity="center"
+            android:src="@mipmap/imgae_sesame_street"
+            />
+        <LinearLayout
+            android:id="@+id/ll_search"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_height_4"
+            android:background="@drawable/shape_layout"
+            android:layout_marginRight="@dimen/default_margin_1"
+            android:layout_marginLeft="@dimen/default_margin_3"
+            android:gravity="center_vertical"
+            >
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginLeft="@dimen/default_margin_2"
+                android:src="@mipmap/image_search"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/default_padding_3"
+        android:paddingRight="@dimen/default_padding_3"
+        >
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_height_3"
+            android:background="@color/color_white"
+            >
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_RecyclerView_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_height_line"
+            android:background="@color/default_backgroud_color"
+            />
+
+        <TextView
+            android:id="@+id/tv_not_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/str_not_data_text"
+            android:gravity="center"
+            android:textSize="@dimen/default_text_size_2"
+            android:visibility="gone"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_white"
+            >
+            <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                android:id="@+id/refreshLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_RecyclerView_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    />
+            </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

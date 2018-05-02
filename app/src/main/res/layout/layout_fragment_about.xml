@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_backgroud_color"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    >
+
+    <include layout="@layout/layout_public_titlebar"></include>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/image_round_app_icon"
+        android:layout_marginTop="@dimen/default_height_1"
+        />
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_height_3"
+        android:layout_marginTop="@dimen/default_margin_2"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="@string/str_app_name_text"
+            android:gravity="right|center_vertical"
+
+            />
+        <TextView
+            android:id="@+id/tv_app_name"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/default_margin_2"
+
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_height_3">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="@string/str_app_version_text"
+            android:gravity="right|center_vertical"
+
+            />
+        <TextView
+            android:id="@+id/tv_app_version"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/default_margin_2"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_height_3">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="@string/str_service_text"
+            android:gravity="right|center_vertical"
+
+            />
+        <TextView
+            android:id="@+id/tv_service"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/default_margin_2"
+            android:autoLink="phone"
+            />
+    </LinearLayout>
+</LinearLayout>

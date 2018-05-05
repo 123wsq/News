@@ -1,1 +1,1 @@
-include ':app',':magicindicator', ':pay'
+include ':app',':magicindicator', ':pay', ':thirdplugin'

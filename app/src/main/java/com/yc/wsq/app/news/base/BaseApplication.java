@@ -6,6 +6,7 @@ import android.support.multidex.MultiDex;
 import android.support.v7.app.AppCompatDelegate;
 
 
+import com.mob.MobSDK;
 import com.scwang.smartrefresh.header.TaurusHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreater;
@@ -17,7 +18,6 @@ import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.wsq.library.tools.ToastUtils;
 import com.wsq.library.utils.Utils;
-import com.yc.wsq.app.news.R;
 import com.yc.wsq.app.news.constant.Constant;
 import com.yc.wsq.app.news.tools.SharedTools;
 
@@ -37,6 +37,8 @@ public class BaseApplication extends LitePalApplication {
         Constant.getInstance();
         SharedTools.getInstance(this);
         Utils.init(this);
+        MobSDK.init(this);
+
     }
 
     @Override

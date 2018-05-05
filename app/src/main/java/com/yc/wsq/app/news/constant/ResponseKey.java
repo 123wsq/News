@@ -100,15 +100,21 @@ public class ResponseKey {
     public final String source = "source";
     public final String description = "description";
     public final String ctime = "ctime";
-
+    public final String type = "type";
+    public final String money_type = "money_type";
+    public final String price = "price";
+    public final String partner = "partner";
+    public final String private_key = "private_key";
+    public final String order_sn = "order_sn";
+    public final String times = "times";
+    public final String sex = "sex";
 
 
     /**
      * ********************************************************************************************
      * 测试key
      */
-    public final String user_name = "";
-    public final String user_psd = "";
+
     public final String rsp_code = "rsp_code";
 
 
@@ -117,10 +123,7 @@ public class ResponseKey {
     public final String image = "image";
     public final String goods = "goods";
     public final String goods_type = "goods_type";
-    public final String benefit = "benefit";
-    public final String benefit_header = "benefit_header";
-    public final String benefit_desc = "benefit_desc";
-    public final String benefit_time = "benefit_time";
+
 
     public final String trade = "trade";
     public final String trade_type = "trade_type";

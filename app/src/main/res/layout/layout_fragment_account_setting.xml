@@ -92,6 +92,7 @@
             />
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/ll_birthday"
         android:layout_width="match_parent"
         android:layout_height="@dimen/default_height_2"
         android:background="@color/color_white"
@@ -134,16 +135,33 @@
             android:text="@string/str_sex_text"
             android:gravity="center_vertical"
             />
-        <TextView
+        <RadioGroup
+            android:id="@+id/rg_sex"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/default_margin_2"
-            />
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:src="@mipmap/image_right"
-            />
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginRight="@dimen/default_margin_3"
+            android:gravity="center"
+            >
+
+            <RadioButton
+                android:id="@+id/rb_sex_boy"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/str_sex_boy_text"
+                android:textColor="@color/default_color_gray_1"
+                />
+            <RadioButton
+                android:id="@+id/rb_sex_lady"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/str_sex_lady_text"
+                android:textColor="@color/default_color_gray_1"
+                />
+        </RadioGroup>
+
     </LinearLayout>
 
 

@@ -2,22 +2,19 @@ package com.yc.wsq.app.news.mvp.presenter;
 
 import com.wsq.library.tools.ToastUtils;
 import com.yc.wsq.app.news.mvp.callback.Callback;
-import com.yc.wsq.app.news.mvp.model.impl.BenefitModelImpl;
-import com.yc.wsq.app.news.mvp.model.impl.ShopModelImpl;
-import com.yc.wsq.app.news.mvp.model.inter.BenefitModelInter;
-import com.yc.wsq.app.news.mvp.model.inter.ShopModelInter;
+import com.yc.wsq.app.news.mvp.model.impl.RequestHttpImpl;
+import com.yc.wsq.app.news.mvp.model.inter.RequestHttpInter;
 import com.yc.wsq.app.news.mvp.view.BaseView;
-import com.yc.wsq.app.news.mvp.view.BenefitView;
 import com.yc.wsq.app.news.mvp.view.ShopView;
 
 import java.util.Map;
 
 public class ShopPresenter<T extends BaseView> extends BasePresenter<T> {
 
-    private ShopModelInter shopModel;
 
+    private RequestHttpInter requestHttp;
     public ShopPresenter(){
-        shopModel = new ShopModelImpl();
+        requestHttp = new RequestHttpImpl();
     }
 
     /**
@@ -37,31 +34,36 @@ public class ShopPresenter<T extends BaseView> extends BasePresenter<T> {
                 throw new Exception(e.getMessage());
             }
             view.showLoadding();
-            shopModel.onGetShopList("", param, new Callback<Map<String, Object>>() {
-               @Override
-               public void onSuccess(Map<String, Object> data) {
-                   if (view != null){
+            requestHttp.onSendGet("", param, new Callback<Map<String, Object>>() {
+                @Override
+                public void onSuccess(Map<String, Object> data) {
+                    if (view != null){
                        view.onShopResponse(data);
                    }
-               }
+                }
 
-               @Override
-               public void onFailure(String msg) {
-                   ToastUtils.onToast(msg);
-               }
+                @Override
+                public void onFailure(String msg) {
+                    ToastUtils.onToast(msg);
+                }
 
-               @Override
-               public void onError() {
-               }
+                @Override
+                public void onOutTime(String msg) {
+                    ToastUtils.onToast(msg);
+                    if (view != null)
+                        view.onReLogin();
+                }
 
-               @Override
-               public void onComplete() {
 
-                   if (view != null){
+
+                @Override
+                public void onComplete() {
+                    if (view != null){
                        view.dismissLoadding();
                    }
-               }
-           });
+                }
+            });
+
         }
     }
 }

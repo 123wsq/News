@@ -134,29 +134,24 @@ public class BenefitFragment extends BaseFragment<BenefitView, BenefitPresenter<
     @Override
     public void onBenefitResponse(Map<String, Object> result) {
 
-        int status = (int) result.get(ResponseKey.getInstace().rsp_status);
 
-        if (status == -1){
-            ToastUtils.onToast(result.get(ResponseKey.getInstace().rsp_msg)+"");
-        }else {
             List<Map<String, Object>> list = (List<Map<String, Object>>) result.get(ResponseKey.getInstace().data);
             if (refreshState ==1){
                 mData.addAll(0, list);
             }else{
                 mData.addAll(list);
             }
-        }
-       onResetRefreshState();
-        mAdapter.notifyDataSetChanged();
+            onResetRefreshState();
+            mAdapter.notifyDataSetChanged();
     }
 
     public void onStartRequest(){
 
         Map<String, String> param = new HashMap<>();
         if (refreshState ==1){
-            param.put(ResponseKey.getInstace().max_id, mData.get(0).get(ResponseKey.getInstace().log_id)+"");
+            param.put(ResponseKey.getInstace().max_id, mData.get(0).get(ResponseKey.getInstace().id)+"");
         }else if(refreshState == 2){
-            param.put(ResponseKey.getInstace().min_id, mData.get(mData.size() -1).get(ResponseKey.getInstace().log_id)+"");
+            param.put(ResponseKey.getInstace().min_id, mData.get(mData.size() -1).get(ResponseKey.getInstace().id)+"");
         }
         try {
             ipresenter.onGetBenefitList(param);

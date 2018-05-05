@@ -1,10 +1,12 @@
 package com.yc.wsq.app.news.base;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.wsq.library.views.view.LoadingDialog;
+import com.yc.wsq.app.news.activity.LoginActivity;
 import com.yc.wsq.app.news.mvp.presenter.BasePresenter;
 import com.yc.wsq.app.news.mvp.view.BaseView;
 
@@ -65,5 +67,11 @@ public abstract class BaseActivity<V, T extends BasePresenter<V >> extends AppCo
     @Override
     public Context getContext() {
         return this;
+    }
+
+    @Override
+    public void onReLogin() {
+
+        startActivity(new Intent(this, LoginActivity.class));
     }
 }

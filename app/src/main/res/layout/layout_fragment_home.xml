@@ -12,7 +12,7 @@
         android:layout_height="@dimen/default_height_2"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:background="@color/red"
+        android:background="@color/color_theme"
         >
 
 
@@ -21,24 +21,35 @@
             android:layout_height="35dp"
             android:gravity="center"
             android:src="@mipmap/imgae_sesame_street"
+            android:layout_marginLeft="@dimen/default_margin_2"
             />
         <LinearLayout
             android:id="@+id/ll_search"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="@dimen/default_height_4"
             android:background="@drawable/shape_layout"
-            android:layout_marginRight="@dimen/default_margin_1"
-            android:layout_marginLeft="@dimen/default_margin_3"
+            android:layout_marginRight="@dimen/default_margin_3"
+            android:layout_marginLeft="@dimen/default_margin_2"
             android:gravity="center_vertical"
             >
             <ImageView
+
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_marginLeft="@dimen/default_margin_2"
                 android:src="@mipmap/image_search"
                 />
         </LinearLayout>
-
+        <ImageView
+            android:id="@+id/iv_qcode_scan"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:gravity="center"
+            android:src="@mipmap/image_scan"
+            android:layout_marginLeft="@dimen/default_margin_3"
+            android:layout_marginRight="@dimen/default_margin_2"
+            />
     </LinearLayout>
 
     <LinearLayout

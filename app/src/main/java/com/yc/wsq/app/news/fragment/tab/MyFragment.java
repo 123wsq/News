@@ -17,9 +17,15 @@ import com.yc.wsq.app.news.base.BaseFragment;
 import com.yc.wsq.app.news.constant.ResponseKey;
 import com.yc.wsq.app.news.constant.Urls;
 import com.yc.wsq.app.news.mvp.presenter.BasePresenter;
+import com.yc.wsq.app.news.mvp.presenter.UserPresenter;
+import com.yc.wsq.app.news.mvp.view.UserMainView;
+import com.yc.wsq.app.news.mvp.view.UserView;
 import com.yc.wsq.app.news.tools.ParamFormat;
 import com.yc.wsq.app.news.tools.ParamValidate;
 import com.yc.wsq.app.news.tools.SharedTools;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -27,7 +33,7 @@ import butterknife.OnClick;
 /**
  * 我的页面
  */
-public class MyFragment extends BaseFragment{
+public class MyFragment extends BaseFragment<UserMainView, UserPresenter<UserMainView>> implements UserMainView{
 
     public static final String TAG = MyFragment.class.getName();
     public static final String  INTERFACE_WITHP = TAG+_INTERFACE_WITHP;
@@ -38,8 +44,8 @@ public class MyFragment extends BaseFragment{
 
 
     @Override
-    protected BasePresenter createPresenter() {
-        return null;
+    protected UserPresenter<UserMainView> createPresenter() {
+        return new UserPresenter<>();
     }
 
     @Override
@@ -55,9 +61,13 @@ public class MyFragment extends BaseFragment{
         tv_title.setText(getResources().getString(R.string.str_my_text));
 
         onUserStatusChangeListener();
+
+
     }
 
-    @OnClick({R.id.ll_user_login, R.id.ll_my_wallet, R.id.ll_integral, R.id.ll_member_upgrade, R.id.ll_about, R.id.ll_setting})
+    @OnClick({R.id.ll_user_login, R.id.ll_my_wallet, R.id.ll_integral, R.id.ll_member_upgrade,
+            R.id.ll_about, R.id.ll_setting, R.id.ll_collect, R.id.ll_history, R.id.ll_comment,
+            R.id.ll_message, R.id.ll_focus, R.id.ll_discount, R.id.ll_help_feedback})
     public void onClick(View view){
         String uid = SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().user_id);
         String token = SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().token);
@@ -93,6 +103,27 @@ public class MyFragment extends BaseFragment{
             case R.id.ll_setting: //设置 param =6;
                 mFunctionsManage.invokeFunction(INTERFACE_WITHP, 6);
                 break;
+            case R.id.ll_collect: //收藏 param =7;
+                mFunctionsManage.invokeFunction(INTERFACE_WITHP, 7);
+                break;
+            case R.id.ll_history: //历史记录 param =8;
+                mFunctionsManage.invokeFunction(INTERFACE_WITHP, 8);
+                break;
+            case R.id.ll_comment: //评论  param =9
+                mFunctionsManage.invokeFunction(INTERFACE_WITHP, 9);
+                break;
+            case R.id.ll_message: // 消息  param = 10
+                mFunctionsManage.invokeFunction(INTERFACE_WITHP, 10);
+                break;
+            case R.id.ll_focus: //我的关注 param =11;
+                mFunctionsManage.invokeFunction(INTERFACE_WITHP, 11);
+                break;
+            case R.id.ll_discount:  // 优惠券 param = 12;
+                mFunctionsManage.invokeFunction(INTERFACE_WITHP, 12);
+                break;
+            case R.id.ll_help_feedback: //帮助与反馈 param =13;
+                mFunctionsManage.invokeFunction(INTERFACE_WITHP, 13);
+                break;
             default:
                 break;
         }
@@ -118,5 +149,48 @@ public class MyFragment extends BaseFragment{
         }
         String nickname = SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().nickname);
         tv_userName.setText(TextUtils.isEmpty(nickname)? "点击登录" :nickname);
+    }
+
+    /**
+     * 获取用户信息
+     */
+    private void onGetUserInfo(){
+        Map<String, String> param = new HashMap<>();
+
+        try {
+            ipresenter.onGetUserInfo(param);
+        } catch (Exception e) {
+            ToastUtils.onToast(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private void onHideLogin(){
+        Map<String, String> param = new HashMap<>();
+
+        try {
+            String username = SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().username);
+            String password = SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().password);
+            param.put(ResponseKey.getInstace().username, username);
+            param.put(ResponseKey.getInstace().password, password);
+            ipresenter.onUserLogin(param);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @Override
+    public void onUserInfoResponse(Map<String, Object> result) {
+
+        int status = (int) result.get(ResponseKey.getInstace().rsp_status);
+        if (status == 1){
+//            onGetUserInfo();
+        }
+    }
+
+    @Override
+    public void onHideLoginResponse(Map<String, Object> result) {
+
     }
 }

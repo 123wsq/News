@@ -1,5 +1,8 @@
 package com.yc.wsq.app.news.mvp.presenter;
 
+import android.content.Intent;
+import android.support.v7.widget.RecyclerView;
+
 import com.wsq.library.tools.ToastUtils;
 import com.yc.wsq.app.news.constant.Constant;
 import com.yc.wsq.app.news.constant.ResponseKey;
@@ -10,8 +13,10 @@ import com.yc.wsq.app.news.mvp.model.impl.UserModelImpl;
 import com.yc.wsq.app.news.mvp.model.inter.RequestHttpInter;
 import com.yc.wsq.app.news.mvp.model.inter.UserModelInter;
 import com.yc.wsq.app.news.mvp.view.BaseView;
+import com.yc.wsq.app.news.mvp.view.RechargeView;
 import com.yc.wsq.app.news.mvp.view.UserRegisterView;
 import com.yc.wsq.app.news.mvp.view.UserView;
+import com.yc.wsq.app.news.mvp.view.WithdrawView;
 import com.yc.wsq.app.news.tools.ParamValidate;
 import com.yc.wsq.app.news.tools.SharedTools;
 
@@ -47,7 +52,7 @@ public class UserPresenter<T extends BaseView> extends BasePresenter<T> {
                     @Override
                     public void onSuccess(Map<String, Object> data) {
                         if (view != null) {
-                            SharedTools.getInstance(view.getContext()).onPutData(Constant.getInstance().SESSION, data.get(ResponseKey.getInstace().result).toString());
+//                            SharedTools.getInstance(view.getContext()).onPutData(Constant.getInstance().SESSION, data.get(ResponseKey.getInstace().result).toString());
                             view.onResponseData(data);
                         }
                     }
@@ -58,9 +63,9 @@ public class UserPresenter<T extends BaseView> extends BasePresenter<T> {
                     }
 
                     @Override
-                    public void onError() {
-
+                    public void onOutTime(String msg) {
                     }
+
 
                     @Override
                     public void onComplete() {
@@ -92,7 +97,8 @@ public class UserPresenter<T extends BaseView> extends BasePresenter<T> {
 
         if (userView != null) {
             userView.showLoadding();
-            requestHttp.onSendPost("", param, new Callback<Map<String, Object>>() {
+            String url = Urls.HOST + Urls.REGISTER;
+            requestHttp.onSendPost(url, param, new Callback<Map<String, Object>>() {
                 @Override
                 public void onSuccess(Map<String, Object> data) {
                     if (userView != null) {
@@ -106,9 +112,10 @@ public class UserPresenter<T extends BaseView> extends BasePresenter<T> {
                 }
 
                 @Override
-                public void onError() {
+                public void onOutTime(String msg) {
 
                 }
+
 
                 @Override
                 public void onComplete() {
@@ -139,7 +146,8 @@ public class UserPresenter<T extends BaseView> extends BasePresenter<T> {
 
         if (userView != null) {
             userView.showLoadding();
-            requestHttp.onSendPost("", param, new Callback<Map<String, Object>>() {
+            String url = Urls.HOST + Urls.GET_VALIDATE_CODE;
+            requestHttp.onSendPost(url, param, new Callback<Map<String, Object>>() {
                 @Override
                 public void onSuccess(Map<String, Object> data) {
                     if (userView != null) {
@@ -153,9 +161,63 @@ public class UserPresenter<T extends BaseView> extends BasePresenter<T> {
                 }
 
                 @Override
-                public void onError() {
+                public void onOutTime(String msg) {
 
                 }
+
+                @Override
+                public void onComplete() {
+                    if (userView != null) {
+                        userView.dismissLoadding();
+                    }
+                }
+            });
+        }
+
+    }
+
+
+    /**
+     * 获取用户信息
+     * @param param
+     * @throws Exception
+     */
+    public void onGetUserInfo(Map<String, String> param) throws Exception{
+
+        final UserRegisterView userView = (UserRegisterView) getView();
+
+        try {
+            ParamValidate.getInstance().onValidateUserName(param.get(ResponseKey.getInstace().mobile));
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+
+
+        if (userView != null) {
+            userView.showLoadding();
+            final String url = Urls.HOST + Urls.GET_VALIDATE_CODE;
+            requestHttp.onSendPost(url, param, new Callback<Map<String, Object>>() {
+                @Override
+                public void onSuccess(Map<String, Object> data) {
+                    if (userView != null) {
+                        userView.onGetValidateData(data);
+                    }
+                }
+
+                @Override
+                public void onFailure(String msg) {
+                    ToastUtils.onToast(msg);
+                }
+
+                @Override
+                public void onOutTime(String msg) {
+                    ToastUtils.onToast(msg);
+                    if (url != null)
+                        userView.onReLogin();
+
+                }
+
+
 
                 @Override
                 public void onComplete() {
@@ -202,9 +264,13 @@ public class UserPresenter<T extends BaseView> extends BasePresenter<T> {
                 }
 
                 @Override
-                public void onError() {
-
+                public void onOutTime(String msg) {
+                    ToastUtils.onToast(msg);
+                    if (userView != null)
+                        userView.onReLogin();
                 }
+
+
 
                 @Override
                 public void onComplete() {
@@ -250,9 +316,12 @@ public class UserPresenter<T extends BaseView> extends BasePresenter<T> {
                 }
 
                 @Override
-                public void onError() {
-
+                public void onOutTime(String msg) {
+                    ToastUtils.onToast(msg);
+                    if (userView != null)
+                        userView.onReLogin();
                 }
+
 
                 @Override
                 public void onComplete() {
@@ -264,4 +333,315 @@ public class UserPresenter<T extends BaseView> extends BasePresenter<T> {
         }
 
     }
+
+    /**
+     * 设置提现密码
+     * @param param
+     * @throws Exception
+     */
+    public void onSettingWithdrawPassword(Map<String, String> param) throws Exception{
+
+        final UserView userView = (UserView) getView();
+
+//        try {
+//            ParamValidate.getInstance().onValidateUserName(param.get(ResponseKey.getInstace().user_name));
+//            ParamValidate.getInstance().onValidateUserPsd(param.get(ResponseKey.getInstace().user_psd));
+//        }catch (Exception e){
+//            throw new Exception(e.getMessage());
+//        }
+
+
+        if (userView != null) {
+            userView.showLoadding();
+            requestHttp.onSendPost("", param, new Callback<Map<String, Object>>() {
+                @Override
+                public void onSuccess(Map<String, Object> data) {
+                    if (userView != null) {
+//                        userView.onRegisterData(data);
+                    }
+                }
+
+                @Override
+                public void onFailure(String msg) {
+                    ToastUtils.onToast(msg);
+                }
+
+                @Override
+                public void onOutTime(String msg) {
+                    ToastUtils.onToast(msg);
+                    if (userView != null)
+                        userView.onReLogin();
+                }
+
+
+
+                @Override
+                public void onComplete() {
+                    if (userView != null) {
+                        userView.dismissLoadding();
+                    }
+                }
+            });
+        }
+
+    }
+
+    /**
+     * 验证提现密码
+     * @param param
+     * @throws Exception
+     */
+    public void onValidateWithdrawPassword(Map<String, String> param) throws Exception{
+
+        final WithdrawView view = (WithdrawView) getView();
+
+//        try {
+//            ParamValidate.getInstance().onValidateUserName(param.get(ResponseKey.getInstace().user_name));
+//            ParamValidate.getInstance().onValidateUserPsd(param.get(ResponseKey.getInstace().user_psd));
+//        }catch (Exception e){
+//            throw new Exception(e.getMessage());
+//        }
+
+
+        if (view != null) {
+            view.showLoadding();
+            requestHttp.onSendPost("", param, new Callback<Map<String, Object>>() {
+                @Override
+                public void onSuccess(Map<String, Object> data) {
+                    if (view != null) {
+                        view.onValidateWithdrawPasswordResponse(data);
+                    }
+                }
+
+                @Override
+                public void onFailure(String msg) {
+                    ToastUtils.onToast(msg);
+                }
+
+                @Override
+                public void onOutTime(String msg) {
+                    ToastUtils.onToast(msg);
+                    if (view != null)
+                        view.onReLogin();
+                }
+
+
+
+                @Override
+                public void onComplete() {
+                    if (view != null) {
+                        view.dismissLoadding();
+                    }
+                }
+            });
+        }
+
+    }
+
+    /**
+     * 添加银行卡
+     * @param param
+     * @throws Exception
+     */
+    public void onAddBankCard(Map<String, String> param) throws Exception{
+
+        final UserView userView = (UserView) getView();
+
+//        try {
+//            ParamValidate.getInstance().onValidateUserName(param.get(ResponseKey.getInstace().user_name));
+//            ParamValidate.getInstance().onValidateUserPsd(param.get(ResponseKey.getInstace().user_psd));
+//        }catch (Exception e){
+//            throw new Exception(e.getMessage());
+//        }
+
+
+        if (userView != null) {
+            userView.showLoadding();
+            requestHttp.onSendPost("", param, new Callback<Map<String, Object>>() {
+                @Override
+                public void onSuccess(Map<String, Object> data) {
+                    if (userView != null) {
+//                        userView.onRegisterData(data);
+                    }
+                }
+
+                @Override
+                public void onFailure(String msg) {
+                    ToastUtils.onToast(msg);
+                }
+
+                @Override
+                public void onOutTime(String msg) {
+                    ToastUtils.onToast(msg);
+                    if (userView != null)
+                        userView.onReLogin();
+                }
+
+
+                @Override
+                public void onComplete() {
+                    if (userView != null) {
+                        userView.dismissLoadding();
+                    }
+                }
+            });
+        }
+
+    }
+
+    /**
+     * 获取充值交易信息
+     * @param param
+     * @throws Exception
+     */
+    public void onGetTradeDetails(Map<String, String> param) throws Exception{
+
+        final RechargeView view = (RechargeView) getView();
+
+        try {
+            ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().uid));
+            ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().token));
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+
+
+        if (view != null) {
+            view.showLoadding();
+            String url = Urls.HOST + Urls.RECHARGE;
+            requestHttp.onSendPost(url, param, new Callback<Map<String, Object>>() {
+                @Override
+                public void onSuccess(Map<String, Object> data) {
+                    if (view != null) {
+                        view.onGetRechargeResponse(data);
+                    }
+                }
+
+                @Override
+                public void onFailure(String msg) {
+                    ToastUtils.onToast(msg);
+                }
+
+                @Override
+                public void onOutTime(String msg) {
+                    ToastUtils.onToast(msg);
+                    if (view != null)
+                        view.onReLogin();
+                }
+
+
+
+                @Override
+                public void onComplete() {
+                    if (view != null) {
+                        view.dismissLoadding();
+                    }
+                }
+            });
+        }
+
+    }
+
+    /**
+     * 充值成功通知服务器
+     * @param param
+     * @throws Exception
+     */
+    public void onNotificationServer(Map<String, String> param) throws Exception{
+
+        final RechargeView view = (RechargeView) getView();
+
+        try {
+            ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().uid));
+            ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().token));
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+
+
+        if (view != null) {
+            view.showLoadding();
+            String url = Urls.HOST + Urls.NOTIFICATION_SERVER;
+            requestHttp.onSendPost(url, param, new Callback<Map<String, Object>>() {
+                @Override
+                public void onSuccess(Map<String, Object> data) {
+                    if (view != null) {
+                        view.onNotificationResponse(data);
+                    }
+                }
+
+                @Override
+                public void onFailure(String msg) {
+                    ToastUtils.onToast(msg);
+                }
+
+                @Override
+                public void onOutTime(String msg) {
+                    ToastUtils.onToast(msg);
+                    if (view != null)
+                        view.onReLogin();
+                }
+
+                @Override
+                public void onComplete() {
+                    if (view != null) {
+                        view.dismissLoadding();
+                    }
+                }
+            });
+        }
+
+    }
+
+    /**
+     * 申请提现
+     * @param param
+     * @throws Exception
+     */
+    public void onApplyWithdraw(Map<String, String> param) throws Exception{
+
+        final WithdrawView view = (WithdrawView) getView();
+
+//        try {
+//            ParamValidate.getInstance().onValidateUserName(param.get(ResponseKey.getInstace().user_name));
+//            ParamValidate.getInstance().onValidateUserPsd(param.get(ResponseKey.getInstace().user_psd));
+//        }catch (Exception e){
+//            throw new Exception(e.getMessage());
+//        }
+
+
+        if (view != null) {
+            view.showLoadding();
+            requestHttp.onSendPost("", param, new Callback<Map<String, Object>>() {
+                @Override
+                public void onSuccess(Map<String, Object> data) {
+                    if (view != null) {
+                        view.onApplyWithdrawResponse(data);
+                    }
+                }
+
+                @Override
+                public void onFailure(String msg) {
+                    ToastUtils.onToast(msg);
+                }
+
+                @Override
+                public void onOutTime(String msg) {
+                    ToastUtils.onToast(msg);
+                    if (view != null)
+                        view.onReLogin();
+                }
+
+
+                @Override
+                public void onComplete() {
+                    if (view != null) {
+                        view.dismissLoadding();
+                    }
+                }
+            });
+        }
+
+    }
+
 }

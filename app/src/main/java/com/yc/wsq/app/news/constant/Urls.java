@@ -54,5 +54,19 @@ public class Urls {
     /**
      * 商城页面
      */
-    public static final String  SHOPPING = "http://www.tp2.com/Mobile/Index/index.html";
+    public static final String  SHOPPING = "http://h.yczmj.cn/Mobile/Index/index.html";
+
+    /**
+     * 会员升级
+     */
+    public static final String UPGRADE = "user/upgrade";
+    /**
+     * 账户充值
+     */
+    public static final String  RECHARGE= "user/chongzhi";
+
+    /**
+     * 充值成功通知服务器
+     */
+    public static final String NOTIFICATION_SERVER = "user/chongzhiback";
 }

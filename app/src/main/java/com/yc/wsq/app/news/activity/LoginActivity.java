@@ -17,6 +17,7 @@ import com.yc.wsq.app.news.mvp.view.UserView;
 import com.yc.wsq.app.news.tools.SharedTools;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -73,25 +74,30 @@ public class LoginActivity extends BaseActivity<UserView, UserPresenter<UserView
     @Override
     public void onResponseData(Map<String, Object> result) {
 
-        int status = (Integer) result.get(ResponseKey.getInstace().rsp_status);
-        if (status == 1){
-            SharedTools shared = SharedTools.getInstance(getContext());
-            Map<String, Object> data = (Map<String, Object>) result.get(ResponseKey.getInstace().result);
-            shared.onPutData(ResponseKey.getInstace().user_id,data.get(ResponseKey.getInstace().user_id)+"");
-            shared.onPutData(ResponseKey.getInstace().paypwd,data.get(ResponseKey.getInstace().paypwd)+"");
-            shared.onPutData(ResponseKey.getInstace().user_money,data.get(ResponseKey.getInstace().user_money)+"");
-            shared.onPutData(ResponseKey.getInstace().mobile,data.get(ResponseKey.getInstace().mobile)+"");
-            shared.onPutData(ResponseKey.getInstace().head_pic,data.get(ResponseKey.getInstace().head_pic)+"");
-            shared.onPutData(ResponseKey.getInstace().nickname,data.get(ResponseKey.getInstace().nickname)+"");
-            shared.onPutData(ResponseKey.getInstace().total_amount,data.get(ResponseKey.getInstace().total_amount)+"");
-            shared.onPutData(ResponseKey.getInstace().token,data.get(ResponseKey.getInstace().token)+"");
-            shared.onPutData(ResponseKey.getInstace().is_vip,data.get(ResponseKey.getInstace().is_vip)+"");
-            shared.onPutData(ResponseKey.getInstace().level_name,data.get(ResponseKey.getInstace().level_name)+"");
 
+            SharedTools shared = SharedTools.getInstance(getContext());
+            shared.onPutData(ResponseKey.getInstace().username, et_username.getText().toString().trim());
+            shared.onPutData(ResponseKey.getInstace().password, et_password.getText().toString().trim());
+            Map<String, Object> data = (Map<String, Object>) result.get(ResponseKey.getInstace().result);
+
+            Iterator<Map.Entry<String, Object>> it =  data.entrySet().iterator();
+            while (it.hasNext()){
+                Map.Entry<String, Object> entry =  it.next();
+                shared.onPutData(entry.getKey(), entry.getValue()+"");
+            }
+
+//            shared.onPutData(ResponseKey.getInstace().user_id,data.get(ResponseKey.getInstace().user_id)+"");
+//            shared.onPutData(ResponseKey.getInstace().paypwd,data.get(ResponseKey.getInstace().paypwd)+"");
+//            shared.onPutData(ResponseKey.getInstace().user_money,data.get(ResponseKey.getInstace().user_money)+"");
+//            shared.onPutData(ResponseKey.getInstace().mobile,data.get(ResponseKey.getInstace().mobile)+"");
+//            shared.onPutData(ResponseKey.getInstace().head_pic,data.get(ResponseKey.getInstace().head_pic)+"");
+//            shared.onPutData(ResponseKey.getInstace().nickname,data.get(ResponseKey.getInstace().nickname)+"");
+//            shared.onPutData(ResponseKey.getInstace().total_amount,data.get(ResponseKey.getInstace().total_amount)+"");
+//            shared.onPutData(ResponseKey.getInstace().token,data.get(ResponseKey.getInstace().token)+"");
+//            shared.onPutData(ResponseKey.getInstace().is_vip,data.get(ResponseKey.getInstace().is_vip)+"");
+//            shared.onPutData(ResponseKey.getInstace().level_name,data.get(ResponseKey.getInstace().level_name)+"");
             setResult(MainActivity.LOGIN_REQUEST_CODE);
             finish();
-        }else {
-            ToastUtils.onToast(result.get(ResponseKey.getInstace().rsp_msg)+"");
-        }
+
     }
 }

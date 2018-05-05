@@ -6,21 +6,19 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.orhanobut.logger.Logger;
-import com.wsq.library.utils.DensityUtil;
 import com.yc.wsq.app.news.R;
 import com.yc.wsq.app.news.base.BaseFragment;
 import com.yc.wsq.app.news.fragment.tab.BenefitFragment;
 import com.yc.wsq.app.news.fragment.tab.HomeFragment;
 import com.yc.wsq.app.news.fragment.tab.MyFragment;
 import com.yc.wsq.app.news.fragment.tab.ShopFragment;
-import com.yc.wsq.app.news.fragment.tab.ShopFragment2;
 import com.yc.wsq.app.news.mvp.presenter.BasePresenter;
+import com.yc.wsq.app.news.views.CustomViewPager;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
@@ -28,18 +26,16 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigat
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.CommonPagerTitleView;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 
 import butterknife.BindView;
 
-public class MainFragment extends BaseFragment implements ViewPager.OnPageChangeListener {
+public class MainFragment extends BaseFragment implements ViewPager.OnPageChangeListener, View.OnTouchListener {
 
     public static final String TAG = MainFragment.class.getName();
     public static final String INTERFACE = TAG ;
 
-    @BindView(R.id.vp_ViewPager) ViewPager vp_ViewPager;
+    @BindView(R.id.vp_ViewPager) CustomViewPager vp_ViewPager;
     @BindView(R.id.magic_indicator) MagicIndicator magic_indicator;
 
 
@@ -50,6 +46,9 @@ public class MainFragment extends BaseFragment implements ViewPager.OnPageChange
 
     private MyAdapter adapter;
     private  CommonNavigator commonNavigator;
+
+    private int curPage = 0;
+
     @Override
     protected BasePresenter createPresenter() {
         return null;
@@ -65,13 +64,14 @@ public class MainFragment extends BaseFragment implements ViewPager.OnPageChange
 
 
         fragments[0] = new HomeFragment();
-        fragments[1] = new ShopFragment2();
+        fragments[1] = new ShopFragment();
         fragments[2] = new BenefitFragment();
         fragments[3] = new MyFragment();
         initMagicIndicator();
         adapter = new MyAdapter(getActivity().getSupportFragmentManager());
         vp_ViewPager.setAdapter(adapter);
         vp_ViewPager.addOnPageChangeListener(this);
+        vp_ViewPager.setOnTouchListener(this);
         vp_ViewPager.setCurrentItem(0);
 
     }
@@ -176,16 +176,27 @@ public class MainFragment extends BaseFragment implements ViewPager.OnPageChange
     @Override
     public void onPageSelected(int position) {
 
+        curPage = position;
         if (position ==1){
             magic_indicator.setVisibility(View.GONE);
+            vp_ViewPager.setScanScroll(false);
         }else {
             magic_indicator.setVisibility(View.VISIBLE);
+            vp_ViewPager.setScanScroll(true);
         }
     }
 
     @Override
     public void onPageScrollStateChanged(int state) {
 
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        if (curPage==1){
+            return true;
+        }
+        return false;
     }
 
     private class MyAdapter extends FragmentPagerAdapter {

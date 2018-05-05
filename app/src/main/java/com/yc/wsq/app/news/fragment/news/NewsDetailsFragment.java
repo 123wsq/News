@@ -55,7 +55,7 @@ public class NewsDetailsFragment extends BaseFragment<NewsView, NewsPresenter<Ne
         onInitWebView();
 
 
-        handler.postDelayed(runnable, 5*1000);
+        handler.postDelayed(runnable, 10*1000);
     }
 
     private void onInitWebView(){

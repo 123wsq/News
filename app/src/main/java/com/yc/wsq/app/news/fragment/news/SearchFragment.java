@@ -3,6 +3,7 @@ package com.yc.wsq.app.news.fragment.news;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -68,7 +69,6 @@ public class SearchFragment extends BaseFragment<SearchView, NewsPresenter<Searc
     protected void initView() {
 
         onInitRecyclerView();
-        onSearchListener();
     }
 
     /**
@@ -117,6 +117,7 @@ public class SearchFragment extends BaseFragment<SearchView, NewsPresenter<Searc
         @Override
         public void onRecyclerItemClickListener(View view, int i) {
             et_search_content.setText(mHotData.get(i));
+            mFunctionsManage.invokeFunction(INTERFACE_WITHP, mHotData.get(i));
         }
 
         @Override
@@ -149,23 +150,11 @@ public class SearchFragment extends BaseFragment<SearchView, NewsPresenter<Searc
         }
     };
 
-    private void onSearchListener(){
-        et_search_content.setOnEditorActionListener(new EditText.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH){
-                    onSaveSearchRecord();
-                    mFunctionsManage.invokeFunction(INTERFACE_WITHP, et_search_content.getText().toString().trim());
-                }
-                return false;
-            }
-        });
-    }
 
-    @OnClick({R.id.tv_break, R.id.tv_clear_search_record})
+    @OnClick({R.id.ll_back, R.id.tv_clear_search_record, R.id.tv_search})
     public void onClick(View view){
         switch (view.getId()){
-            case R.id.tv_break:
+            case R.id.ll_back:
                 mFunctionsManage.invokeFunction(INTERFACE_BACK);
                 break;
             case R.id.tv_clear_search_record:
@@ -175,6 +164,15 @@ public class SearchFragment extends BaseFragment<SearchView, NewsPresenter<Searc
                     mRecordAdapter.notifyDataSetChanged();
                 } catch (Exception e) {
                     e.printStackTrace();
+                }
+                break;
+            case R.id.tv_search:
+                String searchContent = et_search_content.getText().toString().trim();
+                if (!TextUtils.isEmpty(searchContent)) {
+                    onSaveSearchRecord();
+                    mFunctionsManage.invokeFunction(INTERFACE_WITHP, et_search_content.getText().toString().trim());
+                }else {
+                    ToastUtils.onToast("请输入您要搜索的内容");
                 }
                 break;
         }

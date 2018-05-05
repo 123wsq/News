@@ -25,4 +25,9 @@ public class Constant {
      */
     public final String USER_RESULT = "USER_RESULT";
 
+    /**
+     * 重新登录
+     */
+    public final String ACTION_AGAIN_LOGIN = "reLogin";
+
 }

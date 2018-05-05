@@ -1,5 +1,6 @@
 package com.yc.wsq.app.news.fragment.tab;
 
+import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +17,7 @@ import com.wsq.library.tools.RecyclerViewDivider;
 import com.wsq.library.tools.ToastUtils;
 import com.wsq.library.utils.DensityUtil;
 import com.yc.wsq.app.news.R;
+import com.yc.wsq.app.news.activity.QRcodeScanActivity;
 import com.yc.wsq.app.news.adapter.NewsAdapter;
 import com.yc.wsq.app.news.adapter.TitleAdapter;
 import com.yc.wsq.app.news.base.BaseFragment;
@@ -212,11 +214,15 @@ public class HomeFragment extends BaseFragment<NewsView, NewsPresenter<NewsView>
         }
     };
 
-    @OnClick({R.id.ll_search})
+    @OnClick({R.id.ll_search, R.id.iv_qcode_scan})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.ll_search: //搜索 param= -1
                 mFunctionsManage.invokeFunction(INTERFACE_WITHP, -1);
+                break;
+            case R.id.iv_qcode_scan:
+
+                startActivity(new Intent(getActivity(), QRcodeScanActivity.class));
                 break;
         }
     }

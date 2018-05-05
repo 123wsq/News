@@ -15,4 +15,6 @@ public interface BaseView {
     void loadFail(String errorMsg);
 
     Context getContext();
+
+    void onReLogin();
 }

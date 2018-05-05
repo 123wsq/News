@@ -165,23 +165,18 @@ public class IntegralFragment extends BaseFragment<UserView, UserPresenter<UserV
     }
     @Override
     public void onResponseData(Map<String, Object> result) {
-        int status = (int) result.get(ResponseKey.getInstace().rsp_status);
         String points = (String) result.get(ResponseKey.getInstace().points);
         tv_total_integral.setText(points);
-        if (status == -1){
-            ToastUtils.onToast(result.get(ResponseKey.getInstace().rsp_msg)+"");
-        }else {
 
-            List<Map<String, Object>> list = (List<Map<String, Object>>) result.get(ResponseKey.getInstace().data);
-            if (refreshState ==1){
-                mData.addAll(0, list);
-            }else{
-                mData.addAll(list);
-            }
-
-            mAdapter.notifyDataSetChanged();
-            onResetRefreshState();
+        List<Map<String, Object>> list = (List<Map<String, Object>>) result.get(ResponseKey.getInstace().data);
+        if (refreshState ==1){
+            mData.addAll(0, list);
+        }else{
+            mData.addAll(list);
         }
+
+        mAdapter.notifyDataSetChanged();
+        onResetRefreshState();
     }
 
     /**

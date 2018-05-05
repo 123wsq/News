@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.yc.wsq.app.news.constant.Constant;
+import com.yc.wsq.app.news.constant.ResponseKey;
 
 /**
  * 数据缓存
@@ -72,5 +73,22 @@ public class SharedTools {
     }
     public long onGetLong(String key){
         return shared.getLong(key, -1);
+    }
+
+
+    public void onClearUser(){
+        onPutData(ResponseKey.getInstace().nickname, "");
+        onPutData(ResponseKey.getInstace().mobile, "");
+        onPutData(ResponseKey.getInstace().token, "");
+        onPutData(ResponseKey.getInstace().head_pic, "");
+        onPutData(ResponseKey.getInstace().username, "");
+        onPutData(ResponseKey.getInstace().password, "");
+        onPutData(ResponseKey.getInstace().user_id,"");
+        onPutData(ResponseKey.getInstace().paypwd,"");
+        onPutData(ResponseKey.getInstace().user_money,"");
+        onPutData(ResponseKey.getInstace().mobile,"");
+        onPutData(ResponseKey.getInstace().total_amount,"");
+        onPutData(ResponseKey.getInstace().is_vip,"");
+        onPutData(ResponseKey.getInstace().level_name,"");
     }
 }

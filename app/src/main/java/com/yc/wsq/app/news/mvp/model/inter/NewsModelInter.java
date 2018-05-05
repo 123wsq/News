@@ -37,5 +37,4 @@ public interface NewsModelInter {
      * @throws Exception
      */
     void onRemoveAllNativeSearchRecord() throws Exception;
-
 }

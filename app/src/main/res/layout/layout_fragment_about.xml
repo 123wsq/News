@@ -83,4 +83,24 @@
             android:autoLink="phone"
             />
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_height_3">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="QQ："
+            android:gravity="right|center_vertical"
+
+            />
+        <TextView
+            android:id="@+id/tv_qq"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/default_margin_2"
+            />
+    </LinearLayout>
 </LinearLayout>

@@ -88,14 +88,8 @@
             android:layout_height="@dimen/default_height_3"
 
             >
-
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/str_withdraw_money_available_text"
-                android:gravity="center_vertical"
-                />
-            <TextView
+                android:id="@+id/tv_withdraw_available"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="0"
@@ -104,17 +98,13 @@
                 android:layout_marginRight="@dimen/default_margin_4"
                 android:textColor="@color/color_blue"
                 />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/str_money_text"
-                android:gravity="center_vertical"
-                />
+
             <View
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"></View>
             <TextView
+                android:id="@+id/tv_withdraw_all"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="@string/str_all_withdraw_text"

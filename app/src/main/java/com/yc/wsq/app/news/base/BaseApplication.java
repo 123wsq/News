@@ -3,6 +3,7 @@ package com.yc.wsq.app.news.base;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.multidex.MultiDex;
+import android.support.v7.app.AppCompatDelegate;
 
 
 import com.scwang.smartrefresh.header.TaurusHeader;
@@ -63,4 +64,5 @@ public class BaseApplication extends LitePalApplication {
             }
         });
     }
+
 }

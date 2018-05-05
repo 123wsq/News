@@ -10,12 +10,10 @@ import android.view.KeyEvent;
 
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.entity.LocalMedia;
-import com.orhanobut.logger.Logger;
 import com.wsq.library.struct.FunctionNoParamNoResult;
 import com.wsq.library.struct.FunctionWithParamOnly;
 import com.wsq.library.struct.FunctionsManage;
 import com.wsq.library.tools.DialogTools;
-import com.wsq.library.utils.AppManager;
 import com.yc.wsq.app.news.R;
 import com.yc.wsq.app.news.base.BaseActivity;
 import com.yc.wsq.app.news.base.BaseFragment;
@@ -23,37 +21,44 @@ import com.yc.wsq.app.news.constant.ResponseKey;
 import com.yc.wsq.app.news.fragment.MainFragment;
 import com.yc.wsq.app.news.fragment.benefit.BenefitDetailsFragment;
 import com.yc.wsq.app.news.fragment.my.AboutFragment;
-import com.yc.wsq.app.news.fragment.my.AccountSettingFragment;
+import com.yc.wsq.app.news.fragment.my.setting.AccountSettingFragment;
+import com.yc.wsq.app.news.fragment.my.CollectFragment;
+import com.yc.wsq.app.news.fragment.my.CommentFragment;
+import com.yc.wsq.app.news.fragment.my.DiscountFragment;
+import com.yc.wsq.app.news.fragment.my.FocusFragment;
+import com.yc.wsq.app.news.fragment.my.feedback.HelpFragment;
+import com.yc.wsq.app.news.fragment.my.HistoryFragment;
 import com.yc.wsq.app.news.fragment.my.IntegralFragment;
 import com.yc.wsq.app.news.fragment.my.MemberUpgradeFragment;
-import com.yc.wsq.app.news.fragment.my.RechargeFragment;
-import com.yc.wsq.app.news.fragment.my.SettingFragment;
-import com.yc.wsq.app.news.fragment.my.TradeRecordFragment;
-import com.yc.wsq.app.news.fragment.my.WalletFragment;
-import com.yc.wsq.app.news.fragment.my.WithdrawFragment;
+import com.yc.wsq.app.news.fragment.my.MessageFragment;
+import com.yc.wsq.app.news.fragment.my.wallet.RechargeFragment;
+import com.yc.wsq.app.news.fragment.my.setting.SettingFragment;
+import com.yc.wsq.app.news.fragment.my.wallet.TradeRecordFragment;
+import com.yc.wsq.app.news.fragment.my.wallet.WalletFragment;
+import com.yc.wsq.app.news.fragment.my.wallet.WithdrawFragment;
 import com.yc.wsq.app.news.fragment.news.NewsDetailsFragment;
 import com.yc.wsq.app.news.fragment.news.SearchFragment;
 import com.yc.wsq.app.news.fragment.news.SearchResultFragment;
 import com.yc.wsq.app.news.fragment.tab.BenefitFragment;
 import com.yc.wsq.app.news.fragment.tab.HomeFragment;
 import com.yc.wsq.app.news.fragment.tab.MyFragment;
-import com.yc.wsq.app.news.fragment.tab.ShopFragment2;
-import com.yc.wsq.app.news.mvp.presenter.DefaultPresenter;
-import com.yc.wsq.app.news.mvp.view.DefaultView;
+import com.yc.wsq.app.news.fragment.tab.ShopFragment;
+import com.yc.wsq.app.news.mvp.presenter.BasePresenter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends BaseActivity<DefaultView, DefaultPresenter<DefaultView>> implements DefaultView {
+public class MainActivity extends BaseActivity {
 
     private FragmentManager fragmentManager;
     private List<Fragment> mListFragment;
     private Fragment curFragment;
     public static final int LOGIN_REQUEST_CODE =2001;
 
+
     @Override
-    protected DefaultPresenter<DefaultView> createPresenter() {
-        return new DefaultPresenter<>();
+    protected BasePresenter createPresenter() {
+        return null;
     }
 
     @Override
@@ -65,18 +70,10 @@ public class MainActivity extends BaseActivity<DefaultView, DefaultPresenter<Def
     protected void initView() {
         mListFragment = new ArrayList<>();
         fragmentManager = getSupportFragmentManager();
-        try {
-            ipresenter.showData();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void showData(List<String> data) {
-
         onEnter(new MainFragment(), MainFragment.TAG, false);
+
     }
+
 
     /**
      *
@@ -167,6 +164,27 @@ public class MainActivity extends BaseActivity<DefaultView, DefaultPresenter<Def
                     case 6:
                         onEnter(new SettingFragment(), SettingFragment.TAG, true);
                         break;
+                    case 7:
+                        onEnter(new CollectFragment(), CollectFragment.TAG, true);
+                        break;
+                    case 8:
+                        onEnter(new HistoryFragment(), HistoryFragment.TAG, true);
+                        break;
+                    case 9:
+                        onEnter(new CommentFragment(), CommentFragment.TAG, true);
+                        break;
+                    case 10:
+                        onEnter(new MessageFragment(), MessageFragment.TAG, true);
+                        break;
+                    case 11:
+                        onEnter(new FocusFragment(), FocusFragment.TAG, true);
+                        break;
+                    case 12:
+                        onEnter(new DiscountFragment(), DiscountFragment.TAG, true);
+                        break;
+                    case 13:
+                        onEnter(new HelpFragment(), HelpFragment.TAG, true);
+                        break;
                 }
             }
         });
@@ -212,7 +230,7 @@ public class MainActivity extends BaseActivity<DefaultView, DefaultPresenter<Def
 
                 for (int i = 0; i < mListFragment.size(); i++) {
 
-                    if (mListFragment.get(i) instanceof  MainFragment){
+                    if (mListFragment.get(i) instanceof MainFragment){
                         MainFragment mf = (MainFragment) mListFragment.get(i);
                         //用户状态发生变化
                         mf.onUserStatusChange();
@@ -233,12 +251,12 @@ public class MainActivity extends BaseActivity<DefaultView, DefaultPresenter<Def
             }
         });
 
-        functionsManage.addFunction(new FunctionNoParamNoResult(ShopFragment2.INTERFACE_NRNP) {
+        functionsManage.addFunction(new FunctionNoParamNoResult(ShopFragment.INTERFACE_NRNP) {
             @Override
             public void function() {
                 for (int i = 0; i < mListFragment.size(); i++) {
 
-                    if (mListFragment.get(i) instanceof  MainFragment){
+                    if (mListFragment.get(i) instanceof MainFragment){
                         MainFragment mf = (MainFragment) mListFragment.get(i);
                         //用户状态发生变化
                         mf.onSetShowPosition();
@@ -247,13 +265,6 @@ public class MainActivity extends BaseActivity<DefaultView, DefaultPresenter<Def
             }
         });
 
-        /*functionsManage.addFunction(new FunctionWithParamOnly<Object[]>(TabFragment.INTERFACE_WITHR1) {
-            @Override
-            public void function(Object... data) {
-                ToastUtils.onToast(Arrays.toString(data));
-            }
-        });*/
-
         /**
          * 返回按钮的事件监听
          */
@@ -261,6 +272,15 @@ public class MainActivity extends BaseActivity<DefaultView, DefaultPresenter<Def
             @Override
             public void function() {
                 onKeyBack();
+            }
+        });
+        /**
+         * 退出应用
+         */
+        functionsManage.addFunction(new FunctionNoParamNoResult(AccountSettingFragment.INTERFACE_EXIT_APP) {
+            @Override
+            public void function() {
+                finish();
             }
         });
         fragment.setFunctionsManager(functionsManage);
@@ -273,7 +293,7 @@ public class MainActivity extends BaseActivity<DefaultView, DefaultPresenter<Def
             case LOGIN_REQUEST_CODE:
                 for (int i = 0; i < mListFragment.size(); i++) {
 
-                    if (mListFragment.get(i) instanceof  MainFragment){
+                    if (mListFragment.get(i) instanceof MainFragment){
                         MainFragment mf = (MainFragment) mListFragment.get(i);
                         //用户状态发生变化
                         mf.onUserStatusChange();
@@ -326,7 +346,7 @@ public class MainActivity extends BaseActivity<DefaultView, DefaultPresenter<Def
         }
     }
 
-    public void onExitAppDialog(){
+    private void onExitAppDialog(){
         DialogTools.showDialog(this, "离开", "不了","提示", "您确定要离我们而去吗？",
                 new DialogInterface.OnClickListener() {
             @Override
@@ -343,4 +363,6 @@ public class MainActivity extends BaseActivity<DefaultView, DefaultPresenter<Def
             }
         });
     }
+
+
 }

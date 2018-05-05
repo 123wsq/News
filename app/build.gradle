@@ -1,6 +1,20 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        debug {
+            keyAlias 'yuanchuang'
+            keyPassword 'yuanchuang'
+            storeFile file('E:/项目/keystore/cykeystore.jks')
+            storePassword 'yuanchuang'
+        }
+        release {
+            keyAlias 'yuanchuang'
+            keyPassword 'yuanchuang'
+            storeFile file('E:/项目/keystore/cykeystore.jks')
+            storePassword 'yuanchuang'
+        }
+    }
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.yc.wsq.app.news"
@@ -16,6 +30,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            signingConfig signingConfigs.debug
         }
     }
 }
@@ -28,7 +46,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     //开发工具包
-    implementation 'com.github.123wsq:AndroidUtils:v1.8'
+    implementation 'com.github.123wsq:AndroidUtils:v1.9'
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     //implementation 'com.github.hackware1993:MagicIndicator:1.5.0'
@@ -41,4 +59,7 @@ dependencies {
     implementation project(':magicindicator')
     implementation 'me.weyye.hipermission:library:1.0.7'
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.7'
+    implementation 'com.contrarywind:Android-PickerView:4.1.3'
+    implementation project(':pay')
+    implementation 'com.mylhyl:zxingscanner:2.1.0'
 }

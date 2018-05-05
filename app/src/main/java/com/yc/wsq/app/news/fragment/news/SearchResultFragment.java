@@ -36,6 +36,7 @@ public class SearchResultFragment extends BaseFragment<NewsView, NewsPresenter<N
     TextView tv_title;
     @BindView(R.id.rv_RecyclerView)
     RecyclerView rv_RecyclerView;
+    @BindView(R.id.tv_search_no_data) TextView tv_search_no_data;
 
     private NewsAdapter mAdapter;
     private List<Map<String, Object>> mData;
@@ -118,6 +119,13 @@ public class SearchResultFragment extends BaseFragment<NewsView, NewsPresenter<N
         List<Map<String, Object>> newsData = (List<Map<String, Object>>) result.get(ResponseKey.getInstace().data);
         mData.addAll(newsData);
         mAdapter.notifyDataSetChanged();
+        if (mData.size() == 0 ){
+            rv_RecyclerView.setVisibility(View.GONE);
+            tv_search_no_data.setVisibility(View.VISIBLE);
+        }else{
+            rv_RecyclerView.setVisibility(View.VISIBLE);
+            tv_search_no_data.setVisibility(View.GONE);
+        }
     }
 
     @Override

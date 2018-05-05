@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/default_backgroud_color"
+    android:id="@+id/rl_layout"
     >
 
     <LinearLayout
@@ -16,7 +17,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:background="@color/red"
+                android:background="#fd544b"
 
                 >
                 <TextView
@@ -36,6 +37,7 @@
                     >
 
                     <TextView
+                        android:id="@+id/tv_account_balance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="12.01"
@@ -105,6 +107,7 @@
 
 
             <LinearLayout
+                android:id="@+id/ll_setting_withdraw_password"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_height_3"
                 android:background="@color/color_white"

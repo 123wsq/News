@@ -1,6 +1,7 @@
 package com.yc.wsq.app.news.base;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.wsq.library.struct.FunctionsManage;
 import com.wsq.library.views.view.LoadingDialog;
+import com.yc.wsq.app.news.activity.LoginActivity;
 import com.yc.wsq.app.news.activity.MainActivity;
 import com.yc.wsq.app.news.mvp.presenter.BasePresenter;
 import com.yc.wsq.app.news.mvp.view.BaseView;
@@ -101,10 +103,10 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        Log.d(TAG, "执行时间： "+(System.currentTimeMillis()- start_Time)+" ms");
+    public void onReLogin() {
+        startActivity(new Intent(getActivity(), LoginActivity.class));
     }
+
 
     @Override
     public void onDestroy() {

@@ -1,14 +1,9 @@
 package com.yc.wsq.app.news.mvp.model.impl;
 
-import com.orhanobut.logger.Logger;
-import com.wsq.library.okhttp.CallBackUtil;
-import com.wsq.library.okhttp.OkhttpUtil;
 import com.yc.wsq.app.news.bean.SearchBean;
-import com.yc.wsq.app.news.constant.Constant;
 import com.yc.wsq.app.news.constant.ResponseKey;
 import com.yc.wsq.app.news.mvp.callback.Callback;
 import com.yc.wsq.app.news.mvp.model.inter.NewsModelInter;
-import com.yc.wsq.app.news.tools.ParamFormat;
 
 import org.litepal.crud.DataSupport;
 
@@ -16,16 +11,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
-import okhttp3.Call;
-
-public class NewsModelImpl implements NewsModelInter{
-
+public class NewsModelImpl implements NewsModelInter {
 
     /**
      * 热门搜索
-
      * @param callback
      * @throws Exception
      */

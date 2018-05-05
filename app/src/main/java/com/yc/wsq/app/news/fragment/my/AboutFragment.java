@@ -1,5 +1,7 @@
 package com.yc.wsq.app.news.fragment.my;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 import android.widget.TextView;
 
@@ -22,6 +24,7 @@ public class AboutFragment extends BaseFragment{
     @BindView(R.id.tv_app_name) TextView tv_app_name;
     @BindView(R.id.tv_app_version) TextView tv_app_version;
     @BindView(R.id.tv_service) TextView tv_service;
+    @BindView(R.id.tv_qq) TextView tv_qq;
 
     @Override
     protected BasePresenter createPresenter() {
@@ -40,13 +43,18 @@ public class AboutFragment extends BaseFragment{
         tv_app_name.setText(AppManager.getAppName());
         tv_app_version.setText(AppManager.getAppVersionName());
         tv_service.setText("13200988978");
+        tv_qq.setText("1037704496");
     }
 
-    @OnClick({R.id.ll_back})
+    @OnClick({R.id.ll_back, R.id.tv_qq})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.ll_back:
                 mFunctionsManage.invokeFunction(INTERFACE_BACK);
+                break;
+            case R.id.tv_qq:
+                String url="mqqwpa://im/chat?chat_type=wpa&uin=1037704496";
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
                 break;
         }
     }

@@ -8,14 +8,6 @@ public interface RequestHttpInter {
 
 
     /**
-     * 用户登录session
-     * @param url
-     * @param param
-     * @param callback
-     * @throws Exception
-     */
-    void onUserLogin(String url, Map<String, String> param, Callback<Map<String, Object>> callback) throws Exception;
-    /**
      * 发送get请求
      * @param url
      * @param param

@@ -7,14 +7,11 @@ import com.yc.wsq.app.news.constant.Urls;
 import com.yc.wsq.app.news.mvp.callback.Callback;
 import com.yc.wsq.app.news.mvp.model.impl.NewsModelImpl;
 import com.yc.wsq.app.news.mvp.model.impl.RequestHttpImpl;
-import com.yc.wsq.app.news.mvp.model.impl.UserModelImpl;
 import com.yc.wsq.app.news.mvp.model.inter.NewsModelInter;
 import com.yc.wsq.app.news.mvp.model.inter.RequestHttpInter;
-import com.yc.wsq.app.news.mvp.model.inter.UserModelInter;
 import com.yc.wsq.app.news.mvp.view.BaseView;
 import com.yc.wsq.app.news.mvp.view.NewsView;
 import com.yc.wsq.app.news.mvp.view.SearchView;
-import com.yc.wsq.app.news.mvp.view.UserView;
 import com.yc.wsq.app.news.tools.ParamValidate;
 
 import java.util.List;
@@ -56,9 +53,13 @@ public class NewsPresenter<T extends BaseView> extends BasePresenter<T> {
                     }
 
                     @Override
-                    public void onError() {
+                    public void onOutTime(String msg) {
 
+                        ToastUtils.onToast(msg);
+                        if (view != null)
+                        view.onReLogin();
                     }
+
 
                     @Override
                     public void onComplete() {
@@ -103,9 +104,12 @@ public class NewsPresenter<T extends BaseView> extends BasePresenter<T> {
                     }
 
                     @Override
-                    public void onError() {
-
+                    public void onOutTime(String msg) {
+                        ToastUtils.onToast(msg);
+                        if (view != null)
+                            view.onReLogin();
                     }
+
 
                     @Override
                     public void onComplete() {
@@ -143,9 +147,12 @@ public class NewsPresenter<T extends BaseView> extends BasePresenter<T> {
                     }
 
                     @Override
-                    public void onError() {
-
+                    public void onOutTime(String msg) {
+                        ToastUtils.onToast(msg);
+                        if (view != null)
+                            view.onReLogin();
                     }
+
 
                     @Override
                     public void onComplete() {
@@ -190,8 +197,10 @@ public class NewsPresenter<T extends BaseView> extends BasePresenter<T> {
                     }
 
                     @Override
-                    public void onError() {
-
+                    public void onOutTime(String msg) {
+                        ToastUtils.onToast(msg);
+                        if (view != null)
+                            view.onReLogin();
                     }
 
                     @Override
@@ -226,13 +235,16 @@ public class NewsPresenter<T extends BaseView> extends BasePresenter<T> {
 
                     @Override
                     public void onFailure(String msg) {
-
+                        ToastUtils.onToast(msg);
                     }
 
                     @Override
-                    public void onError() {
-
+                    public void onOutTime(String msg) {
+                        ToastUtils.onToast(msg);
+                        if (view != null)
+                            view.onReLogin();
                     }
+
 
                     @Override
                     public void onComplete() {
@@ -263,12 +275,14 @@ public class NewsPresenter<T extends BaseView> extends BasePresenter<T> {
 
                     @Override
                     public void onFailure(String msg) {
-
+                        ToastUtils.onToast(msg);
                     }
 
                     @Override
-                    public void onError() {
-
+                    public void onOutTime(String msg) {
+                        ToastUtils.onToast(msg);
+                        if (view != null)
+                            view.onReLogin();
                     }
 
                     @Override

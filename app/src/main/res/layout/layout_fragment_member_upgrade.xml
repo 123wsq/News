@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/default_backgroud_color"
+    android:id="@+id/ll_layout"
     >
 
     <include layout="@layout/layout_public_titlebar"></include>
@@ -20,7 +21,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/image_vip"
+            android:src="@mipmap/image_vip_background"
             android:layout_marginTop="@dimen/default_margin_2"
             />
         <LinearLayout
@@ -62,6 +63,7 @@
                     android:layout_centerInParent="true"
                     />
                 <ImageView
+                    android:id="@+id/iv_member_upgrade"
                     android:layout_width="100dp"
                     android:layout_height="@dimen/default_height_3"
                     android:src="@mipmap/image_member_upgrade"

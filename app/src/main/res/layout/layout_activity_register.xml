@@ -26,57 +26,22 @@
             android:text="@string/str_tel_num_text"
             android:textSize="@dimen/default_text_size_3"
             android:gravity="center_vertical"
+            android:drawableRight="@mipmap/image_important"
             />
         <EditText
             android:id="@+id/et_mobile"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:digits="0123456789"
-            android:inputType="number"
-            android:hint="请输入手机号码"
-            android:textColorHint="@color/color_hint"
-            android:gravity="right|center_vertical"
-            android:textSize="@dimen/default_text_size_3"
-            android:background="@drawable/shape_edit_no_stroke"
-
-
-            />
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/default_line_height"
-        android:background="@color/line_color"
-        android:layout_marginLeft="@dimen/default_padding_2"
-        android:layout_marginRight="@dimen/default_padding_2"
-        />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/default_height_2"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:paddingLeft="@dimen/default_padding_2"
-        android:paddingRight="@dimen/default_padding_2"
-        android:background="@color/color_white"
-        >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/str_validate_code_text"
-            android:textSize="@dimen/default_text_size_3"
-            android:gravity="center_vertical"
-            />
-        <EditText
-            android:id="@+id/et_validate_code"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:digits="0123456789"
             android:inputType="number"
+            android:hint="请输入手机号码"
             android:textColorHint="@color/color_hint"
-            android:gravity="center"
+            android:gravity="left|center_vertical"
             android:textSize="@dimen/default_text_size_3"
             android:background="@drawable/shape_edit_no_stroke"
+            android:paddingLeft="@dimen/default_padding_1"
+
             />
         <TextView
             android:id="@+id/tv_get_validate"
@@ -105,9 +70,49 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:text="@string/str_validate_code_text"
+            android:textSize="@dimen/default_text_size_3"
+            android:gravity="center_vertical"
+            android:drawableRight="@mipmap/image_important"
+            />
+        <EditText
+            android:id="@+id/et_validate_code"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:digits="0123456789"
+            android:inputType="number"
+            android:textColorHint="@color/color_hint"
+            android:gravity="left"
+            android:textSize="@dimen/default_text_size_3"
+            android:paddingLeft="@dimen/default_padding_1"
+            android:background="@drawable/shape_edit_no_stroke"
+            />
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_line_height"
+        android:background="@color/line_color"
+        android:layout_marginLeft="@dimen/default_padding_2"
+        android:layout_marginRight="@dimen/default_padding_2"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_height_2"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/default_padding_2"
+        android:paddingRight="@dimen/default_padding_2"
+        android:background="@color/color_white"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:text="@string/str_password_text"
             android:textSize="@dimen/default_text_size_3"
             android:gravity="center_vertical"
+            android:drawableRight="@mipmap/image_important"
             />
         <EditText
             android:id="@+id/et_password"
@@ -115,8 +120,9 @@
             android:layout_height="match_parent"
             android:hint="@string/str_please_password_text"
             android:textColorHint="@color/color_hint"
-            android:gravity="right|center_vertical"
+            android:gravity="left|center_vertical"
             android:textSize="@dimen/default_text_size_3"
+            android:paddingLeft="@dimen/default_padding_1"
             android:background="@drawable/shape_edit_no_stroke"
             android:inputType="textPassword"
             />
@@ -144,6 +150,7 @@
             android:text="@string/str_affirm_password_text"
             android:textSize="@dimen/default_text_size_3"
             android:gravity="center_vertical"
+            android:drawableRight="@mipmap/image_important"
             />
         <EditText
             android:id="@+id/et_password2"
@@ -151,10 +158,11 @@
             android:layout_height="match_parent"
             android:hint="@string/str_please_affirm_password_text"
             android:textColorHint="@color/color_hint"
-            android:gravity="right|center_vertical"
+            android:gravity="left|center_vertical"
             android:textSize="@dimen/default_text_size_3"
             android:background="@drawable/shape_edit_no_stroke"
             android:inputType="textPassword"
+            android:paddingLeft="@dimen/default_padding_1"
             />
     </LinearLayout>
     <View
@@ -188,10 +196,11 @@
             android:layout_height="match_parent"
             android:hint="@string/str_please_invite_code_text"
             android:textColorHint="@color/color_hint"
-            android:gravity="right|center_vertical"
+            android:gravity="left|center_vertical"
             android:textSize="@dimen/default_text_size_3"
             android:background="@drawable/shape_edit_no_stroke"
             android:inputType="textPassword"
+            android:paddingLeft="@dimen/default_padding_1"
             />
     </LinearLayout>
     <View

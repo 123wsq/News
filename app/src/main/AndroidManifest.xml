@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.yc.wsq.app.news">
 
+    <uses-permission android:name="android.permission.VIBRATE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/app_icon"
@@ -20,7 +21,8 @@
         <activity android:name=".activity.WellcomeActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.LoginActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.MainActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.RegisterActivity"></activity>
+        <activity android:name=".activity.RegisterActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.QRcodeScanActivity" android:screenOrientation="portrait"></activity>
     </application>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>

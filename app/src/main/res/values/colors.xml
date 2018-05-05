@@ -11,6 +11,7 @@
     <color name="color_blue2">#AD0076FF</color>
     <color name="color_gray">#909191</color>
 
+    <color name="color_theme">#F84B51</color>
 
     <color name="default_main_font_color">#1A1B1B</color>
     <color name="default_color_gray_1">#565656</color>

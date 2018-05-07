@@ -17,6 +17,8 @@ import android.widget.TextView;
 import com.wsq.library.listener.OnRecyclerViewItemClickListener;
 import com.wsq.library.utils.DensityUtil;
 import com.yc.wsq.app.news.R;
+import com.yc.wsq.app.news.tools.ShareTools;
+import com.yc.wsq.app.news.tools.SharedTools;
 
 import cn.sharesdk.onekeyshare.OnekeyShare;
 import cn.sharesdk.tencent.qq.QQ;
@@ -193,16 +195,16 @@ public class SharePopup extends PopupWindow implements View.OnClickListener {
 
             switch (position){
                 case 0:
-                    showShare(Wechat.NAME,mTitle,"这个是分享的内容");
+                    ShareTools.showShare(mContext, Wechat.NAME,mTitle,"", "这个是分享的内容");
                     break;
                 case 1:
-                    showShare(WechatMoments.NAME,mTitle,"这个是分享的内容");
+                    ShareTools.showShare(mContext, WechatMoments.NAME,mTitle,"", "这个是分享的内容");
                     break;
                 case 2:
-                    showShare(QQ.NAME, mTitle, "这个是分享的内容");
+                    ShareTools.showShare(mContext,QQ.NAME, mTitle, "","这个是分享的内容");
                     break;
                 case 3:
-                    showShare(QZone.NAME, mTitle, "这个是分享的内容");
+                    ShareTools.showShare(mContext,QZone.NAME, mTitle, "","这个是分享的内容");
                     break;
             }
             dismiss();
@@ -215,29 +217,29 @@ public class SharePopup extends PopupWindow implements View.OnClickListener {
     };
 
 
-    private void showShare(String platform, String title, String content) {
-        OnekeyShare oks = new OnekeyShare();
-
-        if (platform != null) {
-            oks.setPlatform(platform);
-        }
-
-        //关闭sso授权
-        oks.disableSSOWhenAuthorize();
-
-        // title标题，微信、QQ和QQ空间等平台使用
-        oks.setTitle(title);
-        // titleUrl QQ和QQ空间跳转链接
-        oks.setTitleUrl("http://sharesdk.cn");
-        // text是分享文本，所有平台都需要这个字段
-        oks.setText(content);
-        // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
-//        oks.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
-        // url在微信、微博，Facebook等平台中使用
-//        oks.setUrl("http://sharesdk.cn");
-        // comment是我对这条分享的评论，仅在人人网使用
-//        oks.setComment("我是测试评论文本");
-        // 启动分享GUI
-        oks.show(mContext);
-    }
+//    private void showShare(String platform, String title, String content) {
+//        OnekeyShare oks = new OnekeyShare();
+//
+//        if (platform != null) {
+//            oks.setPlatform(platform);
+//        }
+//
+//        //关闭sso授权
+//        oks.disableSSOWhenAuthorize();
+//
+//        // title标题，微信、QQ和QQ空间等平台使用
+//        oks.setTitle(title);
+//        // titleUrl QQ和QQ空间跳转链接
+//        oks.setTitleUrl("http://sharesdk.cn");
+//        // text是分享文本，所有平台都需要这个字段
+//        oks.setText(content);
+//        // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
+////        oks.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
+//        // url在微信、微博，Facebook等平台中使用
+////        oks.setUrl("http://sharesdk.cn");
+//        // comment是我对这条分享的评论，仅在人人网使用
+////        oks.setComment("我是测试评论文本");
+//        // 启动分享GUI
+//        oks.show(mContext);
+//    }
 }

@@ -132,7 +132,7 @@
     <string name="str_qrcode_scan_text">二维码识别</string>
     <string name="str_cancel_text">取消</string>
     <string name="str_invite_apprentice_text">每邀请以为徒弟奖励50积分</string>
-    <string name="str_read_apprentice_text">徒弟阅读您获得持续2~3倍奖励</string>
+    <string name="str_read_apprentice_text">师傅可以获得徒弟收益的10%作为贡品</string>
     <string name="str_wechat_apprentice_text">微信</string>
     <string name="str_qq_apprentice_text">QQ</string>
     <string name="str_qcode_text">二维码</string>

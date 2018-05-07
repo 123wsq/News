@@ -2,7 +2,6 @@ package com.yc.wsq.app.news.fragment.my.setting;
 
 import android.Manifest;
 import android.content.DialogInterface;
-import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -22,7 +21,7 @@ import com.yc.wsq.app.news.base.BaseFragment;
 import com.yc.wsq.app.news.constant.ResponseKey;
 import com.yc.wsq.app.news.mvp.presenter.BasePresenter;
 import com.yc.wsq.app.news.tools.SharedTools;
-import com.yc.wsq.app.news.views.CalendarPopup;
+import com.yc.wsq.app.news.views.popup.CalendarPopup;
 import com.yc.wsq.app.news.views.listener.OnCalendarResultCallBack;
 
 import java.util.ArrayList;

@@ -26,6 +26,9 @@ public class AboutFragment extends BaseFragment{
     @BindView(R.id.tv_service) TextView tv_service;
     @BindView(R.id.tv_qq) TextView tv_qq;
 
+    private String tel = "18531195530";
+    private String qq= "837113866";
+
     @Override
     protected BasePresenter createPresenter() {
         return null;
@@ -42,8 +45,8 @@ public class AboutFragment extends BaseFragment{
         tv_title.setText(getResources().getString(R.string.str_about_text));
         tv_app_name.setText(AppManager.getAppName());
         tv_app_version.setText(AppManager.getAppVersionName());
-        tv_service.setText("13200988978");
-        tv_qq.setText("1037704496");
+        tv_service.setText(tel);
+        tv_qq.setText(qq);
     }
 
     @OnClick({R.id.ll_back, R.id.tv_qq})
@@ -53,7 +56,7 @@ public class AboutFragment extends BaseFragment{
                 mFunctionsManage.invokeFunction(INTERFACE_BACK);
                 break;
             case R.id.tv_qq:
-                String url="mqqwpa://im/chat?chat_type=wpa&uin=1037704496";
+                String url="mqqwpa://im/chat?chat_type=wpa&uin="+qq;
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
                 break;
         }

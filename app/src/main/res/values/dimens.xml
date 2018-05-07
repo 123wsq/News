@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="default_line_height">1dp</dimen>
+
+    <dimen name="default_icon_size_6">15dp</dimen>
+    <dimen name="default_text_size_5">10sp</dimen>
 </resources>

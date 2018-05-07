@@ -22,7 +22,7 @@
     <LinearLayout
         android:id="@+id/ll_image_layout"
         android:layout_width="match_parent"
-        android:layout_height="90dp"
+        android:layout_height="80dp"
         android:orientation="horizontal"
         android:layout_marginTop="@dimen/default_margin_4"
         android:layout_marginLeft="@dimen/default_margin_3"

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="90dp"
+    android:orientation="vertical"
+    android:background="@color/default_backgroud_color"
+    android:gravity="center"
+    >
+    <ImageView
+        android:id="@+id/iv_share_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@mipmap/image_wechat_icon"
+        />
+
+    <TextView
+        android:id="@+id/tv_share_name"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_height_4"
+        android:textSize="@dimen/default_text_size_3"
+        android:text="微信"
+        android:gravity="center"
+        />
+
+</LinearLayout>

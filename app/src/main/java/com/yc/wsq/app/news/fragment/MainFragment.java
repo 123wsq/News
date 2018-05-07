@@ -234,8 +234,8 @@ public class MainFragment extends BaseFragment implements ViewPager.OnPageChange
     /**
      * 设置显示位置
      */
-    public void onSetShowPosition(){
-        vp_ViewPager.setCurrentItem(0);
+    public void onSetShowPosition(int position){
+        vp_ViewPager.setCurrentItem(position);
     }
 
 }

@@ -21,21 +21,20 @@ import com.yc.wsq.app.news.constant.ResponseKey;
 import com.yc.wsq.app.news.fragment.MainFragment;
 import com.yc.wsq.app.news.fragment.benefit.BenefitDetailsFragment;
 import com.yc.wsq.app.news.fragment.my.AboutFragment;
+import com.yc.wsq.app.news.fragment.my.QRcodeFragment;
 import com.yc.wsq.app.news.fragment.my.setting.AccountSettingFragment;
 import com.yc.wsq.app.news.fragment.my.CollectFragment;
-import com.yc.wsq.app.news.fragment.my.CommentFragment;
 import com.yc.wsq.app.news.fragment.my.DiscountFragment;
-import com.yc.wsq.app.news.fragment.my.FocusFragment;
 import com.yc.wsq.app.news.fragment.my.feedback.HelpFragment;
-import com.yc.wsq.app.news.fragment.my.HistoryFragment;
 import com.yc.wsq.app.news.fragment.my.IntegralFragment;
 import com.yc.wsq.app.news.fragment.my.MemberUpgradeFragment;
-import com.yc.wsq.app.news.fragment.my.MessageFragment;
 import com.yc.wsq.app.news.fragment.my.wallet.RechargeFragment;
 import com.yc.wsq.app.news.fragment.my.setting.SettingFragment;
+import com.yc.wsq.app.news.fragment.my.wallet.SettingWithdrawPasswordFragment;
 import com.yc.wsq.app.news.fragment.my.wallet.TradeRecordFragment;
 import com.yc.wsq.app.news.fragment.my.wallet.WalletFragment;
 import com.yc.wsq.app.news.fragment.my.wallet.WithdrawFragment;
+import com.yc.wsq.app.news.fragment.my.wallet.ValidateAccountFragment;
 import com.yc.wsq.app.news.fragment.news.NewsDetailsFragment;
 import com.yc.wsq.app.news.fragment.news.SearchFragment;
 import com.yc.wsq.app.news.fragment.news.SearchResultFragment;
@@ -132,12 +131,13 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        functionsManage.addFunction(new FunctionWithParamOnly<String>(HomeFragment.INTERFACE_WITHPS) {
+        functionsManage.addFunction(new FunctionWithParamOnly<String[]>(HomeFragment.INTERFACE_WITHPS) {
             @Override
-            public void function(String data) {
+            public void function(String[] data) {
 
                 Bundle bundle = new Bundle();
-                bundle.putString(ResponseKey.getInstace().article_id, data);
+                bundle.putString(ResponseKey.getInstace().article_id, data[0]);
+                bundle.putString(ResponseKey.getInstace().title, data[1]);
                 onEnter(new NewsDetailsFragment(), NewsDetailsFragment.TAG, bundle, true);
             }
         });
@@ -168,16 +168,12 @@ public class MainActivity extends BaseActivity {
                         onEnter(new CollectFragment(), CollectFragment.TAG, true);
                         break;
                     case 8:
-                        onEnter(new HistoryFragment(), HistoryFragment.TAG, true);
+                        onSelectShop();
                         break;
                     case 9:
-                        onEnter(new CommentFragment(), CommentFragment.TAG, true);
-                        break;
-                    case 10:
-                        onEnter(new MessageFragment(), MessageFragment.TAG, true);
-                        break;
-                    case 11:
-                        onEnter(new FocusFragment(), FocusFragment.TAG, true);
+                        Bundle bundle = new Bundle();
+                        bundle.putInt(ResponseKey.getInstace().type, data);
+                        onEnter(new QRcodeFragment(), QRcodeFragment.TAG, bundle,true);
                         break;
                     case 12:
                         onEnter(new DiscountFragment(), DiscountFragment.TAG, true);
@@ -211,7 +207,21 @@ public class MainActivity extends BaseActivity {
                         case 3:
                             onEnter(new TradeRecordFragment(), TradeRecordFragment.TAG, true);
                             break;
+                        case 4:
+                            onEnter(new ValidateAccountFragment(), ValidateAccountFragment.TAG, true);
+                            break;
                     }
+            }
+        });
+
+        functionsManage.addFunction(new FunctionWithParamOnly<Integer>(ValidateAccountFragment.INTERFACE_WITHP) {
+            @Override
+            public void function(Integer data) {
+                switch (data){
+                    case 1:
+                        onEnter(new SettingWithdrawPasswordFragment(), SettingWithdrawPasswordFragment.TAG, true);
+                        break;
+                }
             }
         });
         functionsManage.addFunction(new FunctionWithParamOnly<Integer>(SettingFragment.INTEFACE_WITHP) {
@@ -259,7 +269,7 @@ public class MainActivity extends BaseActivity {
                     if (mListFragment.get(i) instanceof MainFragment){
                         MainFragment mf = (MainFragment) mListFragment.get(i);
                         //用户状态发生变化
-                        mf.onSetShowPosition();
+                        mf.onSetShowPosition(0);
                     }
                 }
             }
@@ -284,6 +294,22 @@ public class MainActivity extends BaseActivity {
             }
         });
         fragment.setFunctionsManager(functionsManage);
+    }
+
+
+    /**
+     * 设置选中商场页面
+     */
+    private void onSelectShop(){
+
+        for (int i = 0; i < mListFragment.size(); i++) {
+
+            if (mListFragment.get(i) instanceof MainFragment){
+                MainFragment mf = (MainFragment) mListFragment.get(i);
+                //用户状态发生变化
+                mf.onSetShowPosition(1);
+            }
+        }
     }
 
     @Override
@@ -363,6 +389,7 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
+
 
 
 }

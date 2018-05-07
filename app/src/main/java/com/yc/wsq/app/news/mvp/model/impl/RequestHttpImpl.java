@@ -13,6 +13,7 @@ import com.yc.wsq.app.news.tools.ParamFormat;
 import java.util.Map;
 
 import okhttp3.Call;
+import okhttp3.OkHttpClient;
 
 public class RequestHttpImpl implements RequestHttpInter{
 
@@ -108,4 +109,5 @@ public class RequestHttpImpl implements RequestHttpInter{
             }
         });
     }
+
 }

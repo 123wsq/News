@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_backgroud_color"
+    android:orientation="vertical"
+    android:id="@+id/ll_layout"
+    >
+    <include layout="@layout/layout_public_titlebar"></include>
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/str_account_info_text"
+        android:textSize="@dimen/default_text_size_3"
+        android:layout_marginTop="@dimen/default_height_3"
+        android:paddingLeft="@dimen/default_padding_2"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_height_2"
+        android:background="@color/color_white"
+        android:paddingLeft="@dimen/default_padding_2"
+        android:paddingRight="@dimen/default_padding_2"
+        android:layout_marginTop="@dimen/default_margin_2"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="@string/str_tel_num_text"
+            android:textSize="@dimen/default_text_size_3"
+            android:drawableRight="@mipmap/image_important"
+            />
+        <EditText
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:hint="@string/str_please_tel_text"
+            android:textSize="@dimen/default_text_size_3"
+            android:background="@drawable/shape_edit_no_stroke"
+            />
+        <TextView
+            android:id="@+id/tv_get_validate"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/default_height_4"
+            android:text="@string/str_get_validate_code_text"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_height_2"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/default_padding_2"
+        android:paddingRight="@dimen/default_padding_2"
+        android:layout_marginTop="@dimen/default_height_line"
+        android:background="@color/color_white"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/str_validate_code_text"
+            android:textSize="@dimen/default_text_size_3"
+            android:gravity="center_vertical"
+            android:drawableRight="@mipmap/image_important"
+            />
+        <EditText
+            android:id="@+id/et_validate_code"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:digits="0123456789"
+            android:inputType="number"
+            android:textColorHint="@color/color_hint"
+            android:gravity="left"
+            android:textSize="@dimen/default_text_size_3"
+            android:paddingLeft="@dimen/default_padding_1"
+            android:background="@drawable/shape_edit_no_stroke"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_next"
+        style="@style/default_button"
+        android:layout_marginLeft="@dimen/default_height_3"
+        android:layout_marginRight="@dimen/default_height_3"
+        android:layout_marginTop="@dimen/default_height_3"
+        android:text="@string/str_next_text"
+        />
+
+</LinearLayout>

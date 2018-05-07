@@ -26,6 +26,8 @@
     <string name="str_benefit_details_text">公益详情</string>
     <string name="str_more_text">更多>>></string>
     <string name="str_my_wallet_text">我的钱包</string>
+    <string name="str_wallet_text">钱包</string>
+    <string name="str_shopping_text">商城</string>
     <string name="str_account_balance_text">账户余额</string>
     <string name="str_actvitities_text">活动</string>
     <string name="str_setting_cash_password_text">设置提现密码</string>
@@ -120,6 +122,7 @@
     <string name="str_hour_text">时</string>
     <string name="str_minute_text">分</string>
     <string name="str_ok_text">确定</string>
+    <string name="str_submit_text">提交</string>
     <string name="str_please_selector_text">请选择</string>
     <string name="str_please_date_text">选择日期</string>
     <string name="str_please_time_text">选择时间</string>
@@ -127,4 +130,20 @@
     <string name="str_balance_available_text">可提现金额为： %1$s 元</string>
     <string name="str_balance_no_text">余额不足</string>
     <string name="str_qrcode_scan_text">二维码识别</string>
+    <string name="str_cancel_text">取消</string>
+    <string name="str_invite_apprentice_text">每邀请以为徒弟奖励50积分</string>
+    <string name="str_read_apprentice_text">徒弟阅读您获得持续2~3倍奖励</string>
+    <string name="str_wechat_apprentice_text">微信</string>
+    <string name="str_qq_apprentice_text">QQ</string>
+    <string name="str_qcode_text">二维码</string>
+    <string name="str_validate_account_text">账户验证</string>
+    <string name="str_account_info_text">账户信息</string>
+    <string name="str_withdraw_password_text">提现密码</string>
+    <string name="str_please_input_withdraw_password_text">请输入提现密码</string>
+    <string name="str_please_reinput_withdraw_password_text">请确认提现密码</string>
+    <string name="str_password_security_level_text">安全等级</string>
+    <string name="str_password_level_low_text">低</string>
+    <string name="str_password_level_middle_text">中</string>
+    <string name="str_password_level_high_text">高</string>
+    <string name="str_share_qrcode_text">二维码</string>
 </resources>

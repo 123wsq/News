@@ -205,7 +205,8 @@ public class HomeFragment extends BaseFragment<NewsView, NewsPresenter<NewsView>
         @Override
         public void onRecyclerItemClickListener(View view, int position) {
 
-            mFunctionsManage.invokeFunction(INTERFACE_WITHPS, mNewsData.get(position).get(ResponseKey.getInstace().article_id)+"");
+            mFunctionsManage.invokeFunction(INTERFACE_WITHPS, mNewsData.get(position).get(ResponseKey.getInstace().article_id)+"",
+                    mNewsData.get(position).get(ResponseKey.getInstace().title)+"");
         }
 
         @Override

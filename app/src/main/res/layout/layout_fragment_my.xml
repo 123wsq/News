@@ -6,7 +6,6 @@
     android:background="@color/default_backgroud_color"
     >
 
-    <include layout="@layout/layout_public_titlebar"></include>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -68,14 +67,12 @@
                 </LinearLayout>
 
             </RelativeLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="70dp"
                 android:background="@color/color_white"
-                android:orientation="horizontal"
-                android:visibility="gone"
                 >
-
                 <LinearLayout
                     android:id="@+id/ll_collect"
                     android:layout_width="0dp"
@@ -87,18 +84,41 @@
                     <ImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:src="@mipmap/image_my_collect_select"
+                        android:src="@mipmap/image_collect_my_icon"
                         />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:text="@string/str_collect_text"
-                        android:gravity="center"
-                        android:textSize="@dimen/default_text_size_4"
+                        android:layout_marginTop="@dimen/default_margin_4"
+                        android:textSize="@dimen/default_text_size_3"
                         />
                 </LinearLayout>
                 <LinearLayout
-                    android:id="@+id/ll_history"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:id="@+id/ll_my_wallet"
+                    >
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@mipmap/image_wallet_my_icon"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/str_wallet_text"
+                        android:layout_marginTop="@dimen/default_margin_4"
+                        android:textSize="@dimen/default_text_size_3"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_shopping"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="match_parent"
@@ -108,127 +128,131 @@
                     <ImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:src="@mipmap/image_browsing_history"
+                        android:src="@mipmap/image_shopping_my_icon"
                         />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/str_browsing_history_text"
                         android:gravity="center"
-                        android:textSize="@dimen/default_text_size_4"
+                        android:text="@string/str_shopping_text"
+                        android:layout_marginTop="@dimen/default_margin_4"
+                        android:textSize="@dimen/default_text_size_3"
                         />
                 </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="@color/color_white"
+                android:gravity="center_vertical"
+                >
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="70dp"
+                    android:src="@mipmap/image_redpage__myicon"
+                    android:layout_marginLeft="@dimen/default_margin_1"
+                    />
                 <LinearLayout
-                    android:id="@+id/ll_comment"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/default_margin_2"
                     >
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@mipmap/image_discuss"
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/str_invite_apprentice_text"
+                        android:layout_marginTop="@dimen/default_margin_4"
+                        android:textSize="@dimen/default_text_size_2"
                         />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/str_discuss_text"
-                        android:gravity="center"
-                        android:textSize="@dimen/default_text_size_4"
-                        />
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/ll_message"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    >
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@mipmap/image_message"
-                        />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/str_message_text"
-                        android:gravity="center"
-                        android:textSize="@dimen/default_text_size_4"
+                        android:text="@string/str_read_apprentice_text"
+                        android:layout_marginTop="@dimen/default_margin_4"
+                        android:textSize="@dimen/default_text_size_3"
+                        android:textColor="@color/color_theme"
                         />
                 </LinearLayout>
 
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/ll_focus"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/default_height_1"
+                android:layout_height="70dp"
                 android:background="@color/color_white"
-                android:layout_marginTop="@dimen/default_margin_4"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:paddingLeft="@dimen/default_padding_2"
-                android:paddingRight="@dimen/default_padding_2"
-                android:visibility="gone"
                 >
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="@dimen/default_margin_3"
-                    android:layout_marginRight="@dimen/default_margin_2"
-                    android:src="@mipmap/image_my_attention"
-                    />
-                <TextView
+                <LinearLayout
+                    android:id="@+id/ll_wechat"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="@string/str_my_focus_text"
-                    android:textSize="@dimen/default_text_size_3"
-                    android:textColor="@color/default_color_gray_2"
-                    />
-                <ImageView
-                    android:layout_width="@dimen/default_icon_size_5"
-                    android:layout_height="@dimen/default_icon_size_5"
-                    android:src="@mipmap/image_right"
-                    />
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    >
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@mipmap/image_wechat"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/str_wechat_apprentice_text"
+                        android:layout_marginTop="@dimen/default_margin_4"
+                        android:textSize="@dimen/default_text_size_3"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_qq"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    >
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@mipmap/image_qq"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/str_qq_apprentice_text"
+                        android:layout_marginTop="@dimen/default_margin_4"
+                        android:textSize="@dimen/default_text_size_3"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_qcode"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    >
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@mipmap/image_qcode"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/str_qcode_text"
+                        android:layout_marginTop="@dimen/default_margin_4"
+                        android:textSize="@dimen/default_text_size_3"
+                        />
+                </LinearLayout>
+
             </LinearLayout>
 
 
-                <LinearLayout
-                    android:id="@+id/ll_my_wallet"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/default_height_3"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="@dimen/default_padding_2"
-                    android:paddingRight="@dimen/default_padding_2"
-                    android:background="@color/color_white"
-                    >
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_marginLeft="@dimen/default_margin_3"
-                        android:layout_marginRight="@dimen/default_margin_2"
-                        android:src="@mipmap/image_my_wallet"
-                        />
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="@string/str_my_wallet_text"
-                        android:textSize="@dimen/default_text_size_3"
-                        android:textColor="@color/default_color_gray_2"
-                        />
-                    <ImageView
-                        android:layout_width="@dimen/default_icon_size_5"
-                        android:layout_height="@dimen/default_icon_size_5"
-                        android:src="@mipmap/image_right"
-                        />
-                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/ll_discount"
@@ -291,8 +315,8 @@
                         android:textColor="@color/default_color_gray_2"
                         />
                     <ImageView
-                        android:layout_width="@dimen/default_icon_size_5"
-                        android:layout_height="@dimen/default_icon_size_5"
+                        android:layout_width="@dimen/default_icon_size_6"
+                        android:layout_height="@dimen/default_icon_size_6"
                         android:src="@mipmap/image_right"
                         />
                 </LinearLayout>
@@ -309,8 +333,8 @@
                     android:background="@color/color_white"
                     >
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="@dimen/default_icon_size_5"
+                        android:layout_height="@dimen/default_icon_size_5"
                         android:layout_marginLeft="@dimen/default_margin_3"
                         android:layout_marginRight="@dimen/default_margin_2"
                         android:src="@mipmap/image_my_manager"
@@ -324,12 +348,18 @@
                         android:textColor="@color/default_color_gray_2"
                         />
                     <ImageView
-                        android:layout_width="@dimen/default_icon_size_5"
-                        android:layout_height="@dimen/default_icon_size_5"
+                        android:layout_width="@dimen/default_icon_size_6"
+                        android:layout_height="@dimen/default_icon_size_6"
                         android:src="@mipmap/image_right"
                         />
                 </LinearLayout>
 
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/default_height_2"
+                    android:background="@mipmap/image_integrate_background"
+                    />
 
                 <LinearLayout
                     android:id="@+id/ll_help_feedback"
@@ -344,8 +374,8 @@
                     android:background="@color/color_white"
                     >
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="@dimen/default_icon_size_5"
+                        android:layout_height="@dimen/default_icon_size_5"
                         android:layout_marginLeft="@dimen/default_margin_3"
                         android:layout_marginRight="@dimen/default_margin_2"
                         android:src="@mipmap/image_my_help"
@@ -359,8 +389,8 @@
                         android:textColor="@color/default_color_gray_2"
                         />
                     <ImageView
-                        android:layout_width="@dimen/default_icon_size_5"
-                        android:layout_height="@dimen/default_icon_size_5"
+                        android:layout_width="@dimen/default_icon_size_6"
+                        android:layout_height="@dimen/default_icon_size_6"
                         android:src="@mipmap/image_right"
                         />
                 </LinearLayout>
@@ -373,12 +403,11 @@
                     android:gravity="center_vertical"
                     android:paddingLeft="@dimen/default_padding_2"
                     android:paddingRight="@dimen/default_padding_2"
-                    android:layout_marginTop="@dimen/default_margin_2"
                     android:background="@color/color_white"
                     >
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="@dimen/default_icon_size_5"
+                        android:layout_height="@dimen/default_icon_size_5"
                         android:layout_marginLeft="@dimen/default_margin_3"
                         android:layout_marginRight="@dimen/default_margin_2"
                         android:src="@mipmap/image_my_about"
@@ -392,8 +421,8 @@
                         android:textColor="@color/default_color_gray_2"
                         />
                     <ImageView
-                        android:layout_width="@dimen/default_icon_size_5"
-                        android:layout_height="@dimen/default_icon_size_5"
+                        android:layout_width="@dimen/default_icon_size_6"
+                        android:layout_height="@dimen/default_icon_size_6"
                         android:src="@mipmap/image_right"
                         />
                 </LinearLayout>
@@ -408,10 +437,11 @@
                     android:paddingRight="@dimen/default_padding_2"
                     android:layout_marginTop="@dimen/default_height_line"
                     android:background="@color/color_white"
+                    android:layout_marginBottom="@dimen/default_height_3"
                     >
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="@dimen/default_icon_size_5"
+                        android:layout_height="@dimen/default_icon_size_5"
                         android:layout_marginLeft="@dimen/default_margin_3"
                         android:layout_marginRight="@dimen/default_margin_2"
                         android:src="@mipmap/image_my_setting"
@@ -425,8 +455,8 @@
                         android:textColor="@color/default_color_gray_2"
                         />
                     <ImageView
-                        android:layout_width="@dimen/default_icon_size_5"
-                        android:layout_height="@dimen/default_icon_size_5"
+                        android:layout_width="@dimen/default_icon_size_6"
+                        android:layout_height="@dimen/default_icon_size_6"
                         android:src="@mipmap/image_right"
                         />
                 </LinearLayout>

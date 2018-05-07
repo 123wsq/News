@@ -2,7 +2,12 @@ package com.yc.wsq.app.news.constant;
 
 public class Urls {
 
-    public static final String HOST = "http://api.yczmj.cn/";
+    public static final String HOST = "https://api.yczmj.cn/";
+
+    /**
+     * 商城页面
+     */
+    public static final String  SHOPPING = "https://yczmj.cn/Mobile/Index/index.html";
 
     /**
      * 获取验证码
@@ -51,10 +56,7 @@ public class Urls {
      */
     public static final String BENEFIT_DETAILS = "Topic/detail";
 
-    /**
-     * 商城页面
-     */
-    public static final String  SHOPPING = "http://h.yczmj.cn/Mobile/Index/index.html";
+
 
     /**
      * 会员升级

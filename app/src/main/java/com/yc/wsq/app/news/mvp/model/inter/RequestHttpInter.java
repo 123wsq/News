@@ -25,4 +25,7 @@ public interface RequestHttpInter {
      * @throws Exception
      */
     void onSendPost(String url, Map<String, String> param, Callback<Map<String, Object>> callback) throws Exception;
+
+
+
 }

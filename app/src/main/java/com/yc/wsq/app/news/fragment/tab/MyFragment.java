@@ -1,26 +1,19 @@
 package com.yc.wsq.app.news.fragment.tab;
 
-import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.wsq.library.tools.ToastUtils;
 import com.yc.wsq.app.news.R;
-import com.yc.wsq.app.news.activity.LoginActivity;
-import com.yc.wsq.app.news.activity.RegisterActivity;
 import com.yc.wsq.app.news.base.BaseFragment;
 import com.yc.wsq.app.news.constant.ResponseKey;
 import com.yc.wsq.app.news.constant.Urls;
-import com.yc.wsq.app.news.mvp.presenter.BasePresenter;
 import com.yc.wsq.app.news.mvp.presenter.UserPresenter;
 import com.yc.wsq.app.news.mvp.view.UserMainView;
-import com.yc.wsq.app.news.mvp.view.UserView;
-import com.yc.wsq.app.news.tools.ParamFormat;
 import com.yc.wsq.app.news.tools.ParamValidate;
 import com.yc.wsq.app.news.tools.SharedTools;
 
@@ -37,8 +30,6 @@ public class MyFragment extends BaseFragment<UserMainView, UserPresenter<UserMai
 
     public static final String TAG = MyFragment.class.getName();
     public static final String  INTERFACE_WITHP = TAG+_INTERFACE_WITHP;
-    @BindView(R.id.ll_back) LinearLayout ll_back;
-    @BindView(R.id.tv_title)TextView tv_title;
     @BindView(R.id.iv_header) ImageView iv_header;
     @BindView(R.id.tv_userName) TextView tv_userName;
 
@@ -56,9 +47,6 @@ public class MyFragment extends BaseFragment<UserMainView, UserPresenter<UserMai
     @Override
     protected void initView() {
 
-        ll_back.setVisibility(View.GONE);
-
-        tv_title.setText(getResources().getString(R.string.str_my_text));
 
         onUserStatusChangeListener();
 
@@ -66,13 +54,13 @@ public class MyFragment extends BaseFragment<UserMainView, UserPresenter<UserMai
     }
 
     @OnClick({R.id.ll_user_login, R.id.ll_my_wallet, R.id.ll_integral, R.id.ll_member_upgrade,
-            R.id.ll_about, R.id.ll_setting, R.id.ll_collect, R.id.ll_history, R.id.ll_comment,
-            R.id.ll_message, R.id.ll_focus, R.id.ll_discount, R.id.ll_help_feedback})
+            R.id.ll_about, R.id.ll_setting, R.id.ll_collect,  R.id.ll_discount, R.id.ll_help_feedback,
+            R.id.ll_shopping, R.id.ll_wechat, R.id.ll_qq, R.id.ll_qcode})
     public void onClick(View view){
         String uid = SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().user_id);
         String token = SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().token);
         try {
-            if (view.getId() != R.id.ll_about) {
+            if (view.getId() != R.id.ll_about && view.getId() != R.id.ll_shopping) {
                 ParamValidate.getInstance().onValidateIsNull(uid, token);
             }
         } catch (Exception e) {
@@ -106,17 +94,17 @@ public class MyFragment extends BaseFragment<UserMainView, UserPresenter<UserMai
             case R.id.ll_collect: //收藏 param =7;
                 mFunctionsManage.invokeFunction(INTERFACE_WITHP, 7);
                 break;
-            case R.id.ll_history: //历史记录 param =8;
+            case R.id.ll_shopping:
                 mFunctionsManage.invokeFunction(INTERFACE_WITHP, 8);
                 break;
-            case R.id.ll_comment: //评论  param =9
+            case R.id.ll_wechat:  //微信好友邀请 param  =9
+//                mFunctionsManage.invokeFunction(INTERFACE_WITHP, 9);
+                break;
+            case R.id.ll_qq:  //QQ好友邀请  param = 10
+//                mFunctionsManage.invokeFunction(INTERFACE_WITHP, 10);
+                break;
+            case R.id.ll_qcode: //展示二维码 param =11
                 mFunctionsManage.invokeFunction(INTERFACE_WITHP, 9);
-                break;
-            case R.id.ll_message: // 消息  param = 10
-                mFunctionsManage.invokeFunction(INTERFACE_WITHP, 10);
-                break;
-            case R.id.ll_focus: //我的关注 param =11;
-                mFunctionsManage.invokeFunction(INTERFACE_WITHP, 11);
                 break;
             case R.id.ll_discount:  // 优惠券 param = 12;
                 mFunctionsManage.invokeFunction(INTERFACE_WITHP, 12);
@@ -124,6 +112,7 @@ public class MyFragment extends BaseFragment<UserMainView, UserPresenter<UserMai
             case R.id.ll_help_feedback: //帮助与反馈 param =13;
                 mFunctionsManage.invokeFunction(INTERFACE_WITHP, 13);
                 break;
+
             default:
                 break;
         }

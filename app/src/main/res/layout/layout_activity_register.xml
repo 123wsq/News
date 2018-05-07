@@ -35,7 +35,7 @@
             android:layout_height="match_parent"
             android:digits="0123456789"
             android:inputType="number"
-            android:hint="请输入手机号码"
+            android:hint="@string/str_please_tel_text"
             android:textColorHint="@color/color_hint"
             android:gravity="left|center_vertical"
             android:textSize="@dimen/default_text_size_3"

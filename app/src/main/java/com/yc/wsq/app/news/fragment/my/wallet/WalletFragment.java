@@ -14,7 +14,7 @@ import com.yc.wsq.app.news.constant.ResponseKey;
 import com.yc.wsq.app.news.mvp.presenter.UserPresenter;
 import com.yc.wsq.app.news.mvp.view.UserView;
 import com.yc.wsq.app.news.tools.SharedTools;
-import com.yc.wsq.app.news.views.CustomPsdKeyboardPopup;
+import com.yc.wsq.app.news.views.popup.CustomPsdKeyboardPopup;
 
 import java.util.Map;
 
@@ -81,9 +81,9 @@ public class WalletFragment extends BaseFragment<UserView, UserPresenter<UserVie
             case R.id.iv_detail: //交易记录  param =3
                 mFunctionsManage.invokeFunction(INTERFACE_WITHP, 3);
                 break;
-            case R.id.ll_setting_withdraw_password: //设置提现密码
-
-                onSettingWithdrawPassword("设置提现密码",FLAG_TYPE_SETTING);
+            case R.id.ll_setting_withdraw_password: //设置提现密码 param =4
+                mFunctionsManage.invokeFunction(INTERFACE_WITHP, 4);
+//                onSettingWithdrawPassword("设置提现密码",FLAG_TYPE_SETTING);
                 break;
         }
     }

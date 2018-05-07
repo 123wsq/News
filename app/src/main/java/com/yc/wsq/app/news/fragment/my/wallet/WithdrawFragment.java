@@ -1,7 +1,6 @@
 package com.yc.wsq.app.news.fragment.my.wallet;
 
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.View;
@@ -17,7 +16,7 @@ import com.yc.wsq.app.news.constant.ResponseKey;
 import com.yc.wsq.app.news.mvp.presenter.UserPresenter;
 import com.yc.wsq.app.news.mvp.view.WithdrawView;
 import com.yc.wsq.app.news.tools.SharedTools;
-import com.yc.wsq.app.news.views.CustomPsdKeyboardPopup;
+import com.yc.wsq.app.news.views.popup.CustomPsdKeyboardPopup;
 
 import java.util.ArrayList;
 import java.util.HashMap;

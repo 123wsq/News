@@ -142,10 +142,12 @@ public class IntegralFragment extends BaseFragment<UserView, UserPresenter<UserV
         Map<String, String> param = new HashMap<>();
         param.put(ResponseKey.getInstace().uid, SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().user_id));
         param.put(ResponseKey.getInstace().token, SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().token));
-        if (refreshState ==1){
-            param.put(ResponseKey.getInstace().max_id, mData.get(0).get(ResponseKey.getInstace().log_id)+"");
-        }else if(refreshState == 2){
-            param.put(ResponseKey.getInstace().min_id, mData.get(mData.size() -1).get(ResponseKey.getInstace().log_id)+"");
+        if (mData.size() !=0) {
+            if (refreshState == 1) {
+                param.put(ResponseKey.getInstace().max_id, mData.get(0).get(ResponseKey.getInstace().log_id) + "");
+            } else if (refreshState == 2) {
+                param.put(ResponseKey.getInstace().min_id, mData.get(mData.size() - 1).get(ResponseKey.getInstace().log_id) + "");
+            }
         }
         try {
             ipresenter.onGetIntegralRecord(param);

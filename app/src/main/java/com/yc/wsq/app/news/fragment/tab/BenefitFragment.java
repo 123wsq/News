@@ -148,10 +148,12 @@ public class BenefitFragment extends BaseFragment<BenefitView, BenefitPresenter<
     public void onStartRequest(){
 
         Map<String, String> param = new HashMap<>();
-        if (refreshState ==1){
-            param.put(ResponseKey.getInstace().max_id, mData.get(0).get(ResponseKey.getInstace().id)+"");
-        }else if(refreshState == 2){
-            param.put(ResponseKey.getInstace().min_id, mData.get(mData.size() -1).get(ResponseKey.getInstace().id)+"");
+        if (mData.size() !=0) {
+            if (refreshState == 1) {
+                param.put(ResponseKey.getInstace().max_id, mData.get(0).get(ResponseKey.getInstace().id) + "");
+            } else if (refreshState == 2) {
+                param.put(ResponseKey.getInstace().min_id, mData.get(mData.size() - 1).get(ResponseKey.getInstace().id) + "");
+            }
         }
         try {
             ipresenter.onGetBenefitList(param);

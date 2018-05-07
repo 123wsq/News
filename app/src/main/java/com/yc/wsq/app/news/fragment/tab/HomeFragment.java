@@ -79,11 +79,13 @@ public class HomeFragment extends BaseFragment<NewsView, NewsPresenter<NewsView>
 
     private void onStartRequest(){
         Map<String, String> param = new HashMap<>();
-        if (refreshState == 1){  //刷新
+        if (mNewsData.size() !=0) {
+            if (refreshState == 1) {  //刷新
 
-            param.put(ResponseKey.getInstace().max_id, mNewsData.get(0).get(ResponseKey.getInstace().article_id)+"");
-        }else if(refreshState == 2){ //更多
-            param.put(ResponseKey.getInstace().min_id, mNewsData.get(mNewsData.size()-1).get(ResponseKey.getInstace().article_id)+"");
+                param.put(ResponseKey.getInstace().max_id, mNewsData.get(0).get(ResponseKey.getInstace().article_id) + "");
+            } else if (refreshState == 2) { //更多
+                param.put(ResponseKey.getInstace().min_id, mNewsData.get(mNewsData.size() - 1).get(ResponseKey.getInstace().article_id) + "");
+            }
         }
             param.put(ResponseKey.getInstace().cat_id, cat_id);
         try {

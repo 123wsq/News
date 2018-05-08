@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_backgroud_color"
+    android:orientation="vertical"
+    >
+
+    <include layout="@layout/layout_public_titlebar"></include>
+
+    <EditText
+        android:id="@+id/et_share_content"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:background="@drawable/shape_edit_stroken"
+        android:layout_marginTop="@dimen/default_margin_3"
+        android:hint="分享理由..."
+        android:textSize="@dimen/default_text_size_3"
+        android:gravity="left|top"
+        android:padding="@dimen/default_padding_4"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_white"
+        android:orientation="horizontal"
+        >
+
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="@dimen/default_margin_1"
+            android:src="@mipmap/image_share_content_icon"
+            android:padding="@dimen/default_padding_4"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/default_margin_3"
+            android:layout_marginRight="@dimen/default_margin_2"
+            >
+            <TextView
+                android:id="@+id/tv_share_name"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="sss"
+                android:textSize="@dimen/default_text_size_3"
+                android:textColor="@color/default_color_gray_1"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                />
+            <TextView
+                android:id="@+id/tv_share_desc"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="sss"
+                android:textSize="@dimen/default_text_size_3"
+                android:textColor="@color/default_color_gray_2"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_share"
+        style="@style/default_button"
+        android:layout_marginTop="@dimen/default_height_3"
+        android:layout_marginLeft="@dimen/default_height_3"
+        android:layout_marginRight="@dimen/default_height_3"
+        android:text="@string/str_share_text"
+        />
+</LinearLayout>

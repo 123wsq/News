@@ -1,5 +1,6 @@
 package com.yc.wsq.app.news.fragment.my;
 
+import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.pay.alipay.AlipayTools;
 import com.example.pay.alipay.PayResult;
+import com.wsq.library.tools.DialogTools;
 import com.wsq.library.tools.ToastUtils;
 import com.wsq.library.views.view.CustomPopup;
 import com.yc.wsq.app.news.R;
@@ -72,9 +74,26 @@ public class MemberUpgradeFragment extends BaseFragment<RechargeView, UserPresen
                 mFunctionsManage.invokeFunction(INTERFACE_BACK);
                 break;
             case R.id.iv_member_upgrade:
-                onInitPopup();
+
+                String is_vip = SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().is_vip);
+                if(is_vip.equals("1")){
+                    onIsVip();
+                }else{
+                    onInitPopup();
+                }
+
                 break;
         }
+    }
+
+    private void onIsVip(){
+        DialogTools.showDialog(getActivity(), "确定", "提示", "您已经是中级会员了！", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.dismiss();
+            }
+        });
     }
 
 

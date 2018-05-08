@@ -181,7 +181,7 @@
                     android:background="@color/color_gray"></View>
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:layout_height="match_parent"
                     android:text="@string/str_grade_text"
                     android:textStyle="bold"
@@ -194,7 +194,7 @@
                     android:background="@color/color_gray"></View>
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:layout_height="match_parent"
                     android:text="@string/str_condition_text"
                     android:textStyle="bold"
@@ -207,7 +207,7 @@
                     android:background="@color/color_gray"></View>
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight="3"
                     android:layout_height="match_parent"
                     android:text="@string/str_welfare_text"
                     android:textStyle="bold"
@@ -233,7 +233,7 @@
                     android:background="@color/color_gray"></View>
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:layout_height="match_parent"
                     android:text="@string/str_primary_vip_text"
                     android:gravity="center"
@@ -244,7 +244,7 @@
                     android:background="@color/color_gray"></View>
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:layout_height="match_parent"
                     android:text="@string/str_condition_register_text"
                     android:gravity="center"
@@ -255,7 +255,7 @@
                     android:background="@color/color_gray"></View>
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight="3"
                     android:layout_height="match_parent"
                     android:text="@string/str_everyday_text"
                     android:gravity="center"
@@ -279,7 +279,7 @@
                     android:background="@color/color_gray"></View>
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:layout_height="match_parent"
                     android:text="@string/str_intermediate_vip_text"
                     android:gravity="center"
@@ -290,7 +290,7 @@
                     android:background="@color/color_gray"></View>
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:layout_height="match_parent"
                     android:text="@string/str_condition_intermediate_text"
                     android:gravity="center"
@@ -301,7 +301,7 @@
                     android:background="@color/color_gray"></View>
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight="3"
                     android:layout_height="match_parent"
                     android:text="@string/str_everyday_intermediate_text"
                     android:gravity="center"

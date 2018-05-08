@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.zxing.client.result.ParsedResultType;
+
 import com.mylhyl.zxing.scanner.encode.QREncode;
 import com.yc.wsq.app.news.base.BaseFragment;
 import com.yc.wsq.app.news.mvp.presenter.BasePresenter;

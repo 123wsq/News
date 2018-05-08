@@ -71,4 +71,25 @@ public class Urls {
      * 充值成功通知服务器
      */
     public static final String NOTIFICATION_SERVER = "user/chongzhiback";
+
+    /**
+     * 收藏
+     */
+    public static final String COLLOCT = "Article/collect";
+
+    /**
+     * 收藏状态
+     */
+    public static final String COLLECT_STATE = "Article/iscollect";
+
+    /**
+     * 收藏列表
+     */
+    public static final String COLLECT_LIST = "user/collect";
+
+
+    /**
+     * 获取用户信息
+     */
+    public static final String  GET_USER_INFO = "user/info";
 }

@@ -82,7 +82,7 @@
             android:digits="0123456789"
             android:inputType="number"
             android:textColorHint="@color/color_hint"
-            android:gravity="left"
+            android:gravity="left|center_vertical"
             android:textSize="@dimen/default_text_size_3"
             android:paddingLeft="@dimen/default_padding_1"
             android:background="@drawable/shape_edit_no_stroke"

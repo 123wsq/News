@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/default_backgroud_color"
+    android:background="@color/color_white"
     >
 
 
@@ -19,54 +19,169 @@
             android:orientation="vertical"
             >
 
-            <RelativeLayout
+            <LinearLayout
+                android:id="@+id/ll_not_login"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="150dp"
+                android:orientation="vertical"
                 android:background="@mipmap/image_my_background"
+                android:gravity="center"
+                android:visibility="gone"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:src="@mipmap/imgae_sesame_street"
+                    />
+                <TextView
+                    android:id="@+id/tv_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="点击登录"
+                    android:textSize="@dimen/default_text_size_3"
+                    android:textColor="@color/color_white"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/default_margin_2"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_already_login"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:orientation="horizontal"
+                android:background="@mipmap/image_my_background"
+                android:gravity="center"
+                android:visibility="visible"
                 >
 
+                    <ImageView
+                        android:id="@+id/iv_header"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@mipmap/image_header_default"
+                        android:layout_marginLeft="@dimen/default_margin_2"
+                        />
+
+
                 <LinearLayout
-                    android:id="@+id/ll_user_login"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_centerInParent="true"
-                    android:gravity="center"
-                    android:layout_marginBottom="@dimen/default_margin_2"
+                    android:layout_marginLeft="@dimen/default_margin_3"
                     >
-                    <RelativeLayout
-                        android:layout_width="60dp"
-                        android:layout_height="60dp">
-                        <ImageView
-                            android:id="@+id/iv_header"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:src="@mipmap/image_header_default"
-                            />
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_alignParentRight="true"
 
-                            />
-                    </RelativeLayout>
-
-
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        >
                         <TextView
                             android:id="@+id/tv_userName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="点击登录"
+                            android:text="用户名"
                             android:textSize="@dimen/default_text_size_3"
                             android:gravity="center"
                             android:textColor="@color/color_white"
-                            android:layout_marginTop="@dimen/default_margin_4"
 
                             />
 
+                        <TextView
+                            android:id="@+id/tv_vip_level"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="初级"
+                            android:textSize="@dimen/default_text_size_4"
+                            android:gravity="center"
+                            android:textColor="@color/default_color_gray_1"
+                            android:layout_marginLeft="@dimen/default_margin_4"
+                            android:background="@mipmap/image_vip_level_background"
+                            android:paddingLeft="@dimen/default_padding_3"
+                            android:paddingRight="@dimen/default_padding_3"
+                            />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_margin_4"
+                        android:gravity="center_vertical"
+                        >
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:background="@mipmap/image_money_icon"
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_total_money"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/default_text_size_3"
+                            android:gravity="center"
+                            android:textColor="@color/color_white"
+                            android:layout_marginLeft="@dimen/default_margin_4"
+
+                            />
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:background="@mipmap/image_integral_icon"
+                            android:layout_marginLeft="@dimen/default_margin_2"
+                            />
+                        <TextView
+                            android:id="@+id/tv_total_integral"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/default_text_size_3"
+                            android:gravity="center"
+                            android:textColor="@color/color_white"
+                            android:layout_marginLeft="@dimen/default_margin_4"
+
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/default_margin_4"
+                        android:gravity="center_vertical"
+                        >
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/default_text_size_3"
+                            android:gravity="center"
+                            android:textColor="@color/color_white"
+                            android:layout_marginLeft="@dimen/default_margin_4"
+                            android:text="邀请码："
+                            />
+
+
+                        <TextView
+                            android:id="@+id/tv_invite_code"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/default_text_size_3"
+                            android:gravity="center"
+                            android:textColor="@color/color_white"
+                            android:layout_marginLeft="@dimen/default_margin_4"
+                            />
+
+                    </LinearLayout>
+
+
                 </LinearLayout>
 
-            </RelativeLayout>
+
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -320,7 +435,13 @@
                         android:src="@mipmap/image_right"
                         />
                 </LinearLayout>
-
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/default_height_line"
+                    android:background="@color/line_color"
+                    android:layout_marginLeft="@dimen/default_padding_2"
+                    android:layout_marginRight="@dimen/default_padding_2"
+                    ></View>
                 <LinearLayout
                     android:id="@+id/ll_member_upgrade"
                     android:layout_width="match_parent"
@@ -393,7 +514,13 @@
                         android:src="@mipmap/image_right"
                         />
                 </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_height_line"
+                android:background="@color/line_color"
+                android:layout_marginLeft="@dimen/default_padding_2"
+                android:layout_marginRight="@dimen/default_padding_2"
+                ></View>
                 <LinearLayout
                     android:id="@+id/ll_about"
                     android:layout_width="match_parent"
@@ -426,7 +553,13 @@
                         android:src="@mipmap/image_right"
                         />
                 </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_height_line"
+                android:background="@color/line_color"
+                android:layout_marginLeft="@dimen/default_padding_2"
+                android:layout_marginRight="@dimen/default_padding_2"
+                ></View>
                 <LinearLayout
                     android:id="@+id/ll_setting"
                     android:layout_width="match_parent"

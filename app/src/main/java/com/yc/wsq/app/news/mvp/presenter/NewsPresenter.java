@@ -10,6 +10,7 @@ import com.yc.wsq.app.news.mvp.model.impl.RequestHttpImpl;
 import com.yc.wsq.app.news.mvp.model.inter.NewsModelInter;
 import com.yc.wsq.app.news.mvp.model.inter.RequestHttpInter;
 import com.yc.wsq.app.news.mvp.view.BaseView;
+import com.yc.wsq.app.news.mvp.view.NewsDetailsView;
 import com.yc.wsq.app.news.mvp.view.NewsView;
 import com.yc.wsq.app.news.mvp.view.SearchView;
 import com.yc.wsq.app.news.tools.ParamValidate;
@@ -77,7 +78,7 @@ public class NewsPresenter<T extends BaseView> extends BasePresenter<T> {
      * @throws Exception
      */
     public void onReadIntegral(Map<String, String> param) throws Exception{
-        final NewsView view = (NewsView) getView();
+        final NewsDetailsView view = (NewsDetailsView) getView();
         if (view != null) {
             //参数验证
             try {
@@ -94,7 +95,7 @@ public class NewsPresenter<T extends BaseView> extends BasePresenter<T> {
                     @Override
                     public void onSuccess(Map<String, Object> data) {
                         if (view != null) {
-                            view.onNewsResponse(data);
+                            view.onReadNewsResponse(data);
                         }
                     }
 
@@ -222,6 +223,8 @@ public class NewsPresenter<T extends BaseView> extends BasePresenter<T> {
      */
     public void onHotSearchNews(Map<String, String> param) throws Exception{
         final SearchView view = (SearchView) getView();
+
+
         if (view != null) {
 
             if (view != null) {
@@ -253,6 +256,108 @@ public class NewsPresenter<T extends BaseView> extends BasePresenter<T> {
                 });
 
             }
+        }
+    }
+
+    /**
+     * 文章收藏
+     * @param param
+     * @throws Exception
+     */
+    public void onAddCollect(Map<String, String> param) throws Exception{
+        final NewsDetailsView view = (NewsDetailsView) getView();
+        if (view != null) {
+            //参数验证
+            try {
+                ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().id));
+                ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().uid));
+                ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().token));
+                ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().act));
+            } catch (Exception e) {
+                throw new Exception(e.getMessage());
+            }
+
+            view.showLoadding();
+            String url = Urls.HOST +Urls.COLLOCT;
+            requestHttp.onSendGet(url, param, new Callback<Map<String, Object>>() {
+                @Override
+                public void onSuccess(Map<String, Object> data) {
+
+                    if (view !=null){
+                        view.onNewsCollectResponse(data);
+                    }
+                }
+
+                @Override
+                public void onFailure(String msg) {
+                    ToastUtils.onToast(msg);
+                }
+
+                @Override
+                public void onOutTime(String msg) {
+                    ToastUtils.onToast(msg);
+                    if (view !=null)
+                    view.onReLogin();
+                }
+
+                @Override
+                public void onComplete() {
+
+                    if (view !=null)
+                        view.dismissLoadding();
+                }
+            });
+
+        }
+    }
+
+    /**
+     * 文章收藏状态获取
+     * @param param
+     * @throws Exception
+     */
+    public void onGetCollectState(Map<String, String> param) throws Exception{
+        final NewsDetailsView view = (NewsDetailsView) getView();
+        if (view != null) {
+            //参数验证
+            try {
+                ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().id));
+                ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().uid));
+            } catch (Exception e) {
+                throw new Exception(e.getMessage());
+            }
+
+            view.showLoadding();
+            String url = Urls.HOST +Urls.COLLECT_STATE;
+            requestHttp.onSendGet(url, param, new Callback<Map<String, Object>>() {
+                @Override
+                public void onSuccess(Map<String, Object> data) {
+
+                    if (view !=null){
+                        view.onNewsStateResponse(data);
+                    }
+                }
+
+                @Override
+                public void onFailure(String msg) {
+                    ToastUtils.onToast(msg);
+                }
+
+                @Override
+                public void onOutTime(String msg) {
+                    ToastUtils.onToast(msg);
+                    if (view !=null)
+                        view.onReLogin();
+                }
+
+                @Override
+                public void onComplete() {
+
+                    if (view !=null)
+                        view.dismissLoadding();
+                }
+            });
+
         }
     }
 

@@ -1,5 +1,6 @@
 package com.yc.wsq.app.news.fragment.tab;
 
+import android.Manifest;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
@@ -8,6 +9,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
+import com.orhanobut.logger.Logger;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -32,6 +38,9 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import me.weyye.hipermission.HiPermission;
+import me.weyye.hipermission.PermissionCallback;
+import me.weyye.hipermission.PermissionItem;
 
 /**
  * 主页面
@@ -54,6 +63,11 @@ public class HomeFragment extends BaseFragment<NewsView, NewsPresenter<NewsView>
     private List<Map<String, Object>> mNewsData;
     private int refreshState = 0;  //0 正常  1 刷新  2 加载
     private String cat_id="";
+    private String curCity;
+
+    //声明AMapLocationClient类对象
+    public AMapLocationClient mLocationClient = null;
+
 
     @Override
     protected NewsPresenter<NewsView> createPresenter() {
@@ -75,6 +89,7 @@ public class HomeFragment extends BaseFragment<NewsView, NewsPresenter<NewsView>
 
         onStartRequest();
 
+        onRequestPermission();
     }
 
     private void onStartRequest(){
@@ -120,6 +135,8 @@ public class HomeFragment extends BaseFragment<NewsView, NewsPresenter<NewsView>
             mTitleData.clear();
         }
         List<Map<String, Object>> list = (List<Map<String, Object>>) result.get(ResponseKey.getInstace().result);
+
+
         mTitleData.addAll(list);
         mTitleAdapter.notifyDataSetChanged();
     }
@@ -158,7 +175,7 @@ public class HomeFragment extends BaseFragment<NewsView, NewsPresenter<NewsView>
         rv_RecyclerView_content.setLayoutManager(new LinearLayoutManager(getActivity()));
         rv_RecyclerView_content.setHasFixedSize(true);
 
-        mNewsAdapter = new NewsAdapter(getActivity(), mNewsData, onNewsItemListener);
+        mNewsAdapter = new NewsAdapter(getActivity(), mNewsData, onNewsItemListener, 0);
         rv_RecyclerView_content.setAdapter(mNewsAdapter);
 
     }
@@ -227,6 +244,95 @@ public class HomeFragment extends BaseFragment<NewsView, NewsPresenter<NewsView>
 
                 startActivity(new Intent(getActivity(), QRcodeScanActivity.class));
                 break;
+        }
+    }
+
+
+    private void onInitLocation(){
+
+
+        //初始化定位
+        mLocationClient = new AMapLocationClient(getActivity());
+
+        AMapLocationClientOption option = new AMapLocationClientOption();
+        option.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+        //接口为true，启动定位时SDK会返回最近3s内精度最高的一次定位结果。如果设置其为true，setOnceLocation(boolean b)接口也会被设置为true，反之不会，默认为false。
+        option.setOnceLocation(true);
+        //设置是否返回地址信息（默认返回地址信息）
+        option.setNeedAddress(true);
+        //关闭缓存机制
+        option.setLocationCacheEnable(false);
+        //给定位客户端对象设置定位参数
+        mLocationClient.setLocationOption(option);
+        //设置定位回调监听
+        mLocationClient.setLocationListener(mLocationListener);
+
+        mLocationClient.startLocation();
+    }
+
+    //声明定位回调监听器
+    AMapLocationListener mLocationListener = new AMapLocationListener() {
+        @Override
+        public void onLocationChanged(AMapLocation aMapLocation) {
+
+            if (aMapLocation != null) {
+                if (aMapLocation.getErrorCode() == 0) {
+                //可在其中解析amapLocation获取相应内容。
+                    curCity = aMapLocation.getCity();
+
+//                    Map<String, Object> location = new HashMap<>();
+//                    location.put(ResponseKey.getInstace().cat_name, curCity);
+//                    location.put(ResponseKey.getInstace().cat_id, 999);
+//                    if(mTitleData.size()>4){
+//                        mTitleData.add( 4, location);
+//                    }else{
+//                        mTitleData.add(location);
+//                    }
+//                    mTitleAdapter.notifyDataSetChanged();
+                }else {
+                    //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
+                }
+            }
+        }
+    };
+
+    /**
+     * 请求权限
+     */
+    private void onRequestPermission(){//READ_PHONE_STATE
+
+        List<PermissionItem> permissions = new ArrayList<PermissionItem>();
+        permissions.add(new PermissionItem(Manifest.permission.ACCESS_COARSE_LOCATION, "定位", R.drawable.permission_ic_location));
+        HiPermission.create(getActivity()).permissions(permissions).checkMutiPermission(new PermissionCallback() {
+            @Override
+            public void onClose() {
+                Logger.d("用户关闭权限申请");
+            }
+
+            @Override
+            public void onFinish() {
+                Logger.d("所有权限申请完成");
+
+                onInitLocation();
+            }
+
+            @Override
+            public void onDeny(String permission, int position) {
+
+            }
+
+            @Override
+            public void onGuarantee(String permission, int position) {
+
+            }
+        });
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (mLocationClient != null){
+            mLocationClient.stopLocation();
         }
     }
 }

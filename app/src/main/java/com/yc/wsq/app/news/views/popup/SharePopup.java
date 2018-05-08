@@ -35,16 +35,16 @@ public class SharePopup extends PopupWindow implements View.OnClickListener {
     private Integer[] drawableId = {R.mipmap.image_wechat_icon, R.mipmap.image_friend_circle_icon, R.mipmap.image_qq_icon, R.mipmap.image_qzone_icon};
     private String[] title = {"微信好友", "朋友圈", "QQ好友","QQ空间"};
     private ShareAdapter mAdapter;
+    private OnShareResultListener mListener;
 
 
     private Activity mContext;
-    private String mTitle;
     private View popupView;
 
 
-    public SharePopup(Activity context, String title){
+    public SharePopup(Activity context,  OnShareResultListener listener){
         this.mContext = context;
-        this.mTitle = title;
+        this.mListener = listener;
         onInitView();
 
         initPopup();
@@ -195,16 +195,16 @@ public class SharePopup extends PopupWindow implements View.OnClickListener {
 
             switch (position){
                 case 0:
-                    ShareTools.showShare(mContext, Wechat.NAME,mTitle,"", "这个是分享的内容");
+                    mListener.onClickResult(Wechat.NAME);
                     break;
                 case 1:
-                    ShareTools.showShare(mContext, WechatMoments.NAME,mTitle,"", "这个是分享的内容");
+                    mListener.onClickResult(WechatMoments.NAME);
                     break;
                 case 2:
-                    ShareTools.showShare(mContext,QQ.NAME, mTitle, "","这个是分享的内容");
+                    mListener.onClickResult(QQ.NAME);
                     break;
                 case 3:
-                    ShareTools.showShare(mContext,QZone.NAME, mTitle, "","这个是分享的内容");
+                    mListener.onClickResult(QZone.NAME);
                     break;
             }
             dismiss();
@@ -215,6 +215,10 @@ public class SharePopup extends PopupWindow implements View.OnClickListener {
 
         }
     };
+
+    public interface OnShareResultListener{
+        void onClickResult(String platform);
+    }
 
 
 //    private void showShare(String platform, String title, String content) {

@@ -3,25 +3,32 @@ package com.yc.wsq.app.news.fragment.tab;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.orhanobut.logger.Logger;
 import com.wsq.library.tools.ToastUtils;
 import com.yc.wsq.app.news.R;
 import com.yc.wsq.app.news.base.BaseFragment;
 import com.yc.wsq.app.news.constant.ResponseKey;
 import com.yc.wsq.app.news.constant.Urls;
+import com.yc.wsq.app.news.fragment.my.IntegralFragment;
 import com.yc.wsq.app.news.mvp.presenter.UserPresenter;
 import com.yc.wsq.app.news.mvp.view.UserMainView;
 import com.yc.wsq.app.news.tools.ParamValidate;
+import com.yc.wsq.app.news.tools.ShareTools;
 import com.yc.wsq.app.news.tools.SharedTools;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.sharesdk.tencent.qq.QQ;
+import cn.sharesdk.wechat.friends.Wechat;
 
 /**
  * 我的页面
@@ -32,6 +39,13 @@ public class MyFragment extends BaseFragment<UserMainView, UserPresenter<UserMai
     public static final String  INTERFACE_WITHP = TAG+_INTERFACE_WITHP;
     @BindView(R.id.iv_header) ImageView iv_header;
     @BindView(R.id.tv_userName) TextView tv_userName;
+    @BindView(R.id.tv_vip_level) TextView tv_vip_level;
+    @BindView(R.id.tv_total_money) TextView tv_total_money;
+    @BindView(R.id.tv_total_integral) TextView tv_total_integral;
+    @BindView(R.id.ll_already_login) LinearLayout ll_already_login;
+    @BindView(R.id.ll_not_login) LinearLayout ll_not_login;
+
+    @BindView(R.id.tv_invite_code) TextView tv_invite_code;
 
 
     @Override
@@ -47,20 +61,20 @@ public class MyFragment extends BaseFragment<UserMainView, UserPresenter<UserMai
     @Override
     protected void initView() {
 
-
-        onUserStatusChangeListener();
-
-
+        onGetUserInfo();
+    onUserStatusChangeListener();
     }
 
-    @OnClick({R.id.ll_user_login, R.id.ll_my_wallet, R.id.ll_integral, R.id.ll_member_upgrade,
+
+
+    @OnClick({ R.id.ll_my_wallet, R.id.ll_integral, R.id.ll_member_upgrade,
             R.id.ll_about, R.id.ll_setting, R.id.ll_collect,  R.id.ll_discount, R.id.ll_help_feedback,
-            R.id.ll_shopping, R.id.ll_wechat, R.id.ll_qq, R.id.ll_qcode})
+            R.id.ll_shopping, R.id.ll_wechat, R.id.ll_qq, R.id.ll_qcode, R.id.tv_login})
     public void onClick(View view){
         String uid = SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().user_id);
         String token = SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().token);
         try {
-            if (view.getId() != R.id.ll_about && view.getId() != R.id.ll_shopping) {
+            if (view.getId() != R.id.ll_about && view.getId() != R.id.ll_shopping && view.getId() != R.id.tv_login) {
                 ParamValidate.getInstance().onValidateIsNull(uid, token);
             }
         } catch (Exception e) {
@@ -80,10 +94,8 @@ public class MyFragment extends BaseFragment<UserMainView, UserPresenter<UserMai
             case R.id.ll_member_upgrade: //会员升级 param =3
                 mFunctionsManage.invokeFunction(INTERFACE_WITHP, 3);
                 break;
-            case R.id.ll_user_login:  //会员登录 param = 4
-                if (TextUtils.isEmpty(SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().nickname))) {
-                    mFunctionsManage.invokeFunction(INTERFACE_WITHP, 4);
-                }
+            case R.id.tv_login:  //会员登录 param = 4
+                mFunctionsManage.invokeFunction(INTERFACE_WITHP, 4);
                 break;
             case R.id.ll_about: //关于  param = 5;
                 mFunctionsManage.invokeFunction(INTERFACE_WITHP, 5);
@@ -99,9 +111,11 @@ public class MyFragment extends BaseFragment<UserMainView, UserPresenter<UserMai
                 break;
             case R.id.ll_wechat:  //微信好友邀请 param  =9
 //                mFunctionsManage.invokeFunction(INTERFACE_WITHP, 9);
+//                ShareTools.showShare(getActivity(), Wechat.NAME, "点一下，和我一起领10~15元现金！","","");
                 break;
             case R.id.ll_qq:  //QQ好友邀请  param = 10
 //                mFunctionsManage.invokeFunction(INTERFACE_WITHP, 10);
+//                ShareTools.showShare(getActivity(), QQ.NAME, "点一下，和我一起领10~15元现金！","","");
                 break;
             case R.id.ll_qcode: //展示二维码 param =11
                 mFunctionsManage.invokeFunction(INTERFACE_WITHP, 9);
@@ -138,6 +152,18 @@ public class MyFragment extends BaseFragment<UserMainView, UserPresenter<UserMai
         }
         String nickname = SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().nickname);
         tv_userName.setText(TextUtils.isEmpty(nickname)? "点击登录" :nickname);
+        tv_vip_level.setText(SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().level_name));
+        tv_total_integral.setText(SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().pay_points));
+        tv_total_money.setText(SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().user_money));
+
+        tv_invite_code.setText(SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().user_id));
+        if(nickname.length() ==0){
+            ll_already_login.setVisibility(View.GONE);
+            ll_not_login.setVisibility(View.VISIBLE);
+        }else{
+            ll_already_login.setVisibility(View.VISIBLE);
+            ll_not_login.setVisibility(View.GONE);
+        }
     }
 
     /**
@@ -147,6 +173,8 @@ public class MyFragment extends BaseFragment<UserMainView, UserPresenter<UserMai
         Map<String, String> param = new HashMap<>();
 
         try {
+            param.put(ResponseKey.getInstace().uid, SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().user_id));
+            param.put(ResponseKey.getInstace().token, SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().token));
             ipresenter.onGetUserInfo(param);
         } catch (Exception e) {
             ToastUtils.onToast(e.getMessage());
@@ -154,32 +182,19 @@ public class MyFragment extends BaseFragment<UserMainView, UserPresenter<UserMai
         }
     }
 
-    private void onHideLogin(){
-        Map<String, String> param = new HashMap<>();
-
-        try {
-            String username = SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().username);
-            String password = SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().password);
-            param.put(ResponseKey.getInstace().username, username);
-            param.put(ResponseKey.getInstace().password, password);
-            ipresenter.onUserLogin(param);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
 
     @Override
     public void onUserInfoResponse(Map<String, Object> result) {
+        SharedTools shared = SharedTools.getInstance(getContext());
+        Map<String, Object> data = (Map<String, Object>) result.get(ResponseKey.getInstace().data);
+        Iterator<Map.Entry<String, Object>> it =  data.entrySet().iterator();
 
-        int status = (int) result.get(ResponseKey.getInstace().rsp_status);
-        if (status == 1){
-//            onGetUserInfo();
+        while (it.hasNext()){
+            Map.Entry<String, Object> entry =  it.next();
+            shared.onPutData(entry.getKey(), entry.getValue()+"");
         }
+        onUserStatusChangeListener();
     }
 
-    @Override
-    public void onHideLoginResponse(Map<String, Object> result) {
-
-    }
 }

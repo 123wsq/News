@@ -78,7 +78,7 @@ public class SearchResultFragment extends BaseFragment<NewsView, NewsPresenter<N
 
 
 
-        mAdapter = new NewsAdapter(getActivity(), mData, listener);
+        mAdapter = new NewsAdapter(getActivity(), mData, listener, 1);
         rv_RecyclerView.setAdapter(mAdapter);
 
 
@@ -95,7 +95,9 @@ public class SearchResultFragment extends BaseFragment<NewsView, NewsPresenter<N
     OnRecyclerViewItemClickListener listener = new OnRecyclerViewItemClickListener() {
         @Override
         public void onRecyclerItemClickListener(View view, int i) {
-            mFunctionsManage.invokeFunction(HomeFragment.INTERFACE_WITHPS, mData.get(i).get(ResponseKey.getInstace().article_id)+"");
+            mFunctionsManage.invokeFunction(HomeFragment.INTERFACE_WITHPS,
+                    mData.get(i).get(ResponseKey.getInstace().article_id)+"",
+                    mData.get(i).get(ResponseKey.getInstace().title)+"");
         }
 
         @Override

@@ -31,22 +31,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_height_4"
                 android:background="@drawable/shape_search"
-                android:layout_marginLeft="@dimen/default_margin_2"
+                android:layout_marginLeft="@dimen/default_margin_1"
+                android:paddingRight="@dimen/default_margin_2"
                 android:paddingLeft="@dimen/default_padding_2"
                 android:textColorHint="@color/default_color_gray_2"
                 android:hint="快去发表伟大言论吧！"
                 android:textSize="@dimen/default_text_size_4"
                 android:gravity="center_vertical"
                 />
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@mipmap/image_voice_icon"
-                android:layout_marginLeft="@dimen/default_margin_2"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/default_margin_2"
-                />
+
         </RelativeLayout>
 
         <ImageView
@@ -56,6 +49,7 @@
             android:layout_marginLeft="@dimen/default_margin_2"
             />
         <ImageView
+            android:id="@+id/iv_collect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/image_collect_icon"

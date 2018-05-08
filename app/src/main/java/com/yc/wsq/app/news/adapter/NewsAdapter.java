@@ -27,11 +27,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
     private Context mContext;
     private List<Map<String, Object>> mData;
     private OnRecyclerViewItemClickListener mOnTitleItemListener;
+    private int mFlag; //0 新闻   1搜索  2 收藏
 
-    public NewsAdapter(Context context, List<Map<String, Object>> data, OnRecyclerViewItemClickListener onTitleItemListener){
+    public NewsAdapter(Context context, List<Map<String, Object>> data, OnRecyclerViewItemClickListener onTitleItemListener, int flag){
         this.mContext = context;
         this.mData = data;
         this.mOnTitleItemListener = onTitleItemListener;
+        this.mFlag = flag;
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -70,6 +72,17 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
             e.printStackTrace();
         }
 
+
+        switch (mFlag){
+            case 0:
+            case 1:
+                holder.ll_status.setVisibility(View.VISIBLE);
+                break;
+            case 2:
+                holder.ll_status.setVisibility(View.GONE);
+                break;
+
+        }
     }
 
     @Override
@@ -81,6 +94,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
         private TextView tv_title, tv_recommend, tv_source, tv_clickNum;
         private LinearLayout ll_news_item;
         private ImageView iv_image_1, iv_image_2, iv_image_3;
+        private LinearLayout ll_status;
         public ViewHolder(View itemView) {
             super(itemView);
             ll_news_item = itemView.findViewById(R.id.ll_news_item);
@@ -91,6 +105,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
             tv_recommend = itemView.findViewById(R.id.tv_recommend);
             tv_source = itemView.findViewById(R.id.tv_source);
             tv_clickNum = itemView.findViewById(R.id.tv_clickNum);
+            ll_status = itemView.findViewById(R.id.ll_status);
             ll_news_item.setOnClickListener(this);
         }
 

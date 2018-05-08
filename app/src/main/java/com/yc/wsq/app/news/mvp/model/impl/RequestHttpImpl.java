@@ -52,11 +52,8 @@ public class RequestHttpImpl implements RequestHttpInter{
                         case 0:
                             callback.onOutTime(result.get(ResponseKey.getInstace().rsp_msg)+"");
                             break;
-                        case 1:
-                            callback.onSuccess(result);
-                            break;
                             default:
-
+                                callback.onSuccess(result);
                                 break;
                     }
 

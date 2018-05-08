@@ -14,6 +14,7 @@ import com.yc.wsq.app.news.mvp.model.inter.RequestHttpInter;
 import com.yc.wsq.app.news.mvp.model.inter.UserModelInter;
 import com.yc.wsq.app.news.mvp.view.BaseView;
 import com.yc.wsq.app.news.mvp.view.RechargeView;
+import com.yc.wsq.app.news.mvp.view.UserMainView;
 import com.yc.wsq.app.news.mvp.view.UserRegisterView;
 import com.yc.wsq.app.news.mvp.view.UserView;
 import com.yc.wsq.app.news.mvp.view.WithdrawView;
@@ -184,23 +185,23 @@ public class UserPresenter<T extends BaseView> extends BasePresenter<T> {
      */
     public void onGetUserInfo(Map<String, String> param) throws Exception{
 
-        final UserRegisterView userView = (UserRegisterView) getView();
+        final UserMainView userView = (UserMainView) getView();
 
         try {
-            ParamValidate.getInstance().onValidateUserName(param.get(ResponseKey.getInstace().mobile));
+            ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().uid));
+            ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().token));
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }
 
 
         if (userView != null) {
-            userView.showLoadding();
-            final String url = Urls.HOST + Urls.GET_VALIDATE_CODE;
+            final String url = Urls.HOST + Urls.GET_USER_INFO;
             requestHttp.onSendPost(url, param, new Callback<Map<String, Object>>() {
                 @Override
                 public void onSuccess(Map<String, Object> data) {
                     if (userView != null) {
-                        userView.onGetValidateData(data);
+                        userView.onUserInfoResponse(data);
                     }
                 }
 
@@ -217,13 +218,9 @@ public class UserPresenter<T extends BaseView> extends BasePresenter<T> {
 
                 }
 
-
-
                 @Override
                 public void onComplete() {
-                    if (userView != null) {
-                        userView.dismissLoadding();
-                    }
+
                 }
             });
         }
@@ -644,4 +641,56 @@ public class UserPresenter<T extends BaseView> extends BasePresenter<T> {
 
     }
 
+
+    /**
+     * 收藏列表
+     * @param param
+     * @throws Exception
+     */
+    public void onGetCollectList(Map<String, String> param) throws Exception{
+
+        final UserView view = (UserView) getView();
+
+        try {
+            ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().uid));
+            ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().token));
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+
+
+        if (view != null) {
+            view.showLoadding();
+            String url = Urls.HOST +Urls.COLLECT_LIST;
+            requestHttp.onSendPost(url, param, new Callback<Map<String, Object>>() {
+                @Override
+                public void onSuccess(Map<String, Object> data) {
+                    if (view != null) {
+                        view.onResponseData(data);
+                    }
+                }
+
+                @Override
+                public void onFailure(String msg) {
+                    ToastUtils.onToast(msg);
+                }
+
+                @Override
+                public void onOutTime(String msg) {
+                    ToastUtils.onToast(msg);
+                    if (view != null)
+                        view.onReLogin();
+                }
+
+
+                @Override
+                public void onComplete() {
+                    if (view != null) {
+                        view.dismissLoadding();
+                    }
+                }
+            });
+        }
+
+    }
 }

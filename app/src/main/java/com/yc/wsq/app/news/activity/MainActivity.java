@@ -38,6 +38,7 @@ import com.yc.wsq.app.news.fragment.my.wallet.ValidateAccountFragment;
 import com.yc.wsq.app.news.fragment.news.NewsDetailsFragment;
 import com.yc.wsq.app.news.fragment.news.SearchFragment;
 import com.yc.wsq.app.news.fragment.news.SearchResultFragment;
+import com.yc.wsq.app.news.fragment.news.ShareFragment;
 import com.yc.wsq.app.news.fragment.tab.BenefitFragment;
 import com.yc.wsq.app.news.fragment.tab.HomeFragment;
 import com.yc.wsq.app.news.fragment.tab.MyFragment;
@@ -251,6 +252,17 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+
+        functionsManage.addFunction(new FunctionWithParamOnly<String[]>(NewsDetailsFragment.INTERFACE_WITHP) {
+            @Override
+            public void function(String[] data) {
+                Bundle bundle = new Bundle();
+                bundle.putString(ResponseKey.getInstace().platform, data[0]);
+                bundle.putString(ResponseKey.getInstace().title, data[1]);
+                bundle.putString(ResponseKey.getInstace().description, data[2]);
+                onEnter(new ShareFragment(), ShareFragment.TAG, bundle, true);
+            }
+        });
         functionsManage.addFunction(new FunctionWithParamOnly<String>(BenefitFragment.INTERFACE_WITHP) {
             @Override
             public void function(String data) {

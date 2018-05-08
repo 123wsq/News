@@ -89,6 +89,7 @@ public class ResponseKey {
     public final String nickname = "nickname";
     public final String total_amount = "total_amount";
     public final String token = "token";
+    public final String act = "act";
     public final String is_vip = "is_vip";
     public final String level_name = "level_name";
     public final String uid = "uid";
@@ -108,6 +109,7 @@ public class ResponseKey {
     public final String order_sn = "order_sn";
     public final String times = "times";
     public final String sex = "sex";
+    public final String platform= "platform";
 
 
     /**

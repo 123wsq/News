@@ -6,5 +6,4 @@ public interface UserMainView extends BaseView{
 
     void onUserInfoResponse(Map<String, Object> result);
 
-    void onHideLoginResponse(Map<String, Object> result);
 }

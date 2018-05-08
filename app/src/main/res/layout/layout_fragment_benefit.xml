@@ -2,27 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/default_backgroud_color"
+    android:background="@color/color_white"
     android:orientation="vertical"
     >
 
     <include layout="@layout/layout_public_titlebar"></include>
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/default_height_3"
-        android:text="@string/str_benefit_activities_text"
-        android:textColor="@color/color_blue"
-        android:textSize="@dimen/default_text_size_2"
-        android:gravity="center_vertical"
-        android:paddingLeft="@dimen/default_padding_2"
-        android:background="@color/color_white"
+        android:layout_height="@dimen/default_height_1"
+        android:background="@mipmap/image_benefit_background"
+        android:layout_marginTop="@dimen/default_line_height"
         />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/default_margin_3"
+        android:orientation="vertical"
         >
         <com.scwang.smartrefresh.layout.SmartRefreshLayout
             android:id="@+id/refreshLayout"

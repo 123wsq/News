@@ -4,15 +4,13 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.view.View;
 import android.widget.TextView;
+
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
@@ -30,7 +28,6 @@ import com.mylhyl.zxing.scanner.common.Scanner;
 import com.mylhyl.zxing.scanner.result.AddressBookResult;
 import com.mylhyl.zxing.scanner.result.ISBNResult;
 import com.mylhyl.zxing.scanner.result.ProductResult;
-import com.mylhyl.zxing.scanner.result.URIResult;
 import com.orhanobut.logger.Logger;
 import com.wsq.library.tools.ToastUtils;
 import com.yc.wsq.app.news.R;
@@ -197,7 +194,7 @@ public class QRcodeScanActivity extends BaseActivity{
     private void onRequestPermission(){
 
         List<PermissionItem> permissions = new ArrayList<PermissionItem>();
-        permissions.add(new PermissionItem(Manifest.permission.CAMERA, "手机权限", R.drawable.permission_ic_phone));
+        permissions.add(new PermissionItem(Manifest.permission.CAMERA, "照相机", R.drawable.permission_ic_camera));
         HiPermission.create(this).permissions(permissions).checkMutiPermission(new PermissionCallback() {
             @Override
             public void onClose() {

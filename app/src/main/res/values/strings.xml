@@ -131,7 +131,7 @@
     <string name="str_balance_no_text">余额不足</string>
     <string name="str_qrcode_scan_text">二维码识别</string>
     <string name="str_cancel_text">取消</string>
-    <string name="str_invite_apprentice_text">每邀请以为徒弟奖励50积分</string>
+    <string name="str_invite_apprentice_text">师傅邀请会员成为师傅奖励50积分</string>
     <string name="str_read_apprentice_text">师傅可以获得徒弟收益的10%作为贡品</string>
     <string name="str_wechat_apprentice_text">微信</string>
     <string name="str_qq_apprentice_text">QQ</string>
@@ -146,4 +146,7 @@
     <string name="str_password_level_middle_text">中</string>
     <string name="str_password_level_high_text">高</string>
     <string name="str_share_qrcode_text">二维码</string>
+    <string name="str_share_text">分享</string>
+    <string name="str_primary_welfare_text">每天可以20条有效阅读\n平台赠送20积分\n 多出无效 \n\n初级会员介绍成为初级\n下级收益的10%\n初级会员介绍成为中级\n下级收益的10%</string>
+    <string name="str_intermediate_welfare_text">每天可以60条有效阅读\n平台赠送60积分\n 多出无效 \n\n中级会员介绍成为初级\n下级收益的10%\n平台赠送50积分\n初级会员介绍成为中级\n下级收益的10%</string>
 </resources>

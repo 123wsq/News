@@ -156,8 +156,8 @@ public class AccountSettingFragment extends BaseFragment implements RadioGroup.O
     private void onRequestPermission(final int position){//READ_PHONE_STATE
 
         List<PermissionItem> permissions = new ArrayList<PermissionItem>();
-        permissions.add(new PermissionItem(Manifest.permission.CAMERA, "手机权限", R.drawable.ic_camera));
-        permissions.add(new PermissionItem(Manifest.permission.READ_EXTERNAL_STORAGE, "手机权限", R.drawable.permission_ic_storage));
+        permissions.add(new PermissionItem(Manifest.permission.CAMERA, "照相机", R.drawable.permission_ic_camera));
+        permissions.add(new PermissionItem(Manifest.permission.READ_EXTERNAL_STORAGE, "SD卡", R.drawable.permission_ic_storage));
         HiPermission.create(getActivity()).permissions(permissions).checkMutiPermission(new PermissionCallback() {
             @Override
             public void onClose() {

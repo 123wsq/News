@@ -9,9 +9,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/hipermission" />
             <option value="$PROJECT_DIR$/magicindicator" />
             <option value="$PROJECT_DIR$/pay" />
-            <option value="$PROJECT_DIR$/thirdplugin" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

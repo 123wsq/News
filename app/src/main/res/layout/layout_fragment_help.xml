@@ -2,9 +2,367 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/default_backgroud_color"
-    >
+    android:background="@color/color_white"
+    android:orientation="vertical">
+
     <include layout="@layout/layout_public_titlebar"></include>
 
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@mipmap/image_my_background">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/imgae_sesame_street"
+                    android:layout_centerInParent="true"
+                    />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_height_1"
+                android:src="@mipmap/image_help_background" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_margin_2"
+                android:background="@color/color_white"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/default_padding_2">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/default_margin_2"
+                    android:layout_marginTop="@dimen/default_margin_2">
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="@dimen/default_margin_2"
+                        android:background="@color/red" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/default_margin_3"
+                        android:text="@string/str_registration_privileges_text" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/default_margin_2">
+
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="@dimen/default_margin_1"
+                        android:src="@mipmap/image_member_hint" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/default_margin_3"
+                        android:text="@string/str_registration_desc_text" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/default_margin_2"
+                    android:layout_marginTop="@dimen/default_margin_1">
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="@dimen/default_margin_2"
+                        android:background="@color/red" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/default_margin_3"
+                        android:text="@string/str_grade_rules_text" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/default_margin_2"
+                    android:layout_marginRight="@dimen/default_margin_2"
+                    android:layout_marginTop="@dimen/default_margin_2"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/default_height_line"
+                        android:background="@color/color_gray"></View>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/default_height_4">
+
+                        <View
+                            android:layout_width="@dimen/default_height_line"
+                            android:layout_height="match_parent"
+                            android:background="@color/color_gray"></View>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="@string/str_grade_text"
+                            android:textColor="@color/black" />
+
+                        <View
+                            android:layout_width="@dimen/default_height_line"
+                            android:layout_height="match_parent"
+                            android:background="@color/color_gray"></View>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:gravity="center"
+                            android:text="@string/str_condition_text"
+                            android:textColor="@color/black" />
+
+                        <View
+                            android:layout_width="@dimen/default_height_line"
+                            android:layout_height="match_parent"
+                            android:background="@color/color_gray"></View>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="4"
+                            android:gravity="center"
+                            android:text="@string/str_welfare_text"
+                            android:textColor="@color/black" />
+
+                        <View
+                            android:layout_width="@dimen/default_height_line"
+                            android:layout_height="match_parent"
+                            android:background="@color/color_gray"></View>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/default_height_line"
+                        android:background="@color/color_gray"></View>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <View
+                            android:layout_width="@dimen/default_height_line"
+                            android:layout_height="match_parent"
+                            android:background="@color/color_gray"></View>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="初级" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="会员" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="@dimen/default_height_line"
+                            android:layout_height="match_parent"
+                            android:background="@color/color_gray">
+
+                        </View>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="注册成为" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/str_primary_vip_text" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="@dimen/default_height_line"
+                            android:layout_height="match_parent"
+                            android:background="@color/color_gray">
+
+                        </View>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="4"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:padding="@dimen/default_padding_4"
+                                android:text="@string/str_primary_welfare_text" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="@dimen/default_height_line"
+                            android:layout_height="match_parent"
+                            android:background="@color/color_gray">
+
+                        </View>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/default_height_line"
+                        android:background="@color/color_gray"></View>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <View
+                            android:layout_width="@dimen/default_height_line"
+                            android:layout_height="match_parent"
+                            android:background="@color/color_gray"></View>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="中级" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="会员" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="@dimen/default_height_line"
+                            android:layout_height="match_parent"
+                            android:background="@color/color_gray">
+
+                        </View>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="注册成为" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/str_intermediate_vip_text"
+
+                                />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="@dimen/default_height_line"
+                            android:layout_height="match_parent"
+                            android:background="@color/color_gray">
+
+                        </View>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="4"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:padding="@dimen/default_padding_4"
+                                android:text="@string/str_intermediate_welfare_text" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="@dimen/default_height_line"
+                            android:layout_height="match_parent"
+                            android:background="@color/color_gray">
+
+                        </View>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/default_height_line"
+                        android:background="@color/color_gray">
+
+                    </View>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

@@ -1,5 +1,6 @@
 package com.yc.wsq.app.news.fragment.tab;
 
+import android.content.DialogInterface;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.orhanobut.logger.Logger;
+import com.wsq.library.tools.DialogTools;
 import com.wsq.library.tools.ToastUtils;
 import com.yc.wsq.app.news.R;
 import com.yc.wsq.app.news.base.BaseFragment;
@@ -44,8 +46,8 @@ public class MyFragment extends BaseFragment<UserMainView, UserPresenter<UserMai
     @BindView(R.id.tv_total_integral) TextView tv_total_integral;
     @BindView(R.id.ll_already_login) LinearLayout ll_already_login;
     @BindView(R.id.ll_not_login) LinearLayout ll_not_login;
+    @BindView(R.id.tv_disciple) TextView tv_disciple;
 
-    @BindView(R.id.tv_invite_code) TextView tv_invite_code;
 
 
     @Override
@@ -61,20 +63,19 @@ public class MyFragment extends BaseFragment<UserMainView, UserPresenter<UserMai
     @Override
     protected void initView() {
 
-        onGetUserInfo();
-    onUserStatusChangeListener();
+
+
     }
 
 
 
-    @OnClick({ R.id.ll_my_wallet, R.id.ll_integral, R.id.ll_member_upgrade,
-            R.id.ll_about, R.id.ll_setting, R.id.ll_collect,  R.id.ll_discount, R.id.ll_help_feedback,
-            R.id.ll_shopping, R.id.ll_wechat, R.id.ll_qq, R.id.ll_qcode, R.id.tv_login})
+    @OnClick({ R.id.ll_my_wallet, R.id.ll_integral, R.id.ll_member_upgrade,R.id.ll_invite,R.id.ll_generalize_code, R.id.ll_apprentice,
+            R.id.ll_about, R.id.ll_setting, R.id.ll_collect,  R.id.ll_discount, R.id.ll_help_feedback, R.id.ll_wechat, R.id.ll_qq, R.id.ll_qcode, R.id.tv_login})
     public void onClick(View view){
         String uid = SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().user_id);
         String token = SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().token);
         try {
-            if (view.getId() != R.id.ll_about && view.getId() != R.id.ll_shopping && view.getId() != R.id.tv_login) {
+            if (view.getId() != R.id.ll_about  && view.getId() != R.id.tv_login) {
                 ParamValidate.getInstance().onValidateIsNull(uid, token);
             }
         } catch (Exception e) {
@@ -106,19 +107,33 @@ public class MyFragment extends BaseFragment<UserMainView, UserPresenter<UserMai
             case R.id.ll_collect: //收藏 param =7;
                 mFunctionsManage.invokeFunction(INTERFACE_WITHP, 7);
                 break;
-            case R.id.ll_shopping:
-                mFunctionsManage.invokeFunction(INTERFACE_WITHP, 8);
+            case R.id.ll_invite: //输入邀请码  param =8
+
+                String inviteCode = SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().first_leader);
+                if (inviteCode.equals("0")) {
+                    mFunctionsManage.invokeFunction(INTERFACE_WITHP, 8);
+                }else {
+                    onShowDialog("提示", "您已经填写了邀请码，不能再次修改了", null);
+                }
                 break;
-            case R.id.ll_wechat:  //微信好友邀请 param  =9
+            case R.id.ll_apprentice: //徒弟列表 param =9
+                mFunctionsManage.invokeFunction(INTERFACE_WITHP, 9);
+                break;
+            case R.id.ll_wechat_moments:
+
+
+                break;
+            case R.id.ll_wechat:  //微信好友邀请
+                ShareTools.onShare(1, "www.baidu.com");
 //                mFunctionsManage.invokeFunction(INTERFACE_WITHP, 9);
 //                ShareTools.showShare(getActivity(), Wechat.NAME, "点一下，和我一起领10~15元现金！","","");
                 break;
-            case R.id.ll_qq:  //QQ好友邀请  param = 10
+            case R.id.ll_qq:  //QQ好友邀请
 //                mFunctionsManage.invokeFunction(INTERFACE_WITHP, 10);
 //                ShareTools.showShare(getActivity(), QQ.NAME, "点一下，和我一起领10~15元现金！","","");
                 break;
-            case R.id.ll_qcode: //展示二维码 param =11
-                mFunctionsManage.invokeFunction(INTERFACE_WITHP, 9);
+            case R.id.ll_qcode: //展示二维码 param =10
+                mFunctionsManage.invokeFunction(INTERFACE_WITHP, 10);
                 break;
             case R.id.ll_discount:  // 优惠券 param = 12;
                 mFunctionsManage.invokeFunction(INTERFACE_WITHP, 12);
@@ -126,11 +141,16 @@ public class MyFragment extends BaseFragment<UserMainView, UserPresenter<UserMai
             case R.id.ll_help_feedback: //帮助与反馈 param =13;
                 mFunctionsManage.invokeFunction(INTERFACE_WITHP, 13);
                 break;
+            case R.id.ll_generalize_code:  //推广码
+                String generalize_code = SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().user_id);
+                onShowDialog("提示", "您的推广码是: " + generalize_code, null);
+                break;
 
             default:
                 break;
         }
     }
+
 
 
     /**
@@ -155,8 +175,7 @@ public class MyFragment extends BaseFragment<UserMainView, UserPresenter<UserMai
         tv_vip_level.setText(SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().level_name));
         tv_total_integral.setText(SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().pay_points));
         tv_total_money.setText(SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().user_money));
-
-        tv_invite_code.setText(SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().user_id));
+        tv_disciple.setText(SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().disciple));
         if(nickname.length() ==0){
             ll_already_login.setVisibility(View.GONE);
             ll_not_login.setVisibility(View.VISIBLE);
@@ -177,7 +196,7 @@ public class MyFragment extends BaseFragment<UserMainView, UserPresenter<UserMai
             param.put(ResponseKey.getInstace().token, SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().token));
             ipresenter.onGetUserInfo(param);
         } catch (Exception e) {
-            ToastUtils.onToast(e.getMessage());
+//            ToastUtils.onToast(e.getMessage());
             e.printStackTrace();
         }
     }
@@ -194,6 +213,12 @@ public class MyFragment extends BaseFragment<UserMainView, UserPresenter<UserMai
             Map.Entry<String, Object> entry =  it.next();
             shared.onPutData(entry.getKey(), entry.getValue()+"");
         }
+        onUserStatusChangeListener();
+    }
+
+
+    public void onUpdateData(){
+        onGetUserInfo();
         onUserStatusChangeListener();
     }
 

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/default_backgroud_color"
+    android:background="@color/color_white"
     >
 
     <include layout="@layout/layout_public_titlebar"></include>
@@ -173,36 +173,7 @@
         android:layout_marginRight="@dimen/default_padding_2"
         />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/default_height_2"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:paddingLeft="@dimen/default_padding_2"
-        android:paddingRight="@dimen/default_padding_2"
-        android:background="@color/color_white"
-        >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/str_invite_code_text"
-            android:textSize="@dimen/default_text_size_3"
-            android:gravity="center_vertical"
-            />
-        <EditText
-            android:id="@+id/et_invite_code"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/str_please_invite_code_text"
-            android:textColorHint="@color/color_hint"
-            android:gravity="left|center_vertical"
-            android:textSize="@dimen/default_text_size_3"
-            android:background="@drawable/shape_edit_no_stroke"
-            android:inputType="textPassword"
-            android:paddingLeft="@dimen/default_padding_1"
-            />
-    </LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/default_line_height"

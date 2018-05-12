@@ -39,16 +39,13 @@ import butterknife.OnClick;
 /**
  * 积分页面
  */
-public class IntegralFragment extends BaseFragment<UserView, UserPresenter<UserView>> implements UserView, RadioGroup.OnCheckedChangeListener {
+public class IntegralFragment extends BaseFragment<UserView, UserPresenter<UserView>> implements UserView {
 
     public static final String TAG = IntegralFragment.class.getName();
 
     @BindView(R.id.tv_title) TextView tv_title;
     @BindView(R.id.rv_RecyclerView) RecyclerView rv_RecyclerView;
     @BindView(R.id.refreshLayout) SmartRefreshLayout refreshLayout;
-    @BindView(R.id.ll_integral_rule) LinearLayout ll_integral_rule;
-    @BindView(R.id.rg_group) RadioGroup rg_group;
-    @BindView(R.id.rb_record) RadioButton rb_record;
     @BindView(R.id.tv_total_integral) TextView tv_total_integral;
 
     private IntegralRecodeAdapter mAdapter;
@@ -69,8 +66,6 @@ public class IntegralFragment extends BaseFragment<UserView, UserPresenter<UserV
     protected void initView() {
 
         tv_title.setText(getResources().getString(R.string.str_my_integral_text));
-        rg_group.setOnCheckedChangeListener(this);
-        rb_record.setChecked(true);
 
         onInitRecyclerView();
         onInitRefreshLayout();
@@ -193,17 +188,5 @@ public class IntegralFragment extends BaseFragment<UserView, UserPresenter<UserV
         refreshState =0;
     }
 
-    @Override
-    public void onCheckedChanged(RadioGroup group, int checkedId) {
-        switch (checkedId){
-            case R.id.rb_record:
-                refreshLayout.setVisibility(View.VISIBLE);
-                ll_integral_rule.setVisibility(View.GONE);
-                break;
-            case R.id.rb_rule:
-                refreshLayout.setVisibility(View.GONE);
-                ll_integral_rule.setVisibility(View.VISIBLE);
-                break;
-        }
-    }
+
 }

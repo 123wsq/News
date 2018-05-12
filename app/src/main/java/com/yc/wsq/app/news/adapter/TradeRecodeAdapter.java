@@ -38,10 +38,10 @@ public class TradeRecodeAdapter extends RecyclerView.Adapter<TradeRecodeAdapter.
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        holder.tv_trade_type.setText(mData.get(position).get(ResponseKey.getInstace().trade_type)+"");
-        holder.tv_trade_money.setText(mData.get(position).get(ResponseKey.getInstace().trade_money)+"");
-        holder.tv_trade_time.setText(mData.get(position).get(ResponseKey.getInstace().trade_time)+"");
-        holder.tv_total_money.setText(mData.get(position).get(ResponseKey.getInstace().trade_total)+"");
+        holder.tv_trade_num.setText(mData.get(position).get(ResponseKey.getInstace().id)+"");
+        holder.tv_trade_money.setText(mData.get(position).get(ResponseKey.getInstace().money)+"");
+        holder.tv_trade_time.setText(mData.get(position).get(ResponseKey.getInstace().create_time)+"");
+        holder.tv_trade_state.setText(mData.get(position).get(ResponseKey.getInstace().status_name)+"");
     }
 
     @Override
@@ -49,27 +49,19 @@ public class TradeRecodeAdapter extends RecyclerView.Adapter<TradeRecodeAdapter.
         return mData.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private LinearLayout ll_layout;
-        private TextView tv_trade_type, tv_trade_money, tv_trade_time, tv_total_money;
+    public class ViewHolder extends RecyclerView.ViewHolder{
+        private TextView tv_trade_num, tv_trade_time, tv_trade_money, tv_trade_state;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            ll_layout = itemView.findViewById(R.id.ll_layout);
-            tv_trade_type = itemView.findViewById(R.id.tv_trade_type);
+            tv_trade_num = itemView.findViewById(R.id.tv_trade_num);
             tv_trade_money = itemView.findViewById(R.id.tv_trade_money);
             tv_trade_time = itemView.findViewById(R.id.tv_trade_time);
-            tv_total_money = itemView.findViewById(R.id.tv_total_money);
+            tv_trade_state = itemView.findViewById(R.id.tv_trade_state);
 
-            ll_layout.setOnClickListener(this);
         }
 
-        @Override
-        public void onClick(View v) {
-            if (mClickLister != null){
-                mClickLister.onRecyclerItemClickListener(null, getPosition());
-            }
-        }
+
     }
 }

@@ -2,14 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/default_backgroud_color"
+    android:background="@color/color_white"
     android:id="@+id/rl_layout"
     >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
+        android:gravity="center_horizontal"
         >
 
             <include layout="@layout/layout_public_titlebar"></include>
@@ -62,6 +63,7 @@
                     android:background="#55000000"
                     android:layout_alignParentBottom="true"
                     android:gravity="center_vertical"
+                    android:visibility="gone"
                     >
                     <ImageView
                         android:layout_width="18dp"
@@ -81,131 +83,152 @@
 
             </RelativeLayout>
 
+
+        <RadioGroup
+            android:id="@+id/rg_vip_level"
+            android:layout_width="300dp"
+            android:layout_height="@dimen/default_height_4"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/default_margin_2"
+            android:visibility="gone"
+            >
+
+            <RadioButton
+                android:id="@+id/rb_general_level"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="@string/str_recharge_record_text"
+                android:button="@null"
+                android:gravity="center"
+                android:textColor="@drawable/selector_font_color"
+                android:background="@drawable/selector_radiobutton_background_left"
+                />
+
+            <RadioButton
+                android:id="@+id/rb_vip_level"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="@string/str_withdraw_record_text"
+                android:button="@null"
+                android:gravity="center"
+                android:textColor="@drawable/selector_font_color"
+                android:background="@drawable/selector_radiobutton_background_center"
+                />
+
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:button="@null"
+                android:gravity="center"
+                android:text="@string/str_consume_record_text"
+                android:textColor="@drawable/selector_font_color"
+                android:background="@drawable/selector_radiobutton_background_right"
+                />
+
+        </RadioGroup>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/default_margin_2"
+            android:background="@color/color_white"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_height_3"
+                android:text="提现记录"
+                android:textColor="@color/default_color_gray_1"
+                android:textSize="@dimen/default_text_size_2"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="@dimen/default_margin_2"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_line_height"
+                android:background="@color/line_color"></View>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_height_3"
-                android:background="@color/color_white"
-                android:paddingLeft="@dimen/default_padding_2"
-                android:paddingRight="@dimen/default_padding_2"
-                android:gravity="center_vertical"
-                android:layout_marginTop="@dimen/default_margin_3"
-                android:visibility="gone"
                 >
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="match_parent"
-                    android:text="@string/str_actvitities_text"
-                    android:gravity="center_vertical"
+                    android:text="编号"
+                    android:gravity="center"
+                    android:textColor="@color/default_color_gray_1"
+                    android:textSize="@dimen/default_text_size_2"
                     />
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@mipmap/image_right"
+                <View
+                    android:layout_width="@dimen/default_line_height"
+                    android:layout_height="match_parent"
+                    android:background="@color/line_color"></View>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="match_parent"
+                    android:text="申请日期"
+                    android:gravity="center"
+                    android:textColor="@color/default_color_gray_1"
+                    android:textSize="@dimen/default_text_size_2"
                     />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/ll_setting_withdraw_password"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/default_height_3"
-                android:background="@color/color_white"
-                android:paddingLeft="@dimen/default_padding_2"
-                android:paddingRight="@dimen/default_padding_2"
-                android:gravity="center_vertical"
-                android:layout_marginTop="@dimen/default_margin_3"
-                >
+                <View
+                    android:layout_width="@dimen/default_line_height"
+                    android:layout_height="match_parent"
+                    android:background="@color/line_color"></View>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="match_parent"
-                    android:text="@string/str_setting_cash_password_text"
-                    android:gravity="center_vertical"
+                    android:text="金额"
+                    android:gravity="center"
+                    android:textColor="@color/default_color_gray_1"
+                    android:textSize="@dimen/default_text_size_2"
                     />
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@mipmap/image_right"
-                    />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/default_height_3"
-                android:background="@color/color_white"
-                android:paddingLeft="@dimen/default_padding_2"
-                android:paddingRight="@dimen/default_padding_2"
-                android:gravity="center_vertical"
-                android:layout_marginTop="@dimen/default_height_line"
-                android:visibility="gone"
-                >
+                <View
+                    android:layout_width="@dimen/default_line_height"
+                    android:layout_height="match_parent"
+                    android:background="@color/line_color"></View>
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:layout_height="match_parent"
-                    android:text="@string/str_update_cash_password_text"
-                    android:gravity="center_vertical"
+                    android:text="状态"
+                    android:gravity="center"
+                    android:textColor="@color/default_color_gray_1"
+                    android:textSize="@dimen/default_text_size_2"
                     />
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@mipmap/image_right"
-                    />
-            </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/default_height_3"
-                android:background="@color/color_white"
-                android:paddingLeft="@dimen/default_padding_2"
-                android:paddingRight="@dimen/default_padding_2"
-                android:gravity="center_vertical"
-                android:layout_marginTop="@dimen/default_height_line"
-                android:visibility="gone"
-                >
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:text="@string/str_forget_cash_password_text"
-                    android:gravity="center_vertical"
-                    />
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@mipmap/image_right"
-                    />
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_line_height"
+                android:background="@color/line_color"></View>
+            <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                android:id="@+id/refreshLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_RecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    />
+            </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+        </LinearLayout>
+
+
     </LinearLayout>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/default_height_2"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:background="@color/color_white"
-        >
-        <TextView
-            android:id="@+id/tv_recharge"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:text="@string/str_recharge_wallet_text"
-            android:gravity="center"
-            android:textSize="@dimen/default_text_size_2"
-            />
-        <TextView
-            android:id="@+id/tv_withdraw"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:text="@string/str_withdraw_text"
-            android:gravity="center"
-            android:textSize="@dimen/default_text_size_2"
-            android:textColor="@color/color_white"
-            android:background="@color/color_blue"
-            />
-    </LinearLayout>
+
 </RelativeLayout>

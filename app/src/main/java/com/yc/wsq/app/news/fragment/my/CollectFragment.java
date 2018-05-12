@@ -4,6 +4,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -13,13 +14,23 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.wsq.library.listener.OnRecyclerViewItemClickListener;
 import com.wsq.library.tools.RecyclerViewDivider;
 import com.wsq.library.utils.DensityUtil;
+import com.yanzhenjie.recyclerview.swipe.SwipeItemClickListener;
+import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
+import com.yanzhenjie.recyclerview.swipe.SwipeMenuBridge;
+import com.yanzhenjie.recyclerview.swipe.SwipeMenuCreator;
+import com.yanzhenjie.recyclerview.swipe.SwipeMenuItem;
+import com.yanzhenjie.recyclerview.swipe.SwipeMenuItemClickListener;
+import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 import com.yc.wsq.app.news.R;
 import com.yc.wsq.app.news.adapter.BenefitAdapter;
 import com.yc.wsq.app.news.adapter.NewsAdapter;
 import com.yc.wsq.app.news.base.BaseFragment;
 import com.yc.wsq.app.news.constant.ResponseKey;
 import com.yc.wsq.app.news.fragment.tab.HomeFragment;
+import com.yc.wsq.app.news.mvp.presenter.NewsPresenter;
 import com.yc.wsq.app.news.mvp.presenter.UserPresenter;
+import com.yc.wsq.app.news.mvp.view.CollectView;
+import com.yc.wsq.app.news.mvp.view.NewsView;
 import com.yc.wsq.app.news.mvp.view.UserView;
 import com.yc.wsq.app.news.tools.SharedTools;
 
@@ -34,7 +45,7 @@ import butterknife.OnClick;
 /**
  * 收藏页面
  */
-public class CollectFragment extends BaseFragment<UserView, UserPresenter<UserView>> implements UserView{
+public class CollectFragment extends BaseFragment<CollectView, NewsPresenter<CollectView>> implements CollectView{
 
     public static final String TAG = CollectFragment.class.getName();
 
@@ -48,8 +59,8 @@ public class CollectFragment extends BaseFragment<UserView, UserPresenter<UserVi
 
 
     @Override
-    protected UserPresenter<UserView> createPresenter() {
-        return new UserPresenter<>();
+    protected NewsPresenter<CollectView> createPresenter() {
+        return new NewsPresenter<>();
     }
 
     @Override
@@ -154,18 +165,7 @@ public class CollectFragment extends BaseFragment<UserView, UserPresenter<UserVi
             e.printStackTrace();
         }
     }
-    @Override
-    public void onResponseData(Map<String, Object> result) {
 
-        List<Map<String, Object>> list = (List<Map<String, Object>>) result.get(ResponseKey.getInstace().data);
-        if (refreshState ==1){
-            mData.addAll(0, list);
-        }else{
-            mData.addAll(list);
-        }
-        onResetRefreshState();
-        mAdapter.notifyDataSetChanged();
-    }
 
     /**
      * 重置刷新状态
@@ -178,4 +178,20 @@ public class CollectFragment extends BaseFragment<UserView, UserPresenter<UserVi
         }
         refreshState =0;
     }
+
+
+
+    @Override
+    public void onCollectListResponse(Map<String, Object> result) {
+        List<Map<String, Object>> list = (List<Map<String, Object>>) result.get(ResponseKey.getInstace().data);
+        if (refreshState ==1){
+            mData.addAll(0, list);
+        }else{
+            mData.addAll(list);
+        }
+        onResetRefreshState();
+        mAdapter.notifyDataSetChanged();
+    }
+
+
 }

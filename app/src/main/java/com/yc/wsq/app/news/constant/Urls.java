@@ -10,9 +10,19 @@ public class Urls {
     public static final String  SHOPPING = "https://yczmj.cn/Mobile/Index/index.html";
 
     /**
+     * App更新地址
+     */
+    public static final String APP_UPDATE = "https://www.pgyer.com/pMWs";
+
+    /**
      * 获取验证码
      */
     public static final String GET_VALIDATE_CODE = "api/send_validate_code";
+
+    /**
+     * 验证码验证
+     */
+    public static final String CHECK_VALIDATE_CODE = "api/check_validate_code";
 
     /**
      * 注册
@@ -20,6 +30,16 @@ public class Urls {
     public static final String REGISTER = "user/reg";
 
     public static final String LOGIN = "user/login";
+
+    /**
+     * 用户登出
+     */
+    public static final String LOGOUT = "user/logout";
+
+    /**
+     * 设置支付密码
+     */
+    public static final String SETTING_PAYWD = "api/paypwd";
 
     /**
      * 新闻列表
@@ -87,9 +107,48 @@ public class Urls {
      */
     public static final String COLLECT_LIST = "user/collect";
 
+    /**
+     *设置用户邀请码
+     */
+    public static final String SET_INVITE = "user/firstLeader";
 
     /**
      * 获取用户信息
      */
     public static final String  GET_USER_INFO = "user/info";
+
+    /**
+     * 获取徒弟列表
+     */
+    public static final String  DISCIPLE_LIST= "user/disciple";
+
+    /**
+     * 设置提现账户
+     */
+    public static final String SETTING_WITHDRAW_ACCOUNT= "user/bankInfo";
+
+    /**
+     * 申请提现
+     */
+    public static final String APPLY_WITHDRAW = "user/withdraw";
+
+    /**
+     * 提现列表
+     */
+    public static final String WITHDRAW_LIST = "user/withdrawalsList";
+
+    /**
+     * App检测
+     */
+    public static final String CHECK_APP = "app/latest";
+
+    /**
+     * 发送文章评论
+     */
+    public static final String SEND_COMMENT = "topic/addArtCom";
+
+    /**
+     * 获取文章评论列表
+     */
+    public static final String GET_ARTICLE_LIST = "topic/artCom";
 }

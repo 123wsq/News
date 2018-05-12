@@ -1,5 +1,7 @@
 package com.yc.wsq.app.news.mvp.presenter;
 
+import android.support.v7.widget.RecyclerView;
+
 import com.wsq.library.tools.ToastUtils;
 import com.yc.wsq.app.news.bean.SearchBean;
 import com.yc.wsq.app.news.constant.ResponseKey;
@@ -10,9 +12,11 @@ import com.yc.wsq.app.news.mvp.model.impl.RequestHttpImpl;
 import com.yc.wsq.app.news.mvp.model.inter.NewsModelInter;
 import com.yc.wsq.app.news.mvp.model.inter.RequestHttpInter;
 import com.yc.wsq.app.news.mvp.view.BaseView;
+import com.yc.wsq.app.news.mvp.view.CollectView;
 import com.yc.wsq.app.news.mvp.view.NewsDetailsView;
 import com.yc.wsq.app.news.mvp.view.NewsView;
 import com.yc.wsq.app.news.mvp.view.SearchView;
+import com.yc.wsq.app.news.mvp.view.UserView;
 import com.yc.wsq.app.news.tools.ParamValidate;
 
 import java.util.List;
@@ -101,14 +105,14 @@ public class NewsPresenter<T extends BaseView> extends BasePresenter<T> {
 
                     @Override
                     public void onFailure(String msg) {
-                        ToastUtils.onToast(msg);
+//                        ToastUtils.onToast(msg);
                     }
 
                     @Override
                     public void onOutTime(String msg) {
                         ToastUtils.onToast(msg);
-                        if (view != null)
-                            view.onReLogin();
+//                        if (view != null)
+//                            view.onReLogin();
                     }
 
 
@@ -284,7 +288,7 @@ public class NewsPresenter<T extends BaseView> extends BasePresenter<T> {
                 public void onSuccess(Map<String, Object> data) {
 
                     if (view !=null){
-                        view.onNewsCollectResponse(data);
+                            view.onNewsCollectResponse(data);
                     }
                 }
 
@@ -310,6 +314,8 @@ public class NewsPresenter<T extends BaseView> extends BasePresenter<T> {
 
         }
     }
+
+
 
     /**
      * 文章收藏状态获取
@@ -340,14 +346,14 @@ public class NewsPresenter<T extends BaseView> extends BasePresenter<T> {
 
                 @Override
                 public void onFailure(String msg) {
-                    ToastUtils.onToast(msg);
+//                    ToastUtils.onToast(msg);
                 }
 
                 @Override
                 public void onOutTime(String msg) {
-                    ToastUtils.onToast(msg);
-                    if (view !=null)
-                        view.onReLogin();
+//                    ToastUtils.onToast(msg);
+//                    if (view !=null)
+//                        view.onReLogin();
                 }
 
                 @Override
@@ -362,6 +368,57 @@ public class NewsPresenter<T extends BaseView> extends BasePresenter<T> {
     }
 
     /**
+     * 收藏列表
+     * @param param
+     * @throws Exception
+     */
+    public void onGetCollectList(Map<String, String> param) throws Exception{
+
+        final CollectView view = (CollectView) getView();
+
+        try {
+            ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().uid));
+            ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().token));
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+
+
+        if (view != null) {
+            view.showLoadding();
+            String url = Urls.HOST +Urls.COLLECT_LIST;
+            requestHttp.onSendPost(url, param, new Callback<Map<String, Object>>() {
+                @Override
+                public void onSuccess(Map<String, Object> data) {
+                    if (view != null) {
+                        view.onCollectListResponse(data);
+                    }
+                }
+
+                @Override
+                public void onFailure(String msg) {
+                    ToastUtils.onToast(msg);
+                }
+
+                @Override
+                public void onOutTime(String msg) {
+                    ToastUtils.onToast(msg);
+                    if (view != null)
+                        view.onReLogin();
+                }
+
+
+                @Override
+                public void onComplete() {
+                    if (view != null) {
+                        view.dismissLoadding();
+                    }
+                }
+            });
+        }
+    }
+
+    /**
      * 搜索记录
      * @throws Exception
      */
@@ -369,36 +426,137 @@ public class NewsPresenter<T extends BaseView> extends BasePresenter<T> {
         final SearchView view = (SearchView) getView();
         if (view != null) {
 
-            if (view != null) {
-                newsModel.onGetNativeSearchRecord(new Callback<List<SearchBean>>() {
-                    @Override
-                    public void onSuccess(List<SearchBean> data) {
-                        if (view != null) {
-                            view.onLoadNativeSearchRecord(data);
-                        }
+            newsModel.onGetNativeSearchRecord(new Callback<List<SearchBean>>() {
+                @Override
+                public void onSuccess(List<SearchBean> data) {
+                    if (view != null) {
+                        view.onLoadNativeSearchRecord(data);
                     }
+                }
 
-                    @Override
-                    public void onFailure(String msg) {
-                        ToastUtils.onToast(msg);
-                    }
+                @Override
+                public void onFailure(String msg) {
+                    ToastUtils.onToast(msg);
+                }
 
-                    @Override
-                    public void onOutTime(String msg) {
-                        ToastUtils.onToast(msg);
-                        if (view != null)
-                            view.onReLogin();
-                    }
+                @Override
+                public void onOutTime(String msg) {
+                    ToastUtils.onToast(msg);
+                    if (view != null)
+                        view.onReLogin();
+                }
 
-                    @Override
-                    public void onComplete() {
+                @Override
+                public void onComplete() {
 
-                    }
-                });
+                }
+            });
 
-            }
         }
     }
+
+
+    /**
+     * 写文章评论
+     * @throws Exception
+     */
+    public void onReadArticleComment (Map<String, String> param) throws Exception{
+        final NewsDetailsView view = (NewsDetailsView) getView();
+        if (view != null) {
+
+            try {
+                ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().user_id));
+                ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().content));
+                ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().article_id));
+                ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().is_anonymous));
+            }catch (Exception e){
+                throw new Exception(e.getMessage());
+            }
+            param.put(ResponseKey.getInstace().ip_facility, "1");
+            view.showLoadding();
+            String url =Urls.HOST + Urls.SEND_COMMENT;
+
+            requestHttp.onSendGet(url, param, new Callback<Map<String, Object>>() {
+                @Override
+                public void onSuccess(Map<String, Object> data) {
+                    if (view !=  null){
+                        view.onArticleCommentResponse(data);
+                    }
+                }
+
+                @Override
+                public void onFailure(String msg) {
+                    ToastUtils.onToast(msg);
+                }
+
+                @Override
+                public void onOutTime(String msg) {
+                    ToastUtils.onToast(msg);
+                    if (view != null){
+                        view.onReLogin();
+                    }
+                }
+
+                @Override
+                public void onComplete() {
+                    if (view !=null)
+                        view.dismissLoadding();
+                }
+            });
+
+        }
+    }
+
+    /**
+     * 获取文章评论列表
+     * @param param
+     * @throws Exception
+     */
+    public void onArticleCommentList (Map<String, String> param) throws Exception{
+        final NewsView view = (NewsView) getView();
+        if (view != null) {
+
+            try {
+                ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().user_id));
+                ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().article_id));
+            }catch (Exception e){
+                throw new Exception(e.getMessage());
+            }
+            view.showLoadding();
+            String url =Urls.HOST + Urls.GET_ARTICLE_LIST;
+
+            requestHttp.onSendGet(url, param, new Callback<Map<String, Object>>() {
+                @Override
+                public void onSuccess(Map<String, Object> data) {
+                    if (view !=  null){
+                        view.onNewsResponse(data);
+                    }
+                }
+
+                @Override
+                public void onFailure(String msg) {
+                    ToastUtils.onToast(msg);
+                }
+
+                @Override
+                public void onOutTime(String msg) {
+                    ToastUtils.onToast(msg);
+                    if (view != null){
+                        view.onReLogin();
+                    }
+                }
+
+                @Override
+                public void onComplete() {
+                    if (view !=null)
+                        view.dismissLoadding();
+                }
+            });
+
+        }
+    }
+
+
 
     /**
      * 删除搜索记录

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_backgroud_color"
+    android:orientation="vertical"
+    >
+    <include layout="@layout/layout_public_titlebar"></include>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_height_2"
+        android:orientation="horizontal"
+        android:background="@color/color_white"
+        android:layout_marginTop="@dimen/default_margin_2"
+        android:paddingLeft="@dimen/default_margin_2"
+        android:paddingRight="@dimen/default_margin_2"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="match_parent"
+            android:text="@string/str_account_alipay_text"
+            android:gravity="right|center_vertical"
+            android:textSize="@dimen/default_text_size_3"
+            android:textColor="@color/default_color_gray_1"
+            android:drawableRight="@mipmap/image_important"
+            />
+
+        <EditText
+            android:id="@+id/et_account"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="match_parent"
+            android:gravity="left|center_vertical"
+            android:textSize="@dimen/default_text_size_3"
+            android:textColor="@color/default_color_gray_1"
+            android:hint="@string/str_please_account_alipay_text"
+            android:textColorHint="@color/default_color_gray_2"
+            android:layout_marginLeft="@dimen/default_margin_2"
+            android:background="@drawable/shape_edit_no_stroke"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_height_2"
+        android:orientation="horizontal"
+        android:background="@color/color_white"
+        android:paddingLeft="@dimen/default_margin_2"
+        android:paddingRight="@dimen/default_margin_2"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="match_parent"
+            android:text="@string/str_alipay_name_text"
+            android:gravity="right|center_vertical"
+            android:textSize="@dimen/default_text_size_3"
+            android:textColor="@color/default_color_gray_1"
+            android:drawableRight="@mipmap/image_important"
+            />
+
+        <EditText
+            android:id="@+id/et_realname"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="match_parent"
+            android:gravity="left|center_vertical"
+            android:textSize="@dimen/default_text_size_3"
+            android:textColor="@color/default_color_gray_1"
+            android:hint="@string/str_must_fill_text"
+            android:textColorHint="@color/red"
+            android:layout_marginLeft="@dimen/default_margin_2"
+            android:background="@drawable/shape_edit_no_stroke"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_submit"
+        style="@style/default_button"
+        android:text="@string/str_submit_text"
+        android:layout_marginLeft="@dimen/default_height_2"
+        android:layout_marginRight="@dimen/default_height_2"
+        android:layout_marginTop="@dimen/default_height_3"
+        />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/str_alipay_hint_text"
+        android:textSize="@dimen/default_text_size_4"
+        android:textColor="@color/red"
+        android:gravity="bottom"
+        android:autoLink="web"
+        android:layout_marginBottom="@dimen/default_height_4"
+        android:layout_marginLeft="@dimen/default_margin_2"
+        android:layout_marginRight="@dimen/default_margin_2"
+        />
+</LinearLayout>

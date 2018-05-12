@@ -110,6 +110,32 @@ public class ResponseKey {
     public final String times = "times";
     public final String sex = "sex";
     public final String platform= "platform";
+    //邀请码
+    public final String first_leader = "first_leader";
+
+    public final String disciple = "disciple";
+
+    public final String bank_type = "bank_type";
+    public final String bank_card = "bank_card";
+    public final String realname = "realname";
+    public final String alipay_bank_card = "alipay_bank_card";
+    public final String alipay_realname = "alipay_realname";
+    public final String wechat_bank_card = "wechat_bank_card";
+    public final String wechat_realname = "wechat_realname";
+    public final String money = "money";
+    public final String city = "city";
+    public final String city_name = "city_name";
+    public final String city_code = "city_code";
+    public final String commonweal = "commonweal";
+    public final String create_time = "create_time";
+    public final String status_name = "status_name";
+    public final String app_version = "app_version";
+    public final String sum = "sum";
+    public final String content = "content";
+    public final String ip_facility = "ip_facility";
+    public final String is_anonymous = "is_anonymous";
+    public final String comment_id = "comment_id";
+    public final String add_time = "add_time";
 
 
     /**

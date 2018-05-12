@@ -191,7 +191,7 @@ public class RechargeFragment extends BaseFragment<RechargeView, UserPresenter<R
         if (TextUtils.equals(resultStatus, "9000")) {
             ToastUtils.onToast("充值成功");
 
-            String total_amount = SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().total_amount);
+            String total_amount = SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().user_money);
             double amount1 = 0, amount2 = 0;;
             try {
                 amount1 = Double.parseDouble(total_amount);
@@ -203,7 +203,7 @@ public class RechargeFragment extends BaseFragment<RechargeView, UserPresenter<R
             }catch (Exception e){
                 e.printStackTrace();
             }
-            SharedTools.getInstance(getActivity()).onPutData(ResponseKey.getInstace().total_amount, (amount1+amount2)+"");
+            SharedTools.getInstance(getActivity()).onPutData(ResponseKey.getInstace().user_money, (amount1+amount2)+"");
 
 
             Message message = new Message();

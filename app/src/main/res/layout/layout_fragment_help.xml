@@ -59,13 +59,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/default_margin_3"
-                        android:text="@string/str_registration_privileges_text" />
+                        android:text="@string/str_grade_rules_text"
+                        android:textColor="@color/default_color_gray_1"
+                        />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/default_margin_2">
+                    android:layout_marginRight="@dimen/default_margin_2"
+                    android:layout_marginTop="@dimen/default_margin_3"
+                    >
 
                     <ImageView
                         android:layout_width="45dp"
@@ -95,271 +99,160 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/default_margin_3"
-                        android:text="@string/str_grade_rules_text" />
+                        android:text="权益保证"
+                        android:textColor="@color/default_color_gray_1"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="@dimen/default_margin_2"
+                    android:layout_marginTop="@dimen/default_margin_4"
+                    >
+                   <LinearLayout
+                       android:layout_width="0dp"
+                       android:layout_weight="1"
+                       android:layout_height="wrap_content"
+                       android:orientation="vertical"
+                       >
+                       <LinearLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content">
+                           <ImageView
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:src="@mipmap/image_read_icon"
+                               />
+                           <TextView
+                               android:layout_width="0dp"
+                               android:layout_weight="1"
+                               android:layout_height="wrap_content"
+                               android:text="阅读收益"
+                               android:layout_marginLeft="@dimen/default_margin_3"
+                               />
+                       </LinearLayout>
+                       <LinearLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_marginTop="@dimen/default_margin_4"
+                           >
+                           <ImageView
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:src="@mipmap/image_apprentice_read_icon"
+                               />
+                           <TextView
+                               android:layout_width="0dp"
+                               android:layout_weight="1"
+                               android:layout_height="wrap_content"
+                               android:text="徒弟阅读收益"
+                               android:layout_marginLeft="@dimen/default_margin_3"
+                               />
+                       </LinearLayout>
+                       <LinearLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_marginTop="@dimen/default_margin_4"
+                           >
+                           <ImageView
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:src="@mipmap/image_self_shop_icon"
+                               />
+                           <TextView
+                               android:layout_width="0dp"
+                               android:layout_weight="1"
+                               android:layout_height="wrap_content"
+                               android:text="自身购物收益"
+                               android:layout_marginLeft="@dimen/default_margin_3"
+                               />
+                       </LinearLayout>
+                   </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        >
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@mipmap/image_product_share_icon"
+                                />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:text="分享产品收益"
+                                android:layout_marginLeft="@dimen/default_margin_3"
+                                />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/default_margin_4"
+                            >
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@mipmap/image_team_icon"
+                                />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:text="团队成长收益"
+                                android:layout_marginLeft="@dimen/default_margin_3"
+                                />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/default_margin_4"
+                            >
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@mipmap/image_area_max_icon"
+                                />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:text="区域知名度最大化"
+                                android:layout_marginLeft="@dimen/default_margin_3"
+                                />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/default_margin_2"
-                    android:layout_marginRight="@dimen/default_margin_2"
-                    android:layout_marginTop="@dimen/default_margin_2"
-                    android:orientation="vertical">
+                    android:layout_marginTop="@dimen/default_margin_1">
 
                     <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/default_height_line"
-                        android:background="@color/color_gray"></View>
+                        android:layout_width="2dp"
+                        android:layout_height="@dimen/default_margin_2"
+                        android:background="@color/red" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/default_height_4">
-
-                        <View
-                            android:layout_width="@dimen/default_height_line"
-                            android:layout_height="match_parent"
-                            android:background="@color/color_gray"></View>
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="@string/str_grade_text"
-                            android:textColor="@color/black" />
-
-                        <View
-                            android:layout_width="@dimen/default_height_line"
-                            android:layout_height="match_parent"
-                            android:background="@color/color_gray"></View>
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="2"
-                            android:gravity="center"
-                            android:text="@string/str_condition_text"
-                            android:textColor="@color/black" />
-
-                        <View
-                            android:layout_width="@dimen/default_height_line"
-                            android:layout_height="match_parent"
-                            android:background="@color/color_gray"></View>
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="4"
-                            android:gravity="center"
-                            android:text="@string/str_welfare_text"
-                            android:textColor="@color/black" />
-
-                        <View
-                            android:layout_width="@dimen/default_height_line"
-                            android:layout_height="match_parent"
-                            android:background="@color/color_gray"></View>
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/default_height_line"
-                        android:background="@color/color_gray"></View>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <View
-                            android:layout_width="@dimen/default_height_line"
-                            android:layout_height="match_parent"
-                            android:background="@color/color_gray"></View>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="初级" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="会员" />
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="@dimen/default_height_line"
-                            android:layout_height="match_parent"
-                            android:background="@color/color_gray">
-
-                        </View>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="2"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="注册成为" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="@string/str_primary_vip_text" />
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="@dimen/default_height_line"
-                            android:layout_height="match_parent"
-                            android:background="@color/color_gray">
-
-                        </View>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="4"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:padding="@dimen/default_padding_4"
-                                android:text="@string/str_primary_welfare_text" />
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="@dimen/default_height_line"
-                            android:layout_height="match_parent"
-                            android:background="@color/color_gray">
-
-                        </View>
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/default_height_line"
-                        android:background="@color/color_gray"></View>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <View
-                            android:layout_width="@dimen/default_height_line"
-                            android:layout_height="match_parent"
-                            android:background="@color/color_gray"></View>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="中级" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="会员" />
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="@dimen/default_height_line"
-                            android:layout_height="match_parent"
-                            android:background="@color/color_gray">
-
-                        </View>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="2"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="注册成为" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="@string/str_intermediate_vip_text"
-
-                                />
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="@dimen/default_height_line"
-                            android:layout_height="match_parent"
-                            android:background="@color/color_gray">
-
-                        </View>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="4"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:padding="@dimen/default_padding_4"
-                                android:text="@string/str_intermediate_welfare_text" />
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="@dimen/default_height_line"
-                            android:layout_height="match_parent"
-                            android:background="@color/color_gray">
-
-                        </View>
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/default_height_line"
-                        android:background="@color/color_gray">
-
-                    </View>
-
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/default_margin_3"
+                        android:text="等级规则"
+                        android:textColor="@color/default_color_gray_1"
+                        />
                 </LinearLayout>
 
+                <include layout="@layout/layout_include_member_upgrade"></include>
 
             </LinearLayout>
 

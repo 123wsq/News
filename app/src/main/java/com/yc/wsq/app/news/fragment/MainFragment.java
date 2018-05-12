@@ -1,7 +1,9 @@
 package com.yc.wsq.app.news.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -11,13 +13,18 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.wsq.library.utils.AppManager;
 import com.yc.wsq.app.news.R;
 import com.yc.wsq.app.news.base.BaseFragment;
+import com.yc.wsq.app.news.constant.ResponseKey;
+import com.yc.wsq.app.news.constant.Urls;
 import com.yc.wsq.app.news.fragment.tab.BenefitFragment;
 import com.yc.wsq.app.news.fragment.tab.HomeFragment;
 import com.yc.wsq.app.news.fragment.tab.MyFragment;
 import com.yc.wsq.app.news.fragment.tab.ShopFragment;
 import com.yc.wsq.app.news.mvp.presenter.BasePresenter;
+import com.yc.wsq.app.news.mvp.presenter.UserPresenter;
+import com.yc.wsq.app.news.mvp.view.UserView;
 import com.yc.wsq.app.news.views.CustomViewPager;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
@@ -28,12 +35,15 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerInd
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.CommonPagerTitleView;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import butterknife.BindView;
 
-public class MainFragment extends BaseFragment implements ViewPager.OnPageChangeListener, View.OnTouchListener {
+public class MainFragment extends BaseFragment<UserView, UserPresenter<UserView>> implements UserView,ViewPager.OnPageChangeListener, View.OnTouchListener {
 
     public static final String TAG = MainFragment.class.getName();
-    public static final String INTERFACE = TAG ;
+    public static final String INTERFACE_EXIT = TAG + _INTERFACE_NPNR +"EXIT" ;
 
     @BindView(R.id.vp_ViewPager) CustomViewPager vp_ViewPager;
     @BindView(R.id.magic_indicator) MagicIndicator magic_indicator;
@@ -50,8 +60,8 @@ public class MainFragment extends BaseFragment implements ViewPager.OnPageChange
     private int curPage = 0;
 
     @Override
-    protected BasePresenter createPresenter() {
-        return null;
+    protected UserPresenter<UserView> createPresenter() {
+        return new UserPresenter<>();
     }
 
     @Override
@@ -73,7 +83,7 @@ public class MainFragment extends BaseFragment implements ViewPager.OnPageChange
         vp_ViewPager.addOnPageChangeListener(this);
         vp_ViewPager.setOnTouchListener(this);
         vp_ViewPager.setCurrentItem(0);
-
+        onGetAppVersion();
     }
 
     private void initMagicIndicator() {
@@ -177,6 +187,8 @@ public class MainFragment extends BaseFragment implements ViewPager.OnPageChange
     public void onPageSelected(int position) {
 
         curPage = position;
+
+
         if (position ==1){
             magic_indicator.setVisibility(View.GONE);
             vp_ViewPager.setScanScroll(false);
@@ -184,6 +196,26 @@ public class MainFragment extends BaseFragment implements ViewPager.OnPageChange
             magic_indicator.setVisibility(View.VISIBLE);
             vp_ViewPager.setScanScroll(true);
         }
+
+        switch (position){
+            case 0:
+                HomeFragment fragment0 = (HomeFragment) fragments[position];
+                fragment0.onUpdateData();
+                break;
+            case 1:
+                ShopFragment fragment1= (ShopFragment) fragments[position];
+                fragment1.onUpdateData();
+                break;
+            case 2:
+                BenefitFragment fragment2 = (BenefitFragment) fragments[position];
+                fragment2.onUpdateData();
+                break;
+            case 3:
+                MyFragment fragment3 = (MyFragment) fragments[position];
+                fragment3.onUpdateData();
+                break;
+        }
+
     }
 
     @Override
@@ -198,6 +230,8 @@ public class MainFragment extends BaseFragment implements ViewPager.OnPageChange
         }
         return false;
     }
+
+
 
     private class MyAdapter extends FragmentPagerAdapter {
 
@@ -222,6 +256,45 @@ public class MainFragment extends BaseFragment implements ViewPager.OnPageChange
     }
 
     /**
+     * 获取app版本号
+     */
+    private void onGetAppVersion(){
+        Map<String, String> param = new HashMap<>();
+
+        try {
+            ipresenter.onGetAppVersion(param);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+    @Override
+    public void onResponseData(Map<String, Object> result) {
+
+       Map<String, Object> data = (Map<String, Object>) result.get(ResponseKey.getInstace().data);
+       String app_version = (String) data.get(ResponseKey.getInstace().app_version);
+        String cur_version = AppManager.getAppVersionName();
+        if (app_version.equals(cur_version)){
+            return;
+        }
+
+        onShowDialog("提示", "您有新的版本，请尽快更新！", new OnDialogClickListener() {
+            @Override
+            public void onClickListener() {
+
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                Uri content_url = Uri.parse(Urls.APP_UPDATE);
+                intent.setData(content_url);
+                startActivity(intent);
+
+                mFunctionsManage.invokeFunction(INTERFACE_EXIT);
+            }
+        });
+
+    }
+
+    /**
      * 用户状态发生改变
      * 作用于下级页面中
      */
@@ -230,6 +303,7 @@ public class MainFragment extends BaseFragment implements ViewPager.OnPageChange
         MyFragment fragment = (MyFragment) fragments[3];
         fragment.onUserStatusChangeListener();
     }
+
 
     /**
      * 设置显示位置

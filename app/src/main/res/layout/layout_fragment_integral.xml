@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/default_backgroud_color"
+    android:background="@color/color_white"
     android:orientation="vertical"
     android:gravity="center_horizontal"
     >
@@ -34,67 +34,18 @@
             />
     </LinearLayout>
 
-
-        <RadioGroup
-            android:id="@+id/rg_group"
-            android:layout_width="200dp"
-            android:layout_height="@dimen/default_height_4"
-            android:orientation="horizontal"
-            android:layout_marginTop="@dimen/default_margin_2"
-            android:background="@drawable/shape_recharge_money"
-            android:padding="1dp"
-            >
-
-            <RadioButton
-                android:id="@+id/rb_record"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:text="@string/str_integral_record_text"
-                android:button="@null"
-                android:gravity="center"
-                android:textColor="@drawable/selector_font_color"
-                android:background="@drawable/selector_radiobutton_background"
-                />
-            <RadioButton
-                android:id="@+id/rb_rule"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:text="@string/str_integral_rule_text"
-                android:button="@null"
-                android:gravity="center"
-                android:textColor="@drawable/selector_font_color"
-                android:background="@drawable/selector_radiobutton_background"
-                />
-
-        </RadioGroup>
-
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/default_margin_2"
         >
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_RecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
-    <LinearLayout
-        android:id="@+id/ll_integral_rule"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="@dimen/default_margin_2"
-        >
-
-        <ImageView
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_RecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/image_integral_rule"
-            />
+            android:layout_height="match_parent"/>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
-    </LinearLayout>
+
+
 </LinearLayout>

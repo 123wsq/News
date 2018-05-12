@@ -1,5 +1,7 @@
 package com.yc.wsq.app.news.fragment.tab;
 
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,12 +16,15 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.wsq.library.listener.OnRecyclerViewItemClickListener;
 import com.wsq.library.tools.RecyclerViewDivider;
 import com.wsq.library.tools.ToastUtils;
+import com.wsq.library.utils.DateUtil;
 import com.wsq.library.utils.DensityUtil;
 import com.yc.wsq.app.news.R;
 import com.yc.wsq.app.news.adapter.BenefitAdapter;
+import com.yc.wsq.app.news.adapter.BenefitAmountAdapter;
 import com.yc.wsq.app.news.adapter.NewsAdapter;
 import com.yc.wsq.app.news.adapter.TitleAdapter;
 import com.yc.wsq.app.news.base.BaseFragment;
+import com.yc.wsq.app.news.bean.AmountBean;
 import com.yc.wsq.app.news.constant.ResponseKey;
 import com.yc.wsq.app.news.mvp.presenter.BasePresenter;
 import com.yc.wsq.app.news.mvp.presenter.BenefitPresenter;
@@ -46,10 +51,14 @@ public class BenefitFragment extends BaseFragment<BenefitView, BenefitPresenter<
     @BindView(R.id.ll_back)LinearLayout ll_back;
     @BindView(R.id.refreshLayout)SmartRefreshLayout refreshLayout;
     @BindView(R.id.rv_RecyclerView) RecyclerView rv_RecyclerView;
+    @BindView(R.id.tv_cur_time) TextView tv_cur_time;
+    @BindView(R.id.rv_RecyclerView_title)RecyclerView rv_RecyclerView_title;
 
     private List<Map<String, Object>> mData;
     private int refreshState = 0;
     private BenefitAdapter mAdapter;
+    private List<AmountBean> mAmountData;
+    private BenefitAmountAdapter mAmountAdapter;
 
     @Override
     protected BenefitPresenter<BenefitView> createPresenter() {
@@ -67,9 +76,12 @@ public class BenefitFragment extends BaseFragment<BenefitView, BenefitPresenter<
         ll_back.setVisibility(View.GONE);
 
         mData = new ArrayList<>();
+        mAmountData = new ArrayList<>();
 
         onInitRecyclerView();
         onInitRefreshLayout();
+
+
     }
 
 
@@ -82,6 +94,12 @@ public class BenefitFragment extends BaseFragment<BenefitView, BenefitPresenter<
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
 
+        rv_RecyclerView_title.setLayoutManager(layoutManager);
+        rv_RecyclerView_title.setHasFixedSize(true);
+
+
+        mAmountAdapter = new BenefitAmountAdapter(getActivity(), mAmountData);
+        rv_RecyclerView_title.setAdapter(mAmountAdapter);
 
 
         rv_RecyclerView.addItemDecoration(new RecyclerViewDivider(
@@ -93,7 +111,7 @@ public class BenefitFragment extends BaseFragment<BenefitView, BenefitPresenter<
         mAdapter = new BenefitAdapter(getActivity(), mData, listener);
         rv_RecyclerView.setAdapter(mAdapter);
 
-        onStartRequest();
+
 
     }
 
@@ -133,6 +151,10 @@ public class BenefitFragment extends BaseFragment<BenefitView, BenefitPresenter<
 
     @Override
     public void onBenefitResponse(Map<String, Object> result) {
+        String amount =(String) result.get(ResponseKey.getInstace().sum);
+
+            onBenefitAmount(amount);
+
 
 
             List<Map<String, Object>> list = (List<Map<String, Object>>) result.get(ResponseKey.getInstace().data);
@@ -172,4 +194,64 @@ public class BenefitFragment extends BaseFragment<BenefitView, BenefitPresenter<
         }
         refreshState =0;
     }
+
+    Handler handler = new Handler(){};
+
+    Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            tv_cur_time.setText(DateUtil.onDateFormat("yyyy年MM月dd日HH时mm分ss秒"));
+            handler.postDelayed(this, 1000);
+
+        }
+    };
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        handler.removeCallbacks(runnable);
+    }
+
+    public void onUpdateData(){
+
+        mData.clear();
+        onStartRequest();
+        handler.postDelayed(runnable, 0);
+    }
+
+
+    private void onBenefitAmount(String amount){
+
+        List<AmountBean> list = new ArrayList<>();
+        int num = amount.length() % 3;
+
+        String amount1 = "";
+        for (int i =  amount.length()-1; i >=0; i --) {
+            amount1 += amount.substring(i, i+1);
+        }
+        for (int i =0; i< amount1.length(); i++){
+
+            if (i % 3 == 0 && i != 0){
+                AmountBean bean1 = new AmountBean();
+                bean1.setIsnum(false);
+                list.add(bean1);
+            }
+            AmountBean bean1 = new AmountBean();
+            bean1.setIsnum(true);
+            bean1.setNum(Integer.parseInt(amount1.substring(i, i+1)));
+            list.add(bean1);
+        }
+
+        List<AmountBean> list2 = new ArrayList<>();
+        for (int i = list.size()-1; i >=0 ; i--) {
+
+            list2.add(list.get(i));
+        }
+
+        mAmountData.clear();
+        mAmountData.addAll(list2);
+        mAmountAdapter.notifyDataSetChanged();
+    }
+
 }

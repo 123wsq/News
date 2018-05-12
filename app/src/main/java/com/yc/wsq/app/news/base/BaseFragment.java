@@ -1,6 +1,7 @@
 package com.yc.wsq.app.news.base;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.wsq.library.struct.FunctionsManage;
+import com.wsq.library.tools.DialogTools;
 import com.wsq.library.views.view.LoadingDialog;
 import com.yc.wsq.app.news.activity.LoginActivity;
 import com.yc.wsq.app.news.activity.MainActivity;
@@ -115,4 +117,24 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
             ipresenter.deachView();
         }
     }
+
+    public void onShowDialog(String title, String msg, final OnDialogClickListener listener){
+
+        DialogTools.showDialog(getActivity(), "确定", title, msg, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                if (listener != null){
+                    listener.onClickListener();
+                }
+                dialog.dismiss();
+            }
+        });
+    }
+
+    public interface  OnDialogClickListener{
+
+        void onClickListener();
+    }
+
 }

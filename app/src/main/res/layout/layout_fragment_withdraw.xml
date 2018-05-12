@@ -1,121 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/default_backgroud_color"
-    android:orientation="vertical"
-    android:id="@+id/ll_layout"
-    >
+    android:orientation="vertical">
 
     <include layout="@layout/layout_public_titlebar"></include>
 
-    <LinearLayout
-        android:id="@+id/ll_withdraw_to"
+
+    <RadioGroup
+        android:id="@+id/rg_pay_type"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/default_height_1"
+        android:layout_height="@dimen/default_height_2"
         android:layout_marginTop="@dimen/default_margin_2"
         android:background="@color/color_white"
-        android:paddingLeft="@dimen/default_padding_2"
-        android:paddingRight="@dimen/default_padding_2"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_alipay"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/str_alipay_text"
+            android:textColor="@drawable/selector_font_color_2" />
+
+        <RadioButton
+            android:id="@+id/rb_wechat"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/str_wechat_text"
+            android:textColor="@drawable/selector_font_color_2"
+            android:visibility="gone"
+            />
+
+    </RadioGroup>
+
+    <LinearLayout
+        android:id="@+id/ll_withdraw_account"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="@dimen/default_margin_4"
+        android:background="@color/color_white"
         android:gravity="center_vertical"
-        >
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/default_margin_2"
+        android:paddingRight="@dimen/default_margin_2">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@mipmap/image_alipay_icon" />
+
         <TextView
+            android:id="@+id/tv_message"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="match_parent"
-            android:text="@string/str_withdraw_to_text"
+            android:layout_weight="1"
             android:gravity="center_vertical"
-            android:textSize="@dimen/default_text_size_3"
-            android:textColor="@color/black"
-            />
-        <TextView
-            android:id="@+id/tv_withdraw_to"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:gravity="right|center_vertical"
-            android:textSize="@dimen/default_text_size_3"
-            android:textColor="@color/black"
-            android:layout_marginRight="@dimen/default_margin_2"
-            />
+            android:paddingLeft="@dimen/default_margin_2"
+            android:textSize="@dimen/default_text_size_2" />
+
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@mipmap/image_right"
-            />
+            android:src="@mipmap/image_right" />
     </LinearLayout>
+
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="@dimen/default_margin_2"
         android:background="@color/color_white"
-        android:paddingLeft="@dimen/default_padding_2"
-        android:paddingRight="@dimen/default_padding_2"
+        android:gravity="center_vertical"
         android:orientation="vertical"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/str_withdraw_money_text"
-            android:layout_marginTop="@dimen/default_margin_2"
-            />
+        android:paddingBottom="@dimen/default_margin_2"
+        android:paddingLeft="@dimen/default_margin_2"
+        android:paddingRight="@dimen/default_margin_2">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="@dimen/default_height_2">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="￥"
-                android:textColor="@color/black"
-                android:textSize="@dimen/default_text_size_1"
-                android:gravity="bottom"
-                android:layout_marginLeft="@dimen/default_margin_4"
+                android:gravity="center_vertical"
+                android:text="当前余额为：" />
 
-                />
-            <EditText
-                android:id="@+id/et_recharge_money"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="25sp"
-                android:hint="@string/str_please_input_withdraw_money_text"
-                android:digits="0123456789."
-                android:background="@drawable/shape_edit_no_stroke"
-                android:paddingLeft="@dimen/default_padding_2"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/default_height_3"
-
-            >
             <TextView
                 android:id="@+id/tv_withdraw_available"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="0"
-                android:gravity="center_vertical"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/default_margin_4"
                 android:layout_marginRight="@dimen/default_margin_4"
-                android:textColor="@color/color_blue"
-                />
+                android:gravity="center_vertical"
+                android:text="0"
+                android:textColor="@color/color_blue" />
 
-            <View
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"></View>
             <TextView
-                android:id="@+id/tv_withdraw_all"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="@string/str_all_withdraw_text"
                 android:gravity="center_vertical"
-                android:textColor="@color/color_blue"
-                />
+                android:text=" 元" />
         </LinearLayout>
+
+        <RadioGroup
+            android:id="@+id/rg_withdraw_money"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_height_2"
+            android:layout_marginTop="@dimen/default_margin_2"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_money_50"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/shape_recharge_money"
+                android:button="@null"
+                android:gravity="center"
+                android:text="50元"
+                android:textColor="@drawable/selector_font_color_3"
+                android:textSize="@dimen/default_text_size_2" />
+
+            <RadioButton
+                android:id="@+id/rb_money_100"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/default_margin_2"
+                android:layout_marginRight="@dimen/default_margin_2"
+                android:layout_weight="1"
+                android:background="@drawable/shape_recharge_money"
+                android:button="@null"
+                android:gravity="center"
+                android:text="100元"
+                android:textColor="@drawable/selector_font_color_3"
+                android:textSize="@dimen/default_text_size_2" />
+
+            <RadioButton
+                android:id="@+id/rb_money_500"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/shape_recharge_money"
+                android:button="@null"
+                android:gravity="center"
+                android:text="500元"
+                android:textColor="@drawable/selector_font_color_3"
+                android:textSize="@dimen/default_text_size_2" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/tv_withdraw"
+            style="@style/default_button"
+            android:layout_marginTop="@dimen/default_height_2"
+            android:text="@string/str_affirm_withdraw_text" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/str_alipay_withdraw_hint_text"
+            android:gravity="bottom"
+            android:textSize="@dimen/default_text_size_4"
+            />
+
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_withdraw"
-        style="@style/default_button"
-        android:text="@string/str_affirm_withdraw_text"/>
+
+
+
+
 </LinearLayout>

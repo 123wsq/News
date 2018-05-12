@@ -17,11 +17,19 @@
 
 
         <ImageView
-            android:layout_width="75dp"
-            android:layout_height="45dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:gravity="center"
-            android:src="@mipmap/imgae_sesame_street"
-            android:layout_marginLeft="@dimen/default_margin_2"
+            android:src="@mipmap/image_location_icon"
+            android:layout_marginLeft="@dimen/default_margin_4"
+            />
+        <TextView
+            android:id="@+id/tv_location"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/default_text_size_3"
+            android:gravity="center"
+            android:textColor="@color/color_white"
             />
         <LinearLayout
             android:id="@+id/ll_search"
@@ -86,15 +94,19 @@
             android:textSize="@dimen/default_text_size_2"
             android:visibility="gone"
             />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/color_white"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/default_margin_2"
             >
             <com.scwang.smartrefresh.layout.SmartRefreshLayout
                 android:id="@+id/refreshLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
+
+
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_RecyclerView_content"
                     android:layout_width="match_parent"

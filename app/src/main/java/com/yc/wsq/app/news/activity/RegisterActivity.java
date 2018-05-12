@@ -28,7 +28,6 @@ public class RegisterActivity extends BaseActivity<UserRegisterView, UserPresent
     @BindView(R.id.et_validate_code) EditText et_validate_code;
     @BindView(R.id.et_password) EditText et_password;
     @BindView(R.id.et_password2) EditText et_password2;
-    @BindView(R.id.et_invite_code) EditText et_invite_code;
 
     private int curLen = 60;
 
@@ -72,7 +71,7 @@ public class RegisterActivity extends BaseActivity<UserRegisterView, UserPresent
                 param.put(ResponseKey.getInstace().password, et_password.getText().toString().trim());
                 param.put(ResponseKey.getInstace().password2, et_password2.getText().toString().trim());
                 param.put(ResponseKey.getInstace().code, et_validate_code.getText().toString().trim());
-                param.put(ResponseKey.getInstace().invite, et_invite_code.getText().toString().trim());
+                param.put(ResponseKey.getInstace().invite, "");
                 try {
                     ipresenter.onUserRegister(param);
                 } catch (Exception e) {

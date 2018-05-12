@@ -55,7 +55,8 @@ public class ShareFragment extends BaseFragment{
                 mFunctionsManage.invokeFunction(INTERFACE_BACK);
                 break;
             case R.id.tv_share:
-                ShareTools.showShare(getActivity(), platform, title, "", et_share_content.getText().toString());
+//                ShareTools.showShare(getActivity(), platform, title, "", et_share_content.getText().toString());
+
                 break;
         }
     }

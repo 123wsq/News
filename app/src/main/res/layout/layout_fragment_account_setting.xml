@@ -28,10 +28,105 @@
             android:id="@+id/tv_account"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1MB"
+            android:text=""
             android:layout_marginRight="@dimen/default_margin_2"
             />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_setting_withdraw_password"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_height_3"
+        android:background="@color/color_white"
+        android:paddingLeft="@dimen/default_padding_2"
+        android:paddingRight="@dimen/default_padding_2"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/default_margin_3"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="@string/str_setting_cash_password_text"
+            android:gravity="center_vertical"
+            />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/image_right"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_setting_withdraw_account"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_height_3"
+        android:background="@color/color_white"
+        android:paddingLeft="@dimen/default_padding_2"
+        android:paddingRight="@dimen/default_padding_2"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/default_margin_4"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="@string/str_account_credited_text"
+            android:gravity="center_vertical"
+            />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/image_right"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_height_3"
+        android:background="@color/color_white"
+        android:paddingLeft="@dimen/default_padding_2"
+        android:paddingRight="@dimen/default_padding_2"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/default_height_line"
+        android:visibility="gone"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="@string/str_update_cash_password_text"
+            android:gravity="center_vertical"
+            />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/image_right"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_height_3"
+        android:background="@color/color_white"
+        android:paddingLeft="@dimen/default_padding_2"
+        android:paddingRight="@dimen/default_padding_2"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/default_height_line"
+        android:visibility="gone"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="@string/str_forget_cash_password_text"
+            android:gravity="center_vertical"
+            />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/image_right"
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -135,6 +230,14 @@
             android:text="@string/str_sex_text"
             android:gravity="center_vertical"
             />
+
+        <TextView
+            android:id="@+id/tv_sex_secrecy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="保密"
+            android:visibility="gone"
+            />
         <RadioGroup
             android:id="@+id/rg_sex"
             android:layout_width="wrap_content"
@@ -142,6 +245,7 @@
             android:orientation="horizontal"
             android:layout_marginRight="@dimen/default_margin_3"
             android:gravity="center"
+            android:visibility="gone"
             >
 
             <RadioButton

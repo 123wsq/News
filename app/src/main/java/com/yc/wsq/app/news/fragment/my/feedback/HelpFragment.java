@@ -1,6 +1,7 @@
 package com.yc.wsq.app.news.fragment.my.feedback;
 
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yc.wsq.app.news.R;
@@ -21,6 +22,8 @@ public class HelpFragment extends BaseFragment<UserView, UserPresenter<UserView>
     public static final String TAG = HelpFragment.class.getName();
     @BindView(R.id.tv_title)
     TextView tv_title;
+    @BindView(R.id.ll_not_layout)
+    LinearLayout ll_not_layout;
 
     @Override
     protected UserPresenter<UserView> createPresenter() {
@@ -36,6 +39,7 @@ public class HelpFragment extends BaseFragment<UserView, UserPresenter<UserView>
     protected void initView() {
 
         tv_title.setText(getResources().getString(R.string.str_help_text));
+        ll_not_layout.setVisibility(View.GONE);
     }
 
     @OnClick({R.id.ll_back})

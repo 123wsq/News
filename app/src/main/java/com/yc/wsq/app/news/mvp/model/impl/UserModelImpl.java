@@ -111,24 +111,5 @@ public class UserModelImpl  implements UserModelInter{
         });
     }
 
-    @Override
-    public void onGetTradeRecode(String url, Map<String, String> param, Callback<Map<String, Object>> callback) throws Exception {
-        List<Map<String, Object>> list = new ArrayList<>();
-        Map<String, Object> data = new HashMap<>();
-        data.put(ResponseKey.getInstace().rsp_code, "200");
-        data.put(ResponseKey.getInstace().rsp_msg, "请求成功");
 
-        for (int i = 0; i < 10; i++) {
-            Map<String, Object> map = new HashMap<>();
-            map.put(ResponseKey.getInstace().trade_type, "充值");
-            map.put(ResponseKey.getInstace().trade_money, "+200");
-            map.put(ResponseKey.getInstace().trade_time, "2018-04-22 12:00:01");
-            map.put(ResponseKey.getInstace().trade_total, "2555");
-            list.add(map);
-        }
-        data.put(ResponseKey.getInstace().trade, list);
-
-        callback.onSuccess(data);
-        callback.onComplete();
-    }
 }

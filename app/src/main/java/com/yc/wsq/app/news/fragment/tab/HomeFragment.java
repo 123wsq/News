@@ -30,6 +30,7 @@ import com.yc.wsq.app.news.base.BaseFragment;
 import com.yc.wsq.app.news.constant.ResponseKey;
 import com.yc.wsq.app.news.mvp.presenter.NewsPresenter;
 import com.yc.wsq.app.news.mvp.view.NewsView;
+import com.yc.wsq.app.news.tools.SharedTools;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,6 +57,7 @@ public class HomeFragment extends BaseFragment<NewsView, NewsPresenter<NewsView>
     @BindView(R.id.rv_RecyclerView_content) RecyclerView rv_RecyclerView_content;
     @BindView(R.id.refreshLayout) SmartRefreshLayout refreshLayout;
     @BindView(R.id.tv_not_data) TextView tv_not_data;
+    @BindView(R.id.tv_location) TextView tv_location;
 
     private TitleAdapter mTitleAdapter;
     private List<Map<String, Object>> mTitleData;
@@ -84,12 +86,11 @@ public class HomeFragment extends BaseFragment<NewsView, NewsPresenter<NewsView>
         mTitleData = new ArrayList<>();
         mNewsData = new ArrayList<>();
 
+        tv_location.setText(SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().city_name));
+
         onInitRecyclerView();
         onInitRefreshLayout();
-
-        onStartRequest();
-
-        onRequestPermission();
+        onUpdateData();
     }
 
     private void onStartRequest(){
@@ -105,10 +106,19 @@ public class HomeFragment extends BaseFragment<NewsView, NewsPresenter<NewsView>
             param.put(ResponseKey.getInstace().cat_id, cat_id);
         try {
             ipresenter.onGetNewsList(param);
-            ipresenter.onGetNewsType(param);
+
         } catch (Exception e) {
             ToastUtils.onToast(e.getMessage());
             onResetRefreshState();
+            e.printStackTrace();
+        }
+    }
+
+    private void onGetNewsType(){
+        Map<String, String> param = new HashMap<>();
+        try {
+            ipresenter.onGetNewsType(param);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -207,11 +217,10 @@ public class HomeFragment extends BaseFragment<NewsView, NewsPresenter<NewsView>
         public void onRecyclerItemClickListener(View view, int i) {
 
             cat_id = mTitleData.get(i).get(ResponseKey.getInstace().cat_id)+"";
+
             refreshState = 3;
             mNewsData.clear();
             onStartRequest();
-//            ToastUtils.onToast(mTitleData.get(i).);
-
         }
 
         @Override
@@ -280,6 +289,11 @@ public class HomeFragment extends BaseFragment<NewsView, NewsPresenter<NewsView>
                 //可在其中解析amapLocation获取相应内容。
                     curCity = aMapLocation.getCity();
 
+                    tv_location.setText(curCity);
+
+                    SharedTools.getInstance(getActivity()).onPutData(ResponseKey.getInstace().city_name, curCity);
+                    SharedTools.getInstance(getActivity()).onPutData(ResponseKey.getInstace().city_code, aMapLocation.getCityCode());
+
 //                    Map<String, Object> location = new HashMap<>();
 //                    location.put(ResponseKey.getInstace().cat_name, curCity);
 //                    location.put(ResponseKey.getInstace().cat_id, 999);
@@ -334,5 +348,14 @@ public class HomeFragment extends BaseFragment<NewsView, NewsPresenter<NewsView>
         if (mLocationClient != null){
             mLocationClient.stopLocation();
         }
+    }
+
+    public void onUpdateData(){
+
+        mTitleData.clear();
+        mNewsData.clear();
+        onStartRequest();
+        onGetNewsType();
+        onRequestPermission();
     }
 }

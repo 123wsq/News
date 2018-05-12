@@ -80,6 +80,45 @@ public class UserPresenter<T extends BaseView> extends BasePresenter<T> {
     }
 
     /**
+     * 用户登出
+     * @param param
+     * @throws Exception
+     */
+    public void onUserLogOut(Map<String, String> param) throws Exception {
+
+        final UserView view = (UserView) getView();
+        if (view != null){
+
+            if (view != null) {
+                String url = Urls.HOST + Urls.LOGOUT;
+                requestHttp.onSendGet(url, param, new Callback<Map<String, Object>>() {
+                    @Override
+                    public void onSuccess(Map<String, Object> data) {
+                        if (view != null) {
+                            view.onResponseData(data);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(String msg) {
+                        ToastUtils.onToast(msg);
+                    }
+
+                    @Override
+                    public void onOutTime(String msg) {
+                    }
+
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+            }
+        }
+    }
+
+    /**
      * 用户注册
      * @param param
      * @throws Exception
@@ -153,6 +192,55 @@ public class UserPresenter<T extends BaseView> extends BasePresenter<T> {
                 public void onSuccess(Map<String, Object> data) {
                     if (userView != null) {
                         userView.onGetValidateData(data);
+                    }
+                }
+
+                @Override
+                public void onFailure(String msg) {
+                    ToastUtils.onToast(msg);
+                }
+
+                @Override
+                public void onOutTime(String msg) {
+
+                }
+
+                @Override
+                public void onComplete() {
+                    if (userView != null) {
+                        userView.dismissLoadding();
+                    }
+                }
+            });
+        }
+
+    }
+
+    /**
+     * 验证码 验证
+     * @param param
+     * @throws Exception
+     */
+    public void onCheckValidateCode(Map<String, String> param) throws Exception{
+
+        final UserRegisterView userView = (UserRegisterView) getView();
+
+        try {
+            ParamValidate.getInstance().onValidateUserName(param.get(ResponseKey.getInstace().mobile));
+            ParamValidate.getInstance().onValidateCode(param.get(ResponseKey.getInstace().code));
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+
+
+        if (userView != null) {
+            userView.showLoadding();
+            String url = Urls.HOST + Urls.CHECK_VALIDATE_CODE;
+            requestHttp.onSendPost(url, param, new Callback<Map<String, Object>>() {
+                @Override
+                public void onSuccess(Map<String, Object> data) {
+                    if (userView != null) {
+                        userView.onRegisterData(data);
                     }
                 }
 
@@ -289,21 +377,22 @@ public class UserPresenter<T extends BaseView> extends BasePresenter<T> {
 
         final UserView userView = (UserView) getView();
 
-//        try {
-//            ParamValidate.getInstance().onValidateUserName(param.get(ResponseKey.getInstace().user_name));
-//            ParamValidate.getInstance().onValidateUserPsd(param.get(ResponseKey.getInstace().user_psd));
-//        }catch (Exception e){
-//            throw new Exception(e.getMessage());
-//        }
+        try {
+            ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().uid));
+            ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().token));
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
 
 
         if (userView != null) {
             userView.showLoadding();
-            requestHttp.onSendPost("", param, new Callback<Map<String, Object>>() {
+            String url = Urls.HOST +Urls.WITHDRAW_LIST;
+            requestHttp.onSendPost(url, param, new Callback<Map<String, Object>>() {
                 @Override
                 public void onSuccess(Map<String, Object> data) {
                     if (userView != null) {
-//                        userView.onRegisterData(data);
+                        userView.onResponseData(data);
                     }
                 }
 
@@ -340,21 +429,15 @@ public class UserPresenter<T extends BaseView> extends BasePresenter<T> {
 
         final UserView userView = (UserView) getView();
 
-//        try {
-//            ParamValidate.getInstance().onValidateUserName(param.get(ResponseKey.getInstace().user_name));
-//            ParamValidate.getInstance().onValidateUserPsd(param.get(ResponseKey.getInstace().user_psd));
-//        }catch (Exception e){
-//            throw new Exception(e.getMessage());
-//        }
-
 
         if (userView != null) {
             userView.showLoadding();
-            requestHttp.onSendPost("", param, new Callback<Map<String, Object>>() {
+            String url = Urls.HOST +Urls.SETTING_PAYWD;
+            requestHttp.onSendGet(url, param, new Callback<Map<String, Object>>() {
                 @Override
                 public void onSuccess(Map<String, Object> data) {
                     if (userView != null) {
-//                        userView.onRegisterData(data);
+                        userView.onResponseData(data);
                     }
                 }
 
@@ -384,63 +467,11 @@ public class UserPresenter<T extends BaseView> extends BasePresenter<T> {
     }
 
     /**
-     * 验证提现密码
+     * app版本检测
      * @param param
      * @throws Exception
      */
-    public void onValidateWithdrawPassword(Map<String, String> param) throws Exception{
-
-        final WithdrawView view = (WithdrawView) getView();
-
-//        try {
-//            ParamValidate.getInstance().onValidateUserName(param.get(ResponseKey.getInstace().user_name));
-//            ParamValidate.getInstance().onValidateUserPsd(param.get(ResponseKey.getInstace().user_psd));
-//        }catch (Exception e){
-//            throw new Exception(e.getMessage());
-//        }
-
-
-        if (view != null) {
-            view.showLoadding();
-            requestHttp.onSendPost("", param, new Callback<Map<String, Object>>() {
-                @Override
-                public void onSuccess(Map<String, Object> data) {
-                    if (view != null) {
-                        view.onValidateWithdrawPasswordResponse(data);
-                    }
-                }
-
-                @Override
-                public void onFailure(String msg) {
-                    ToastUtils.onToast(msg);
-                }
-
-                @Override
-                public void onOutTime(String msg) {
-                    ToastUtils.onToast(msg);
-                    if (view != null)
-                        view.onReLogin();
-                }
-
-
-
-                @Override
-                public void onComplete() {
-                    if (view != null) {
-                        view.dismissLoadding();
-                    }
-                }
-            });
-        }
-
-    }
-
-    /**
-     * 添加银行卡
-     * @param param
-     * @throws Exception
-     */
-    public void onAddBankCard(Map<String, String> param) throws Exception{
+    public void onGetAppVersion(Map<String, String> param) throws Exception{
 
         final UserView userView = (UserView) getView();
 
@@ -453,12 +484,12 @@ public class UserPresenter<T extends BaseView> extends BasePresenter<T> {
 
 
         if (userView != null) {
-            userView.showLoadding();
-            requestHttp.onSendPost("", param, new Callback<Map<String, Object>>() {
+            String url = Urls.HOST +Urls.CHECK_APP;
+            requestHttp.onSendPost(url, param, new Callback<Map<String, Object>>() {
                 @Override
                 public void onSuccess(Map<String, Object> data) {
                     if (userView != null) {
-//                        userView.onRegisterData(data);
+                        userView.onResponseData(data);
                     }
                 }
 
@@ -469,17 +500,13 @@ public class UserPresenter<T extends BaseView> extends BasePresenter<T> {
 
                 @Override
                 public void onOutTime(String msg) {
-                    ToastUtils.onToast(msg);
-                    if (userView != null)
-                        userView.onReLogin();
+
                 }
 
 
                 @Override
                 public void onComplete() {
-                    if (userView != null) {
-                        userView.dismissLoadding();
-                    }
+
                 }
             });
         }
@@ -597,7 +624,7 @@ public class UserPresenter<T extends BaseView> extends BasePresenter<T> {
      */
     public void onApplyWithdraw(Map<String, String> param) throws Exception{
 
-        final WithdrawView view = (WithdrawView) getView();
+        final UserView view = (UserView) getView();
 
 //        try {
 //            ParamValidate.getInstance().onValidateUserName(param.get(ResponseKey.getInstace().user_name));
@@ -609,11 +636,12 @@ public class UserPresenter<T extends BaseView> extends BasePresenter<T> {
 
         if (view != null) {
             view.showLoadding();
-            requestHttp.onSendPost("", param, new Callback<Map<String, Object>>() {
+            String url = Urls.HOST +Urls.APPLY_WITHDRAW;
+            requestHttp.onSendPost(url, param, new Callback<Map<String, Object>>() {
                 @Override
                 public void onSuccess(Map<String, Object> data) {
                     if (view != null) {
-                        view.onApplyWithdrawResponse(data);
+                        view.onResponseData(data);
                     }
                 }
 
@@ -643,17 +671,16 @@ public class UserPresenter<T extends BaseView> extends BasePresenter<T> {
 
 
     /**
-     * 收藏列表
+     * 提交邀请码
      * @param param
      * @throws Exception
      */
-    public void onGetCollectList(Map<String, String> param) throws Exception{
+    public void onSubmitInviteCode(Map<String, String> param) throws Exception{
 
         final UserView view = (UserView) getView();
 
         try {
-            ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().uid));
-            ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().token));
+            ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().first_leader));
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }
@@ -661,8 +688,117 @@ public class UserPresenter<T extends BaseView> extends BasePresenter<T> {
 
         if (view != null) {
             view.showLoadding();
-            String url = Urls.HOST +Urls.COLLECT_LIST;
-            requestHttp.onSendPost(url, param, new Callback<Map<String, Object>>() {
+            String url = Urls.HOST +Urls.SET_INVITE;
+            requestHttp.onSendGet(url, param, new Callback<Map<String, Object>>() {
+                @Override
+                public void onSuccess(Map<String, Object> data) {
+                    if (view != null) {
+                        view.onResponseData(data);
+                    }
+                }
+
+                @Override
+                public void onFailure(String msg) {
+                    ToastUtils.onToast(msg);
+                }
+
+                @Override
+                public void onOutTime(String msg) {
+                    ToastUtils.onToast(msg);
+                    if (view != null)
+                        view.onReLogin();
+                }
+
+
+                @Override
+                public void onComplete() {
+                    if (view != null) {
+                        view.dismissLoadding();
+                    }
+                }
+            });
+        }
+
+    }
+
+
+    /**
+     * 获取徒弟列表
+     * @param param
+     * @throws Exception
+     */
+    public void onGetApprenticeList(Map<String, String> param) throws Exception{
+
+        final UserView view = (UserView) getView();
+
+        try {
+            ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().uid));
+            ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().token));
+            ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().type));
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+
+
+        if (view != null) {
+            view.showLoadding();
+            String url = Urls.HOST +Urls.DISCIPLE_LIST;
+            requestHttp.onSendGet(url, param, new Callback<Map<String, Object>>() {
+                @Override
+                public void onSuccess(Map<String, Object> data) {
+                    if (view != null) {
+                        view.onResponseData(data);
+                    }
+                }
+
+                @Override
+                public void onFailure(String msg) {
+                    ToastUtils.onToast(msg);
+                }
+
+                @Override
+                public void onOutTime(String msg) {
+                    ToastUtils.onToast(msg);
+                    if (view != null)
+                        view.onReLogin();
+                }
+
+
+                @Override
+                public void onComplete() {
+                    if (view != null) {
+                        view.dismissLoadding();
+                    }
+                }
+            });
+        }
+
+    }
+
+
+    /**
+     * 设置提现账户
+     * @param param
+     * @throws Exception
+     */
+    public void onSettingWithdrawAccount(Map<String, String> param) throws Exception{
+
+        final UserView view = (UserView) getView();
+
+        try {
+            ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().user_id));
+            ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().bank_type));
+            ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().bank_card));
+            ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().realname));
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+
+
+        if (view != null) {
+            view.showLoadding();
+            String url = Urls.HOST +Urls.SETTING_WITHDRAW_ACCOUNT;
+            requestHttp.onSendGet(url, param, new Callback<Map<String, Object>>() {
                 @Override
                 public void onSuccess(Map<String, Object> data) {
                     if (view != null) {

@@ -41,13 +41,6 @@ public interface UserModelInter {
     void onGetValidateCode(String url, Map<String, String> param, Callback<Map<String, Object>> callback) throws  Exception;
 
 
-    /**
-     * 获取交易记录
-     * @param url
-     * @param param
-     * @param callback
-     * @throws Exception
-     */
-    void onGetTradeRecode(String url, Map<String, String> param, Callback<Map<String, Object>> callback) throws  Exception;
+
 
 }

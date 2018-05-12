@@ -5,6 +5,7 @@ import android.view.View;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 
+import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
@@ -31,12 +32,14 @@ import butterknife.OnClick;
 public class ShopFragment extends BaseFragment<ShopView, ShopPresenter<ShopView>> implements ShopView{
 
     public static final String TAG = ShopFragment.class.getName();
-    public static final String INTERFACE_NRNP = TAG+_INTERFACE_NPNR;
+    public static final String INTERFACE_NRNP = TAG + _INTERFACE_NPNR;
     @BindView(R.id.tv_title)TextView tv_title;
     @BindView(R.id.ll_back)LinearLayout ll_back;
     @BindView(R.id.wv_WebView)
     WebView wv_WebView;
 
+    private String user_id = "";
+    private String articleUrl;
     @Override
     protected ShopPresenter<ShopView> createPresenter() {
         return new ShopPresenter<>();
@@ -61,11 +64,17 @@ public class ShopFragment extends BaseFragment<ShopView, ShopPresenter<ShopView>
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        user_id = SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().user_id);
+    }
+
     private void onInitWebView(){
 
         WebViewTools.init(wv_WebView);
 
-        String articleUrl = Urls.SHOPPING;
+        articleUrl = Urls.SHOPPING +"?"+ ResponseKey.getInstace().user_id+"="+user_id;
         Logger.d(articleUrl);
 
 
@@ -84,8 +93,9 @@ public class ShopFragment extends BaseFragment<ShopView, ShopPresenter<ShopView>
             }
 
         });
-        synCookies(articleUrl);
-        wv_WebView.loadUrl(articleUrl);
+        wv_WebView.addJavascriptInterface(new AndroidObject(), "nativeMethod");
+//        synCookies(articleUrl);
+//        wv_WebView.loadUrl(articleUrl);
     }
 
     @OnClick({R.id.ll_back})
@@ -94,6 +104,7 @@ public class ShopFragment extends BaseFragment<ShopView, ShopPresenter<ShopView>
             case R.id.ll_back:
                 if (mFunctionsManage != null) {
                     mFunctionsManage.invokeFunction(INTERFACE_NRNP);
+//                    wv_WebView.canGoBack();
                 }else {
                     Logger.d("mFunctionsManage == null");
                 }
@@ -131,5 +142,20 @@ public class ShopFragment extends BaseFragment<ShopView, ShopPresenter<ShopView>
         CookieSyncManager.getInstance().sync();
     }
 
+
+    class AndroidObject extends Object{
+
+        @JavascriptInterface
+        public void onLogin(){
+            onReLogin();
+        }
+
+    }
+
+    public void onUpdateData(){
+
+        wv_WebView.removeAllViews();
+        wv_WebView.loadUrl(articleUrl);
+    }
 
 }

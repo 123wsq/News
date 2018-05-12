@@ -19,13 +19,18 @@ import com.wsq.library.views.view.CustomPopup;
 import com.yc.wsq.app.news.R;
 import com.yc.wsq.app.news.base.BaseFragment;
 import com.yc.wsq.app.news.constant.ResponseKey;
+import com.yc.wsq.app.news.fragment.my.IntegralFragment;
 import com.yc.wsq.app.news.mvp.presenter.BasePresenter;
+import com.yc.wsq.app.news.mvp.presenter.UserPresenter;
+import com.yc.wsq.app.news.mvp.view.UserView;
 import com.yc.wsq.app.news.tools.SharedTools;
 import com.yc.wsq.app.news.views.popup.CalendarPopup;
 import com.yc.wsq.app.news.views.listener.OnCalendarResultCallBack;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -36,11 +41,12 @@ import me.weyye.hipermission.PermissionItem;
 /**
  * 账户设置页面
  */
-public class AccountSettingFragment extends BaseFragment implements RadioGroup.OnCheckedChangeListener {
+public class AccountSettingFragment extends BaseFragment<UserView, UserPresenter<UserView>> implements UserView,RadioGroup.OnCheckedChangeListener {
 
     public static final String TAG = AccountSettingFragment.class.getName();
     public static final String INTERFACE_BACK_ALL = TAG + "BACK_MYFRAGMENT";
     public static final String INTERFACE_EXIT_APP = TAG + "EXIT_APP";
+    public static final String INTERFACE_WITHP = TAG + _INTERFACE_WITHP;
     public static final int RESULT_IMAGE = 2022;
 
     @BindView(R.id.tv_title) TextView tv_title;
@@ -50,13 +56,14 @@ public class AccountSettingFragment extends BaseFragment implements RadioGroup.O
     @BindView(R.id.rg_sex) RadioGroup rg_sex;
     @BindView(R.id.rb_sex_boy) RadioButton rb_sex_boy;
     @BindView(R.id.rb_sex_lady) RadioButton rb_sex_lady;
+    @BindView(R.id.tv_sex_secrecy) TextView tv_sex_secrecy;
 
     private CustomPopup popup;
 
 
     @Override
-    protected BasePresenter createPresenter() {
-        return null;
+    protected UserPresenter<UserView> createPresenter() {
+        return new UserPresenter<>();
     }
 
     @Override
@@ -74,15 +81,24 @@ public class AccountSettingFragment extends BaseFragment implements RadioGroup.O
         String sex = SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().sex);
 
         if (sex.equals("0")){
-            rb_sex_boy.setChecked(true);
+            tv_sex_secrecy.setVisibility(View.VISIBLE);
+            rg_sex.setVisibility(View.GONE);
+
         }else {
-            rb_sex_lady.setChecked(true);
+            tv_sex_secrecy.setVisibility(View.GONE);
+            rg_sex.setVisibility(View.VISIBLE);
+            if (sex.equals("1")){
+                rb_sex_boy.setChecked(true);
+            }else{
+                rb_sex_lady.setChecked(false);
+            }
         }
 
         rg_sex.setOnCheckedChangeListener(this);
     }
 
-    @OnClick({R.id.ll_back, R.id.tv_exit_account, R.id.ll_header, R.id.ll_nickname, R.id.ll_birthday})
+    @OnClick({R.id.ll_back, R.id.tv_exit_account, R.id.ll_header, R.id.ll_nickname, R.id.ll_birthday,
+            R.id.ll_setting_withdraw_password, R.id.ll_setting_withdraw_account})
     public void onClick(View view){
 
         switch (view.getId()){
@@ -94,8 +110,7 @@ public class AccountSettingFragment extends BaseFragment implements RadioGroup.O
 //                onCameraPopup();
                 break;
             case R.id.tv_exit_account:
-                SharedTools.getInstance(getActivity()).onClearUser();
-                mFunctionsManage.invokeFunction(INTERFACE_BACK_ALL);
+                onExitApp();
                 break;
             case R.id.ll_nickname:
 //                onUpdateNickName();
@@ -103,6 +118,22 @@ public class AccountSettingFragment extends BaseFragment implements RadioGroup.O
             case R.id.ll_birthday:
 //                onUpdateBirthday();
                 break;
+            case R.id.ll_setting_withdraw_password: //设置提现密码 param =1
+                mFunctionsManage.invokeFunction(INTERFACE_WITHP, 1);
+                break;
+            case R.id.ll_setting_withdraw_account:  //提现账户设置 param =2
+                mFunctionsManage.invokeFunction(INTERFACE_WITHP, 2);
+                break;
+        }
+    }
+
+    private void onExitApp(){
+        Map<String, String> param = new HashMap<>();
+
+        try {
+            ipresenter.onUserLogOut(param);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -110,19 +141,19 @@ public class AccountSettingFragment extends BaseFragment implements RadioGroup.O
      * 修改昵称
      */
     private void onUpdateNickName(){
-        DialogTools.showDialog(getActivity(), "提交", "取消", "修改昵称", "", false, new OnDialogClickListener() {
-            @Override
-            public void onClick(CustomDefaultDialog customDefaultDialog, String s, int i) {
-
-                customDefaultDialog.dismiss();
-            }
-        }, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                dialog.dismiss();
-            }
-        });
+//        DialogTools.showDialog(getActivity(), "提交", "取消", "修改昵称", "", false, new OnDialogClickListener() {
+//            @Override
+//            public void onClick(CustomDefaultDialog customDefaultDialog, String s, int i) {
+//
+//                customDefaultDialog.dismiss();
+//            }
+//        }, new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//
+//                dialog.dismiss();
+//            }
+//        });
     }
 
     /***
@@ -246,4 +277,9 @@ public class AccountSettingFragment extends BaseFragment implements RadioGroup.O
     }
 
 
+    @Override
+    public void onResponseData(Map<String, Object> result) {
+        SharedTools.getInstance(getActivity()).onClearUser();
+        mFunctionsManage.invokeFunction(INTERFACE_BACK_ALL);
+    }
 }

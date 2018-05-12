@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="30dp"
+    android:gravity="bottom"
+    >
+
+    <ImageView
+        android:id="@+id/iv_benefit_amount"
+        android:layout_width="20dp"
+        android:layout_height="30dp"
+        android:src="@mipmap/image_0"
+        android:layout_marginLeft="2dp"
+        android:visibility="gone"
+        />
+    <ImageView
+        android:id="@+id/iv_comma"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/image_comma_icon"
+        android:visibility="gone"
+        android:layout_gravity="bottom"
+        />
+</LinearLayout>

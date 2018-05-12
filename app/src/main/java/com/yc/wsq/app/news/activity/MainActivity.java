@@ -10,6 +10,7 @@ import android.view.KeyEvent;
 
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.entity.LocalMedia;
+import com.orhanobut.logger.Logger;
 import com.wsq.library.struct.FunctionNoParamNoResult;
 import com.wsq.library.struct.FunctionWithParamOnly;
 import com.wsq.library.struct.FunctionsManage;
@@ -21,7 +22,10 @@ import com.yc.wsq.app.news.constant.ResponseKey;
 import com.yc.wsq.app.news.fragment.MainFragment;
 import com.yc.wsq.app.news.fragment.benefit.BenefitDetailsFragment;
 import com.yc.wsq.app.news.fragment.my.AboutFragment;
+import com.yc.wsq.app.news.fragment.my.ApprenticeFragment;
+import com.yc.wsq.app.news.fragment.my.InviteCodeFragment;
 import com.yc.wsq.app.news.fragment.my.QRcodeFragment;
+import com.yc.wsq.app.news.fragment.my.setting.AccountCreditedFragment;
 import com.yc.wsq.app.news.fragment.my.setting.AccountSettingFragment;
 import com.yc.wsq.app.news.fragment.my.CollectFragment;
 import com.yc.wsq.app.news.fragment.my.DiscountFragment;
@@ -35,6 +39,7 @@ import com.yc.wsq.app.news.fragment.my.wallet.TradeRecordFragment;
 import com.yc.wsq.app.news.fragment.my.wallet.WalletFragment;
 import com.yc.wsq.app.news.fragment.my.wallet.WithdrawFragment;
 import com.yc.wsq.app.news.fragment.my.wallet.ValidateAccountFragment;
+import com.yc.wsq.app.news.fragment.news.ArticleCommentFragment;
 import com.yc.wsq.app.news.fragment.news.NewsDetailsFragment;
 import com.yc.wsq.app.news.fragment.news.SearchFragment;
 import com.yc.wsq.app.news.fragment.news.SearchResultFragment;
@@ -169,9 +174,12 @@ public class MainActivity extends BaseActivity {
                         onEnter(new CollectFragment(), CollectFragment.TAG, true);
                         break;
                     case 8:
-                        onSelectShop();
+                        onEnter(new InviteCodeFragment(), InviteCodeFragment.TAG, true);
                         break;
                     case 9:
+                        onEnter(new ApprenticeFragment(), ApprenticeFragment.TAG, true);
+                        break;
+                    case 10:
                         Bundle bundle = new Bundle();
                         bundle.putInt(ResponseKey.getInstace().type, data);
                         onEnter(new QRcodeFragment(), QRcodeFragment.TAG, bundle,true);
@@ -181,6 +189,17 @@ public class MainActivity extends BaseActivity {
                         break;
                     case 13:
                         onEnter(new HelpFragment(), HelpFragment.TAG, true);
+                        break;
+                }
+            }
+        });
+
+        functionsManage.addFunction(new FunctionWithParamOnly<Integer>(MemberUpgradeFragment.INTERFACE_WITHP) {
+            @Override
+            public void function(Integer data) {
+                switch (data){
+                    case 1:
+                        onEnter(new InviteCodeFragment(), InviteCodeFragment.TAG, true);
                         break;
                 }
             }
@@ -211,7 +230,37 @@ public class MainActivity extends BaseActivity {
                         case 4:
                             onEnter(new ValidateAccountFragment(), ValidateAccountFragment.TAG, true);
                             break;
+                        case 5:
+                            onEnter(new AccountCreditedFragment(), AccountCreditedFragment.TAG, true);
+                            break;
+
                     }
+            }
+        });
+        functionsManage.addFunction(new FunctionWithParamOnly<String[]>(NewsDetailsFragment.INTERFACE_WITHP) {
+            @Override
+            public void function(String[] data) {
+                switch (data[0]){
+                    case "1":
+                        Bundle bundle = new Bundle();
+                        bundle.putString(ResponseKey.getInstace().article_id, data[1]);
+                        onEnter(new ArticleCommentFragment(), ArticleCommentFragment.TAG, bundle, true);
+                        break;
+                }
+            }
+        });
+
+        functionsManage.addFunction(new FunctionWithParamOnly<Integer>(AccountSettingFragment.INTERFACE_WITHP) {
+            @Override
+            public void function(Integer data) {
+                switch (data){
+                    case 1:
+                        onEnter(new ValidateAccountFragment(), ValidateAccountFragment.TAG, true);
+                        break;
+                    case 2:
+                        onEnter(new AccountCreditedFragment(), AccountCreditedFragment.TAG, true);
+                        break;
+                }
             }
         });
 
@@ -221,6 +270,17 @@ public class MainActivity extends BaseActivity {
                 switch (data){
                     case 1:
                         onEnter(new SettingWithdrawPasswordFragment(), SettingWithdrawPasswordFragment.TAG, true);
+                        break;
+                }
+            }
+        });
+
+        functionsManage.addFunction(new FunctionWithParamOnly<Integer>(SettingWithdrawPasswordFragment.INTERFACE_WITHP) {
+            @Override
+            public void function(Integer data) {
+                switch (data){
+                    case 1:
+                        onBackSettingPage();
                         break;
                 }
             }
@@ -252,17 +312,6 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-
-        functionsManage.addFunction(new FunctionWithParamOnly<String[]>(NewsDetailsFragment.INTERFACE_WITHP) {
-            @Override
-            public void function(String[] data) {
-                Bundle bundle = new Bundle();
-                bundle.putString(ResponseKey.getInstace().platform, data[0]);
-                bundle.putString(ResponseKey.getInstace().title, data[1]);
-                bundle.putString(ResponseKey.getInstace().description, data[2]);
-                onEnter(new ShareFragment(), ShareFragment.TAG, bundle, true);
-            }
-        });
         functionsManage.addFunction(new FunctionWithParamOnly<String>(BenefitFragment.INTERFACE_WITHP) {
             @Override
             public void function(String data) {
@@ -296,6 +345,16 @@ public class MainActivity extends BaseActivity {
                 onKeyBack();
             }
         });
+
+        /**
+         * 强制提出app
+         */
+        functionsManage.addFunction(new FunctionNoParamNoResult(MainFragment.INTERFACE_EXIT) {
+            @Override
+            public void function() {
+                onConstraintExitApp();
+            }
+        });
         /**
          * 退出应用
          */
@@ -309,20 +368,7 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    /**
-     * 设置选中商场页面
-     */
-    private void onSelectShop(){
 
-        for (int i = 0; i < mListFragment.size(); i++) {
-
-            if (mListFragment.get(i) instanceof MainFragment){
-                MainFragment mf = (MainFragment) mListFragment.get(i);
-                //用户状态发生变化
-                mf.onSetShowPosition(1);
-            }
-        }
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -384,7 +430,20 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    private void onExitAppDialog(){
+    /**
+     * 返回到账户设置页面
+     */
+    private void onBackSettingPage(){
+        for (int i = mListFragment.size()-1; i >0; i--) {
+            Fragment fragment = mListFragment.get(i);
+            if (fragment instanceof AccountSettingFragment){
+                return;
+            }
+            onKeyBack();
+        }
+    }
+
+    public void onExitAppDialog(){
         DialogTools.showDialog(this, "离开", "不了","提示", "您确定要离我们而去吗？",
                 new DialogInterface.OnClickListener() {
             @Override
@@ -400,6 +459,10 @@ public class MainActivity extends BaseActivity {
                 dialog.dismiss();
             }
         });
+    }
+
+    public void onConstraintExitApp(){
+        finish();
     }
 
 

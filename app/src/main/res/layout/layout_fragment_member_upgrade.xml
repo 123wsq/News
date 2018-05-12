@@ -1,324 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/default_backgroud_color"
-    android:id="@+id/ll_layout"
-    >
+    android:background="@color/color_white"
+    android:orientation="vertical">
 
     <include layout="@layout/layout_public_titlebar"></include>
 
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:background="@color/color_white"
-        android:orientation="vertical"
-        >
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/image_vip_background"
-            android:layout_marginTop="@dimen/default_margin_2"
-            />
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@mipmap/image_upgrade_member_background"
                 >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/str_primary_vip_text"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="LV.1"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/str_tourist_text"
-                    />
-            </LinearLayout>
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_weight="2"
-                android:layout_height="match_parent">
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/default_height_line"
-                    android:background="@color/color_gray"
-                    android:layout_centerInParent="true"
-                    />
                 <ImageView
-                    android:id="@+id/iv_member_upgrade"
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@mipmap/image_upgrade_vip_background"
+                    android:layout_marginLeft="@dimen/default_margin_1"
+                    android:layout_marginRight="@dimen/default_margin_1"
+                    android:layout_marginTop="@dimen/default_margin_2"
+                    android:layout_marginBottom="@dimen/default_margin_2"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_white"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_margin_2"
+                    android:src="@mipmap/image_vip_background" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="@dimen/default_height_3"
-                    android:src="@mipmap/image_member_upgrade"
-                    android:layout_centerInParent="true"
-                    />
-            </RelativeLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/str_intermediate_vip_text"
-                    />
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    >
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="LV.2"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/str_vip_text"
-                    />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/str_primary_vip_text" />
+
+
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/default_height_line"
+                            android:layout_centerInParent="true"
+                            android:background="@color/color_gray" />
+
+                        <ImageView
+                            android:id="@+id/iv_member_upgrade"
+                            android:layout_width="120dp"
+                            android:layout_height="@dimen/default_height_3"
+                            android:layout_centerInParent="true"
+                            android:src="@mipmap/image_member_upgrade" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/str_intermediate_vip_text" />
+
+                    </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
+
+
+            <include layout="@layout/layout_include_member_upgrade"></include>
+            <include layout="@layout/layout_include_member_vip"></include>
         </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/color_white"
-        android:layout_marginTop="@dimen/default_margin_2"
-        android:paddingBottom="@dimen/default_padding_2"
-        >
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/default_margin_2"
-            android:layout_marginTop="@dimen/default_margin_2"
-            >
-            <View
-                android:layout_width="2dp"
-                android:layout_height="@dimen/default_margin_2"
-                android:background="@color/red"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/str_registration_privileges_text"
-                android:layout_marginLeft="@dimen/default_margin_3"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/default_margin_2"
-            >
-
-            <ImageView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:src="@mipmap/image_member_hint"
-                android:layout_marginLeft="@dimen/default_margin_1"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/str_registration_desc_text"
-                android:layout_marginLeft="@dimen/default_margin_3"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/default_margin_2"
-            android:layout_marginTop="@dimen/default_margin_1"
-            >
-            <View
-                android:layout_width="2dp"
-                android:layout_height="@dimen/default_margin_2"
-                android:background="@color/red"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/str_grade_rules_text"
-                android:layout_marginLeft="@dimen/default_margin_3"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="@dimen/default_margin_2"
-            android:layout_marginLeft="@dimen/default_margin_2"
-            android:layout_marginRight="@dimen/default_margin_2"
-            >
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/default_height_line"
-                android:background="@color/color_gray"></View>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/default_height_4">
-                <View
-                    android:layout_width="@dimen/default_height_line"
-                    android:layout_height="match_parent"
-                    android:background="@color/color_gray"></View>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="match_parent"
-                    android:text="@string/str_grade_text"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:gravity="center"
-                    />
-                <View
-                    android:layout_width="@dimen/default_height_line"
-                    android:layout_height="match_parent"
-                    android:background="@color/color_gray"></View>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="match_parent"
-                    android:text="@string/str_condition_text"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:gravity="center"
-                    />
-                <View
-                    android:layout_width="@dimen/default_height_line"
-                    android:layout_height="match_parent"
-                    android:background="@color/color_gray"></View>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="3"
-                    android:layout_height="match_parent"
-                    android:text="@string/str_welfare_text"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:gravity="center"
-                    />
-                <View
-                    android:layout_width="@dimen/default_height_line"
-                    android:layout_height="match_parent"
-                    android:background="@color/color_gray"></View>
-
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/default_height_line"
-                android:background="@color/color_gray"></View>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/default_height_4">
-                <View
-                    android:layout_width="@dimen/default_height_line"
-                    android:layout_height="match_parent"
-                    android:background="@color/color_gray"></View>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="match_parent"
-                    android:text="@string/str_primary_vip_text"
-                    android:gravity="center"
-                    />
-                <View
-                    android:layout_width="@dimen/default_height_line"
-                    android:layout_height="match_parent"
-                    android:background="@color/color_gray"></View>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="match_parent"
-                    android:text="@string/str_condition_register_text"
-                    android:gravity="center"
-                    />
-                <View
-                    android:layout_width="@dimen/default_height_line"
-                    android:layout_height="match_parent"
-                    android:background="@color/color_gray"></View>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="3"
-                    android:layout_height="match_parent"
-                    android:text="@string/str_everyday_text"
-                    android:gravity="center"
-                    />
-                <View
-                    android:layout_width="@dimen/default_height_line"
-                    android:layout_height="match_parent"
-                    android:background="@color/color_gray"></View>
-
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/default_height_line"
-                android:background="@color/color_gray"></View>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/default_height_4">
-                <View
-                    android:layout_width="@dimen/default_height_line"
-                    android:layout_height="match_parent"
-                    android:background="@color/color_gray"></View>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="match_parent"
-                    android:text="@string/str_intermediate_vip_text"
-                    android:gravity="center"
-                    />
-                <View
-                    android:layout_width="@dimen/default_height_line"
-                    android:layout_height="match_parent"
-                    android:background="@color/color_gray"></View>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="match_parent"
-                    android:text="@string/str_condition_intermediate_text"
-                    android:gravity="center"
-                    />
-                <View
-                    android:layout_width="@dimen/default_height_line"
-                    android:layout_height="match_parent"
-                    android:background="@color/color_gray"></View>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="3"
-                    android:layout_height="match_parent"
-                    android:text="@string/str_everyday_intermediate_text"
-                    android:gravity="center"
-                    />
-                <View
-                    android:layout_width="@dimen/default_height_line"
-                    android:layout_height="match_parent"
-                    android:background="@color/color_gray"></View>
-
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/default_height_line"
-                android:background="@color/color_gray"></View>
-        </LinearLayout>
-
-        
-    </LinearLayout>
-
+    </ScrollView>
 </LinearLayout>

@@ -21,4 +21,25 @@ public class DateFormat {
 
         return "";
     }
+
+    public static final String onGetCurIntervalTime(String millisecond){
+
+        long oldTime = Long.parseLong(millisecond);
+        long curTime = System.currentTimeMillis()/1000;
+        long time = curTime -oldTime;
+        if (time<60){
+            return time + "秒前";
+        }else if(time < 60 * 60){
+            return (time / 60)+"分钟前";
+        }else if(time < 60 * 60 * 24){
+            return (time / 60 / 60)+"小时前";
+        }else if(time < 60* 60 * 24 * 30){
+            return (time / 60 / 60 / 24)+"天前";
+        }else if(time < 60* 60 * 24 * 30 *12){
+            return (time / 60 / 60 / 24 / 30)+"月前";
+        }else {
+            return (time / 60 / 60 / 24 / 30 / 12)+"年前";
+        }
+
+    }
 }

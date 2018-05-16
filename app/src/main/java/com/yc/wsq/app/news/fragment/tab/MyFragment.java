@@ -1,45 +1,56 @@
 package com.yc.wsq.app.news.fragment.tab;
 
-import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.luck.picture.lib.PictureSelector;
+import com.luck.picture.lib.entity.LocalMedia;
 import com.orhanobut.logger.Logger;
-import com.wsq.library.tools.DialogTools;
-import com.wsq.library.tools.ToastUtils;
 import com.yc.wsq.app.news.R;
+import com.yc.wsq.app.news.activity.my.AboutActivity;
+import com.yc.wsq.app.news.activity.my.ApprenticeActivity;
+import com.yc.wsq.app.news.activity.my.CollectActivity;
+import com.yc.wsq.app.news.activity.my.DiscountActivity;
+import com.yc.wsq.app.news.activity.my.IntegralActivity;
+import com.yc.wsq.app.news.activity.my.InviteCodeActivity;
+import com.yc.wsq.app.news.activity.my.MemberUpgradeActivity;
+import com.yc.wsq.app.news.activity.my.QRcodeActivity;
+import com.yc.wsq.app.news.activity.my.feedback.HelpActivity;
+import com.yc.wsq.app.news.activity.my.setting.AccountSettingActivity;
+import com.yc.wsq.app.news.activity.my.setting.SettingActivity;
+import com.yc.wsq.app.news.activity.my.wallet.WalletActivity;
 import com.yc.wsq.app.news.base.BaseFragment;
 import com.yc.wsq.app.news.constant.ResponseKey;
 import com.yc.wsq.app.news.constant.Urls;
-import com.yc.wsq.app.news.fragment.my.IntegralFragment;
 import com.yc.wsq.app.news.mvp.presenter.UserPresenter;
 import com.yc.wsq.app.news.mvp.view.UserMainView;
 import com.yc.wsq.app.news.tools.ParamValidate;
 import com.yc.wsq.app.news.tools.ShareTools;
 import com.yc.wsq.app.news.tools.SharedTools;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import cn.sharesdk.tencent.qq.QQ;
-import cn.sharesdk.wechat.friends.Wechat;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * 我的页面
  */
 public class MyFragment extends BaseFragment<UserMainView, UserPresenter<UserMainView>> implements UserMainView{
 
-    public static final String TAG = MyFragment.class.getName();
-    public static final String  INTERFACE_WITHP = TAG+_INTERFACE_WITHP;
-    @BindView(R.id.iv_header) ImageView iv_header;
+
+    @BindView(R.id.iv_header) CircleImageView iv_header;
     @BindView(R.id.tv_userName) TextView tv_userName;
     @BindView(R.id.tv_vip_level) TextView tv_vip_level;
     @BindView(R.id.tv_total_money) TextView tv_total_money;
@@ -64,13 +75,18 @@ public class MyFragment extends BaseFragment<UserMainView, UserPresenter<UserMai
     protected void initView() {
 
 
-
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        onGetUserInfo();
+        onUserStatusChangeListener();
+    }
 
-
-    @OnClick({ R.id.ll_my_wallet, R.id.ll_integral, R.id.ll_member_upgrade,R.id.ll_invite,R.id.ll_generalize_code, R.id.ll_apprentice,
-            R.id.ll_about, R.id.ll_setting, R.id.ll_collect,  R.id.ll_discount, R.id.ll_help_feedback, R.id.ll_wechat, R.id.ll_qq, R.id.ll_qcode, R.id.tv_login})
+    @OnClick({ R.id.ll_my_wallet, R.id.ll_integral, R.id.ll_member_upgrade,R.id.ll_invite,R.id.ll_generalize_code,
+            R.id.ll_apprentice, R.id.ll_about, R.id.ll_setting, R.id.ll_collect,  R.id.ll_discount,
+            R.id.ll_help_feedback, R.id.ll_wechat, R.id.ll_qq, R.id.ll_qcode, R.id.tv_login, R.id.iv_header})
     public void onClick(View view){
         String uid = SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().user_id);
         String token = SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().token);
@@ -80,66 +96,72 @@ public class MyFragment extends BaseFragment<UserMainView, UserPresenter<UserMai
             }
         } catch (Exception e) {
             //用户信息为空，需要重新登录
-            mFunctionsManage.invokeFunction(INTERFACE_WITHP, 4);
+            onReLogin();
             e.printStackTrace();
             return;
         }
         switch (view.getId()){
-
+            case R.id.iv_header:
+//                List<LocalMedia> list = new ArrayList<>();
+//                LocalMedia media = new LocalMedia();
+//                media.setPath(Urls.HOST + SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().head_pic));
+//                list.add(media);
+//                PictureSelector.create(getActivity()).externalPicturePreview(0, list);
+                startActivity(new Intent(getActivity(), AccountSettingActivity.class));
+                break;
             case R.id.ll_my_wallet: //param =1;  我的钱包
-                mFunctionsManage.invokeFunction(INTERFACE_WITHP, 1);
+                startActivity(new Intent(getActivity(), WalletActivity.class));
                 break;
             case R.id.ll_integral:  //我的积分  param =2
-                mFunctionsManage.invokeFunction(INTERFACE_WITHP, 2);
+                startActivity(new Intent(getActivity(), IntegralActivity.class));
                 break;
             case R.id.ll_member_upgrade: //会员升级 param =3
-                mFunctionsManage.invokeFunction(INTERFACE_WITHP, 3);
+                startActivity(new Intent(getActivity(), MemberUpgradeActivity.class));
                 break;
             case R.id.tv_login:  //会员登录 param = 4
-                mFunctionsManage.invokeFunction(INTERFACE_WITHP, 4);
+                    onReLogin();
                 break;
             case R.id.ll_about: //关于  param = 5;
-                mFunctionsManage.invokeFunction(INTERFACE_WITHP, 5);
+                startActivity(new Intent(getActivity(), AboutActivity.class));
                 break;
             case R.id.ll_setting: //设置 param =6;
-                mFunctionsManage.invokeFunction(INTERFACE_WITHP, 6);
+                startActivity(new Intent(getActivity(), SettingActivity.class));
                 break;
             case R.id.ll_collect: //收藏 param =7;
-                mFunctionsManage.invokeFunction(INTERFACE_WITHP, 7);
+                startActivity(new Intent(getActivity(), CollectActivity.class));
                 break;
             case R.id.ll_invite: //输入邀请码  param =8
 
                 String inviteCode = SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().first_leader);
                 if (inviteCode.equals("0")) {
-                    mFunctionsManage.invokeFunction(INTERFACE_WITHP, 8);
+                    startActivity(new Intent(getActivity(), InviteCodeActivity.class));
                 }else {
                     onShowDialog("提示", "您已经填写了邀请码，不能再次修改了", null);
                 }
                 break;
             case R.id.ll_apprentice: //徒弟列表 param =9
-                mFunctionsManage.invokeFunction(INTERFACE_WITHP, 9);
+                startActivity(new Intent(getActivity(), ApprenticeActivity.class));
                 break;
             case R.id.ll_wechat_moments:
 
 
                 break;
             case R.id.ll_wechat:  //微信好友邀请
-                ShareTools.onShare(1, "www.baidu.com");
-//                mFunctionsManage.invokeFunction(INTERFACE_WITHP, 9);
-//                ShareTools.showShare(getActivity(), Wechat.NAME, "点一下，和我一起领10~15元现金！","","");
+                Logger.d("微信调用了");
+                ShareTools.onShare(5, "", "");
                 break;
             case R.id.ll_qq:  //QQ好友邀请
 //                mFunctionsManage.invokeFunction(INTERFACE_WITHP, 10);
 //                ShareTools.showShare(getActivity(), QQ.NAME, "点一下，和我一起领10~15元现金！","","");
                 break;
             case R.id.ll_qcode: //展示二维码 param =10
-                mFunctionsManage.invokeFunction(INTERFACE_WITHP, 10);
+                startActivity( new Intent(getActivity(), QRcodeActivity.class));
                 break;
             case R.id.ll_discount:  // 优惠券 param = 12;
-                mFunctionsManage.invokeFunction(INTERFACE_WITHP, 12);
+                startActivity( new Intent(getActivity(), DiscountActivity.class));
                 break;
             case R.id.ll_help_feedback: //帮助与反馈 param =13;
-                mFunctionsManage.invokeFunction(INTERFACE_WITHP, 13);
+                startActivity( new Intent(getActivity(), HelpActivity.class));
                 break;
             case R.id.ll_generalize_code:  //推广码
                 String generalize_code = SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().user_id);
@@ -188,7 +210,7 @@ public class MyFragment extends BaseFragment<UserMainView, UserPresenter<UserMai
     /**
      * 获取用户信息
      */
-    private void onGetUserInfo(){
+    public void onGetUserInfo(){
         Map<String, String> param = new HashMap<>();
 
         try {
@@ -217,9 +239,5 @@ public class MyFragment extends BaseFragment<UserMainView, UserPresenter<UserMai
     }
 
 
-    public void onUpdateData(){
-        onGetUserInfo();
-        onUserStatusChangeListener();
-    }
 
 }

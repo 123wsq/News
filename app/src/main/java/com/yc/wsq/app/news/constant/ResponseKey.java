@@ -43,11 +43,14 @@ public class ResponseKey {
      */
     public final String password = "password";
     public final String password2 = "password2";
+    public final String newpassword = "newpassword";
+    public final String newpassword2 = "newpassword2";
     public final String  keywords = "keywords";
     public final String  max_id = "max_id";
     public final String  min_id = "min_id";
     public final String article_id = "article_id";
     public final String id = "id";
+    public final String _id = "_id";
     /**
      * 验证码
      */
@@ -136,7 +139,9 @@ public class ResponseKey {
     public final String is_anonymous = "is_anonymous";
     public final String comment_id = "comment_id";
     public final String add_time = "add_time";
-
+    public final String name = "name";
+    public final String isRead = "isRead";
+    public final String sort_order = "sort_order";
 
     /**
      * ********************************************************************************************

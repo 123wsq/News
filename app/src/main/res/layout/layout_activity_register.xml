@@ -8,7 +8,14 @@
 
     <include layout="@layout/layout_public_titlebar"></include>
 
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_line_height"
+        android:background="@color/line_color"
+        android:layout_marginLeft="@dimen/default_padding_2"
+        android:layout_marginRight="@dimen/default_padding_2"
+        android:layout_marginTop="@dimen/default_height_2"
+        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/default_height_2"
@@ -16,7 +23,6 @@
         android:gravity="center_vertical"
         android:paddingLeft="@dimen/default_padding_2"
         android:paddingRight="@dimen/default_padding_2"
-        android:layout_marginTop="@dimen/default_height_2"
         android:background="@color/color_white"
         >
 
@@ -185,7 +191,7 @@
     <TextView
         android:id="@+id/tv_register"
         style="@style/default_button"
-        android:text="@string/str_register_text"
+        android:text="@string/str_submit_text"
         android:layout_marginTop="@dimen/default_height_1"
         />
 </LinearLayout>

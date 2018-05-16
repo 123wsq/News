@@ -14,6 +14,7 @@ import com.yc.wsq.app.news.mvp.model.inter.RequestHttpInter;
 import com.yc.wsq.app.news.mvp.model.inter.UserModelInter;
 import com.yc.wsq.app.news.mvp.view.BaseView;
 import com.yc.wsq.app.news.mvp.view.RechargeView;
+import com.yc.wsq.app.news.mvp.view.UpdateUserInfoView;
 import com.yc.wsq.app.news.mvp.view.UserMainView;
 import com.yc.wsq.app.news.mvp.view.UserRegisterView;
 import com.yc.wsq.app.news.mvp.view.UserView;
@@ -21,7 +22,10 @@ import com.yc.wsq.app.news.mvp.view.WithdrawView;
 import com.yc.wsq.app.news.tools.ParamValidate;
 import com.yc.wsq.app.news.tools.SharedTools;
 
+import java.io.File;
 import java.util.Map;
+
+import cn.sharesdk.framework.authorize.RegisterView;
 
 public class UserPresenter<T extends BaseView> extends BasePresenter<T> {
 
@@ -86,7 +90,7 @@ public class UserPresenter<T extends BaseView> extends BasePresenter<T> {
      */
     public void onUserLogOut(Map<String, String> param) throws Exception {
 
-        final UserView view = (UserView) getView();
+        final UpdateUserInfoView view = (UpdateUserInfoView) getView();
         if (view != null){
 
             if (view != null) {
@@ -95,7 +99,7 @@ public class UserPresenter<T extends BaseView> extends BasePresenter<T> {
                     @Override
                     public void onSuccess(Map<String, Object> data) {
                         if (view != null) {
-                            view.onResponseData(data);
+                            view.onUserLogOutResponseData(data);
                         }
                     }
 
@@ -824,6 +828,158 @@ public class UserPresenter<T extends BaseView> extends BasePresenter<T> {
                     if (view != null) {
                         view.dismissLoadding();
                     }
+                }
+            });
+        }
+
+    }
+
+    /**
+     * 修改用户信息返回
+     * @param param
+     * @throws Exception
+     */
+    public void onUpdateAccountInfo(Map<String, String> param) throws Exception{
+
+        final UpdateUserInfoView view = (UpdateUserInfoView) getView();
+
+        if(param.containsKey(ResponseKey.getInstace().password) && param.containsKey(ResponseKey.getInstace().newpassword)){
+            try {
+                ParamValidate.getInstance().onValidateUserPsd(param.get(ResponseKey.getInstace().password));
+                ParamValidate.getInstance().onValidateUserPsd(param.get(ResponseKey.getInstace().newpassword), param.get(ResponseKey.getInstace().newpassword2));
+            }catch (Exception e){
+                throw new Exception(e.getMessage());
+            }
+        }
+
+        param.remove(ResponseKey.getInstace().newpassword2);
+        if (view != null) {
+            String url = Urls.HOST +Urls.UPDATE_USER_INFO;
+            view.showLoadding();
+            requestHttp.onSendGet(url, param, new Callback<Map<String, Object>>() {
+                @Override
+                public void onSuccess(Map<String, Object> data) {
+                    if (view != null) {
+                        view.onUpdateUserResponseData(data);
+                    }
+                }
+
+                @Override
+                public void onFailure(String msg) {
+                    ToastUtils.onToast(msg);
+                }
+
+                @Override
+                public void onOutTime(String msg) {
+                    ToastUtils.onToast(msg);
+                    if (view != null)
+                        view.onReLogin();
+                }
+
+
+                @Override
+                public void onComplete() {
+
+                    if(view!= null)
+                      view.dismissLoadding();
+                }
+            });
+        }
+
+    }
+
+
+    /**
+     * 上传头像
+     * @throws Exception
+     */
+    public void onUploadUserHeader(String path, Map<String, String> param) throws Exception{
+
+        final UpdateUserInfoView view = (UpdateUserInfoView) getView();
+
+        File file = new File(path);
+        if (!file.exists()){
+            throw  new Exception("文件不存在");
+        }
+
+        if (view != null) {
+            String url = Urls.HOST +Urls.UPDATE_USER_INFO;
+            requestHttp.onUploadImage(url, file, ResponseKey.getInstace().head_pic, "image", param, new Callback<Map<String, Object>>() {
+                @Override
+                public void onSuccess(Map<String, Object> data) {
+                    if (view != null) {
+                        view.onUpdateUserResponseData(data);
+                    }
+                }
+
+                @Override
+                public void onFailure(String msg) {
+                    ToastUtils.onToast(msg);
+                }
+
+                @Override
+                public void onOutTime(String msg) {
+                    ToastUtils.onToast(msg);
+                    if (view != null)
+                        view.onReLogin();
+                }
+
+
+                @Override
+                public void onComplete() {
+
+                }
+            });
+        }
+
+    }
+
+    /**
+     * 忘记密码
+     * @param param
+     * @throws Exception
+     */
+    public void onForgetPassword( Map<String, String> param) throws Exception{
+
+        final UserRegisterView view = (UserRegisterView) getView();
+
+        try {
+            ParamValidate.getInstance().onValidateUserName(param.get(ResponseKey.getInstace().mobile));
+            ParamValidate.getInstance().onValidateUserPsd(param.get(ResponseKey.getInstace().password), param.get(ResponseKey.getInstace().password2));
+            ParamValidate.getInstance().onValidateCode(param.get(ResponseKey.getInstace().code));
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+        param.remove(ResponseKey.getInstace().password2);
+        if (view != null) {
+            view.showLoadding();
+            String url = Urls.HOST +Urls.FORGET_PASSWORD;
+            requestHttp.onSendGet(url,  param, new Callback<Map<String, Object>>() {
+                @Override
+                public void onSuccess(Map<String, Object> data) {
+                    if (view != null) {
+                        view.onRegisterData(data);
+                    }
+                }
+
+                @Override
+                public void onFailure(String msg) {
+                    ToastUtils.onToast(msg);
+                }
+
+                @Override
+                public void onOutTime(String msg) {
+                    ToastUtils.onToast(msg);
+                    if (view != null)
+                        view.onReLogin();
+                }
+
+
+                @Override
+                public void onComplete() {
+
+                    if (view!= null)
+                        view.dismissLoadding();
                 }
             });
         }

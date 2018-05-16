@@ -8,6 +8,37 @@ import java.util.Map;
 
 public interface NewsModelInter {
 
+
+    /**
+     * 获取本地新闻
+     * @return
+     * @throws Exception
+     */
+    Map<String, Object> onGetNativeNewsData(Map<String, String> param) throws Exception;
+
+    /**
+     * 获取本地新闻类型
+     * @return
+     * @throws Exception
+     */
+    Map<String, Object> onGetNativeNewsTypeData(Map<String, String> param) throws Exception;
+
+    /**
+     * 保存到本地新闻
+     * @return
+     * @throws Exception
+     */
+    void onSaveNativeNewsData(Map<String, String> param, Map<String, Object> resultData) throws Exception;
+
+    /**
+     * 保存本地新闻类型
+     * @return
+     * @throws Exception
+     */
+    void onSaveNativeNewsTypeData(Map<String, String> param, Map<String, Object> resultData) throws Exception;
+
+
+
     /**
      * 获取热门搜索
      * @param url

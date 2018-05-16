@@ -7,6 +7,13 @@
     >
     <include layout="@layout/layout_public_titlebar"></include>
 
+    <TextView
+        android:id="@+id/tv_not_data"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_height_2"
+        android:text="@string/str_not_data_text"
+        android:gravity="center"
+        />
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"

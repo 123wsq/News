@@ -12,6 +12,8 @@
             <option value="$PROJECT_DIR$/hipermission" />
             <option value="$PROJECT_DIR$/magicindicator" />
             <option value="$PROJECT_DIR$/pay" />
+            <option value="$PROJECT_DIR$/picture_library" />
+            <option value="$PROJECT_DIR$/ucrop" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

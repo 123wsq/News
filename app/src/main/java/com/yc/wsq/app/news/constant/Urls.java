@@ -151,4 +151,14 @@ public class Urls {
      * 获取文章评论列表
      */
     public static final String GET_ARTICLE_LIST = "topic/artCom";
+
+    /**
+     * 修改用户信息
+     */
+    public static final String UPDATE_USER_INFO = "user/edit";
+
+    /**
+     * 忘记密码
+     */
+    public static final String FORGET_PASSWORD = "api/mobile_user_code";
 }

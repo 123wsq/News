@@ -3,6 +3,7 @@ package com.yc.wsq.app.news.base;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.multidex.MultiDex;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatDelegate;
 
 
@@ -23,12 +24,17 @@ import com.yc.wsq.app.news.tools.SharedTools;
 
 import org.litepal.LitePalApplication;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * Created by wsq on 2018/1/6.
  */
 
 public class BaseApplication extends LitePalApplication {
+
+
 
     @Override
     public void onCreate() {
@@ -38,6 +44,7 @@ public class BaseApplication extends LitePalApplication {
         SharedTools.getInstance(this);
         Utils.init(this);
         MobSDK.init(this);
+
 
     }
 

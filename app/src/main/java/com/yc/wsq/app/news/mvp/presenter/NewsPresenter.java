@@ -1,8 +1,11 @@
 package com.yc.wsq.app.news.mvp.presenter;
 
-import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 
+import com.orhanobut.logger.Logger;
 import com.wsq.library.tools.ToastUtils;
+import com.yc.wsq.app.news.bean.CatTitleBean;
+import com.yc.wsq.app.news.bean.NewsBean;
 import com.yc.wsq.app.news.bean.SearchBean;
 import com.yc.wsq.app.news.constant.ResponseKey;
 import com.yc.wsq.app.news.constant.Urls;
@@ -13,12 +16,18 @@ import com.yc.wsq.app.news.mvp.model.inter.NewsModelInter;
 import com.yc.wsq.app.news.mvp.model.inter.RequestHttpInter;
 import com.yc.wsq.app.news.mvp.view.BaseView;
 import com.yc.wsq.app.news.mvp.view.CollectView;
+import com.yc.wsq.app.news.mvp.view.HomeNewsView;
 import com.yc.wsq.app.news.mvp.view.NewsDetailsView;
 import com.yc.wsq.app.news.mvp.view.NewsView;
 import com.yc.wsq.app.news.mvp.view.SearchView;
 import com.yc.wsq.app.news.mvp.view.UserView;
+import com.yc.wsq.app.news.tools.NetworkUtils;
 import com.yc.wsq.app.news.tools.ParamValidate;
 
+import org.litepal.crud.DataSupport;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,11 +41,61 @@ public class NewsPresenter<T extends BaseView> extends BasePresenter<T> {
         newsModel = new NewsModelImpl();
     }
 
+    public void onGetNewsList(final Map<String, String> param) throws Exception {
+        final NewsView view = (NewsView) getView();
+
+
+        if (view!= null){
+            if (!NetworkUtils.isNetworkAvailable(view.getContext())){
+
+                //首先将缓存的数据返回
+                view.onNewsResponse(newsModel.onGetNativeNewsData(param));
+            }else {
+                //开始获取网络数据
+                String url = Urls.HOST + Urls.GET_NEWS_LIST;
+                requestHttp.onSendPost(url, param, new Callback<Map<String, Object>>() {
+                    @Override
+                    public void onSuccess(Map<String, Object> data) {
+
+                        if (view != null) {
+                            try {
+                                newsModel.onSaveNativeNewsData(param, data);
+                                view.onNewsResponse(newsModel.onGetNativeNewsData(param));
+                            } catch (Exception e) {
+
+                                e.printStackTrace();
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(String msg) {
+                        ToastUtils.onToast(msg);
+                    }
+
+                    @Override
+                    public void onOutTime(String msg) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+            }
+        }
+
+    }
+
+
+
     /**
      * 获取新闻列表
      * @param param
      */
-    public void onGetNewsList(Map<String, String> param) throws Exception {
+    public void onGetNewsLists(Map<String, String> param) throws Exception {
 
         final NewsView view = (NewsView) getView();
         if (view != null) {
@@ -48,6 +107,24 @@ public class NewsPresenter<T extends BaseView> extends BasePresenter<T> {
                     @Override
                     public void onSuccess(Map<String, Object> data) {
                         if (view != null) {
+                            List<Map<String, Object>> list = (List<Map<String, Object>>) data.get(ResponseKey.getInstace().data);
+                            for (int i = 0; i < list.size(); i++) {
+                                Map<String, Object> map = list.get(i);
+                                int article_id = (int) map.get(ResponseKey.getInstace().article_id);
+                                int count = DataSupport.where(ResponseKey.getInstace().article_id+"=?", article_id+"").count(NewsBean.class);
+                                Logger.d(article_id+" 新闻个数："+count);
+                                if(count == 0 ){
+                                    NewsBean bean = new NewsBean();
+                                    bean.setArticle_id(article_id);
+                                    bean.setTitle(map.get(ResponseKey.getInstace().title)+"");
+                                    bean.setIs_recommend(map.get(ResponseKey.getInstace().is_recommend) +"");
+                                    bean.setClick( map.get(ResponseKey.getInstace().click) +"");
+                                    bean.setSource(map.get(ResponseKey.getInstace().source) +"");
+                                    bean.setThumb(map.get(ResponseKey.getInstace().thumb)+"");
+                                    bean.setIsRead(0+"");
+                                    bean.save();
+                                }
+                            }
                             view.onNewsResponse(data);
                         }
                     }
@@ -75,6 +152,8 @@ public class NewsPresenter<T extends BaseView> extends BasePresenter<T> {
             }
         }
     }
+
+
 
     /**
      * 新闻阅读加积分
@@ -126,12 +205,57 @@ public class NewsPresenter<T extends BaseView> extends BasePresenter<T> {
         }
     }
 
+    public void onGetNewsType(final Map<String, String> param) throws Exception{
+        final NewsView view = (NewsView) getView();
+
+        if(view != null){
+            //在没有网络的情况下读取本地数据
+            if (!NetworkUtils.isNetworkAvailable(view.getContext())){
+
+                view.onNewsTypeResponse(newsModel.onGetNativeNewsTypeData(param));
+            }else{
+                String url = Urls.HOST + Urls.GET_NEWS_TYPE;
+                requestHttp.onSendGet(url, param, new Callback<Map<String, Object>>() {
+                    @Override
+                    public void onSuccess(Map<String, Object> data) {
+                        if (view != null) {
+                            try {
+                                newsModel.onSaveNativeNewsTypeData(param, data);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            view.onNewsTypeResponse(data);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(String msg) {
+                        ToastUtils.onToast(msg);
+                    }
+
+                    @Override
+                    public void onOutTime(String msg) {
+                        ToastUtils.onToast(msg);
+                        if (view != null)
+                            view.onReLogin();
+                    }
+
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+            }
+        }
+    }
+
     /**
      * 获取新闻类型
      * @param param
      * @throws Exception
      */
-    public void onGetNewsType(Map<String, String> param) throws Exception{
+    public void onGetNewsTypes(Map<String, String> param) throws Exception{
         final NewsView view = (NewsView) getView();
         if (view != null) {
 

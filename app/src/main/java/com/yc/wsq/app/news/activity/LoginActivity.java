@@ -2,7 +2,6 @@ package com.yc.wsq.app.news.activity;
 
 import android.content.Intent;
 import android.graphics.Paint;
-import android.text.util.Linkify;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -11,7 +10,6 @@ import com.wsq.library.tools.ToastUtils;
 import com.yc.wsq.app.news.R;
 import com.yc.wsq.app.news.base.BaseActivity;
 import com.yc.wsq.app.news.constant.ResponseKey;
-import com.yc.wsq.app.news.mvp.presenter.BasePresenter;
 import com.yc.wsq.app.news.mvp.presenter.UserPresenter;
 import com.yc.wsq.app.news.mvp.view.UserView;
 import com.yc.wsq.app.news.tools.SharedTools;
@@ -48,7 +46,7 @@ public class LoginActivity extends BaseActivity<UserView, UserPresenter<UserView
         tv_no_account_register.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
     }
 
-    @OnClick({R.id.ll_back, R.id.tv_login, R.id.tv_no_account_register})
+    @OnClick({R.id.ll_back, R.id.tv_login, R.id.tv_no_account_register, R.id.tv_forget_password})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.ll_back:
@@ -68,6 +66,9 @@ public class LoginActivity extends BaseActivity<UserView, UserPresenter<UserView
             case R.id.tv_no_account_register:
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
                 break;
+            case R.id.tv_forget_password:
+                startActivity(new Intent(LoginActivity.this, ForgetPasswordActivity.class));
+                break;
         }
     }
 
@@ -86,17 +87,7 @@ public class LoginActivity extends BaseActivity<UserView, UserPresenter<UserView
                 shared.onPutData(entry.getKey(), entry.getValue()+"");
             }
 
-//            shared.onPutData(ResponseKey.getInstace().user_id,data.get(ResponseKey.getInstace().user_id)+"");
-//            shared.onPutData(ResponseKey.getInstace().paypwd,data.get(ResponseKey.getInstace().paypwd)+"");
-//            shared.onPutData(ResponseKey.getInstace().user_money,data.get(ResponseKey.getInstace().user_money)+"");
-//            shared.onPutData(ResponseKey.getInstace().mobile,data.get(ResponseKey.getInstace().mobile)+"");
-//            shared.onPutData(ResponseKey.getInstace().head_pic,data.get(ResponseKey.getInstace().head_pic)+"");
-//            shared.onPutData(ResponseKey.getInstace().nickname,data.get(ResponseKey.getInstace().nickname)+"");
-//            shared.onPutData(ResponseKey.getInstace().total_amount,data.get(ResponseKey.getInstace().total_amount)+"");
-//            shared.onPutData(ResponseKey.getInstace().token,data.get(ResponseKey.getInstace().token)+"");
-//            shared.onPutData(ResponseKey.getInstace().is_vip,data.get(ResponseKey.getInstace().is_vip)+"");
-//            shared.onPutData(ResponseKey.getInstace().level_name,data.get(ResponseKey.getInstace().level_name)+"");
-            setResult(MainActivity.LOGIN_REQUEST_CODE);
+
             finish();
 
     }

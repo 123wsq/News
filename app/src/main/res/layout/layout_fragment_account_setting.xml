@@ -58,6 +58,29 @@
             />
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/ll_setting_login_password"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_height_3"
+        android:background="@color/color_white"
+        android:paddingLeft="@dimen/default_padding_2"
+        android:paddingRight="@dimen/default_padding_2"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/default_margin_4"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="@string/str_setting_login_text"
+            android:gravity="center_vertical"
+            />
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/image_right"
+            />
+    </LinearLayout>
+    <LinearLayout
         android:id="@+id/ll_setting_withdraw_account"
         android:layout_width="match_parent"
         android:layout_height="@dimen/default_height_3"
@@ -146,9 +169,10 @@
             android:text="@string/str_header_text"
             android:gravity="center_vertical"
             />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_header"
+            android:layout_width="@dimen/default_height_3"
+            android:layout_height="@dimen/default_height_3"
             android:layout_marginRight="@dimen/default_margin_2"
             />
         <ImageView
@@ -204,6 +228,7 @@
             android:gravity="center_vertical"
             />
         <TextView
+            android:id="@+id/tv_birthday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/default_margin_2"
@@ -215,6 +240,7 @@
             />
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/ll_selector_sex"
         android:layout_width="match_parent"
         android:layout_height="@dimen/default_height_2"
         android:background="@color/color_white"
@@ -236,36 +262,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="保密"
-            android:visibility="gone"
+            android:visibility="visible"
             />
-        <RadioGroup
-            android:id="@+id/rg_sex"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_marginRight="@dimen/default_margin_3"
-            android:gravity="center"
-            android:visibility="gone"
-            >
-
-            <RadioButton
-                android:id="@+id/rb_sex_boy"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="@string/str_sex_boy_text"
-                android:textColor="@color/default_color_gray_1"
-                />
-            <RadioButton
-                android:id="@+id/rb_sex_lady"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="@string/str_sex_lady_text"
-                android:textColor="@color/default_color_gray_1"
-                />
-        </RadioGroup>
-
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@mipmap/image_right"
+            />
     </LinearLayout>
 
 

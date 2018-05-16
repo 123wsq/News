@@ -1,5 +1,6 @@
 package com.yc.wsq.app.news.fragment.tab;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.ContextCompat;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.orhanobut.logger.Logger;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
@@ -19,6 +21,7 @@ import com.wsq.library.tools.ToastUtils;
 import com.wsq.library.utils.DateUtil;
 import com.wsq.library.utils.DensityUtil;
 import com.yc.wsq.app.news.R;
+import com.yc.wsq.app.news.activity.benefit.BenefitDetailsActivity;
 import com.yc.wsq.app.news.adapter.BenefitAdapter;
 import com.yc.wsq.app.news.adapter.BenefitAmountAdapter;
 import com.yc.wsq.app.news.adapter.NewsAdapter;
@@ -44,8 +47,6 @@ import butterknife.BindView;
  */
 public class BenefitFragment extends BaseFragment<BenefitView, BenefitPresenter<BenefitView>> implements BenefitView{
 
-    public static final String TAG = BenefitFragment.class.getName();
-    public static final String INTERFACE_WITHP = TAG + _INTERFACE_WITHP;
 
     @BindView(R.id.tv_title)TextView tv_title;
     @BindView(R.id.ll_back)LinearLayout ll_back;
@@ -111,7 +112,8 @@ public class BenefitFragment extends BaseFragment<BenefitView, BenefitPresenter<
         mAdapter = new BenefitAdapter(getActivity(), mData, listener);
         rv_RecyclerView.setAdapter(mAdapter);
 
-
+        onStartRequest();
+        handler.postDelayed(runnable, 0);
 
     }
 
@@ -140,7 +142,9 @@ public class BenefitFragment extends BaseFragment<BenefitView, BenefitPresenter<
         @Override
         public void onRecyclerItemClickListener(View view, int i) {
 
-            mFunctionsManage.invokeFunction(INTERFACE_WITHP, mData.get(i).get(ResponseKey.getInstace().id)+"");
+            Intent intent = new Intent(getActivity(), BenefitDetailsActivity.class);
+            intent.putExtra(ResponseKey.getInstace().id,  mData.get(i).get(ResponseKey.getInstace().id)+"");
+            startActivity(intent);
         }
 
         @Override
@@ -153,7 +157,14 @@ public class BenefitFragment extends BaseFragment<BenefitView, BenefitPresenter<
     public void onBenefitResponse(Map<String, Object> result) {
         String amount =(String) result.get(ResponseKey.getInstace().sum);
 
-            onBenefitAmount(amount);
+            String zero = "";
+            if(amount.length() < 10){
+
+                for (int i = 0; i < 10-amount.length(); i++) {
+                    zero += "0";
+                }
+            }
+            onBenefitAmount(zero+amount);
 
 
 
@@ -161,8 +172,8 @@ public class BenefitFragment extends BaseFragment<BenefitView, BenefitPresenter<
             if (refreshState ==1){
                 mData.addAll(0, list);
             }else{
-                mData.addAll(list);
-            }
+            mData.addAll(list);
+        }
             onResetRefreshState();
             mAdapter.notifyDataSetChanged();
     }
@@ -213,13 +224,6 @@ public class BenefitFragment extends BaseFragment<BenefitView, BenefitPresenter<
         handler.removeCallbacks(runnable);
     }
 
-    public void onUpdateData(){
-
-        mData.clear();
-        onStartRequest();
-        handler.postDelayed(runnable, 0);
-    }
-
 
     private void onBenefitAmount(String amount){
 
@@ -244,6 +248,7 @@ public class BenefitFragment extends BaseFragment<BenefitView, BenefitPresenter<
         }
 
         List<AmountBean> list2 = new ArrayList<>();
+        list2.add(new AmountBean());
         for (int i = list.size()-1; i >=0 ; i--) {
 
             list2.add(list.get(i));
@@ -253,5 +258,6 @@ public class BenefitFragment extends BaseFragment<BenefitView, BenefitPresenter<
         mAmountData.addAll(list2);
         mAmountAdapter.notifyDataSetChanged();
     }
+
 
 }

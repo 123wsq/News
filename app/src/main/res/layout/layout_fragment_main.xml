@@ -6,7 +6,7 @@
     android:background="@color/default_backgroud_color"
     >
 
-    <com.yc.wsq.app.news.views.CustomViewPager
+    <android.support.v4.view.ViewPager
         android:id="@+id/vp_ViewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"

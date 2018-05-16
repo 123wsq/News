@@ -1,5 +1,6 @@
 package com.yc.wsq.app.news.activity;
 
+import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.EditText;

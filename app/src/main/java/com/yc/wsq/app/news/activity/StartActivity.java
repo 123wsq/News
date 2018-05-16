@@ -3,15 +3,12 @@ package com.yc.wsq.app.news.activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
-import android.widget.ImageView;
 
 import com.yc.wsq.app.news.R;
 import com.yc.wsq.app.news.base.BaseActivity;
 import com.yc.wsq.app.news.constant.Constant;
 import com.yc.wsq.app.news.mvp.presenter.BasePresenter;
 import com.yc.wsq.app.news.tools.SharedTools;
-
-import butterknife.BindView;
 
 public class StartActivity extends BaseActivity{
 

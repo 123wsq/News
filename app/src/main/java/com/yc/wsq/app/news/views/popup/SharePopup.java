@@ -21,9 +21,7 @@ import com.yc.wsq.app.news.tools.ShareTools;
 import com.yc.wsq.app.news.tools.SharedTools;
 
 import cn.sharesdk.tencent.qq.QQ;
-import cn.sharesdk.tencent.qzone.QZone;
 import cn.sharesdk.wechat.friends.Wechat;
-import cn.sharesdk.wechat.moments.WechatMoments;
 
 public class SharePopup extends PopupWindow implements View.OnClickListener {
 

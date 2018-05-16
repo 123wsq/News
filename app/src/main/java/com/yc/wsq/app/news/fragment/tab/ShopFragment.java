@@ -31,8 +31,7 @@ import butterknife.OnClick;
  */
 public class ShopFragment extends BaseFragment<ShopView, ShopPresenter<ShopView>> implements ShopView{
 
-    public static final String TAG = ShopFragment.class.getName();
-    public static final String INTERFACE_NRNP = TAG + _INTERFACE_NPNR;
+
     @BindView(R.id.tv_title)TextView tv_title;
     @BindView(R.id.ll_back)LinearLayout ll_back;
     @BindView(R.id.wv_WebView)
@@ -54,6 +53,7 @@ public class ShopFragment extends BaseFragment<ShopView, ShopPresenter<ShopView>
     protected void initView() {
 
         tv_title.setText(getResources().getString(R.string.str_shop_text));
+        ll_back.setVisibility(View.GONE);
         onInitWebView();
     }
 
@@ -95,19 +95,14 @@ public class ShopFragment extends BaseFragment<ShopView, ShopPresenter<ShopView>
         });
         wv_WebView.addJavascriptInterface(new AndroidObject(), "nativeMethod");
 //        synCookies(articleUrl);
-//        wv_WebView.loadUrl(articleUrl);
+        wv_WebView.loadUrl(articleUrl);
     }
 
     @OnClick({R.id.ll_back})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.ll_back:
-                if (mFunctionsManage != null) {
-                    mFunctionsManage.invokeFunction(INTERFACE_NRNP);
-//                    wv_WebView.canGoBack();
-                }else {
-                    Logger.d("mFunctionsManage == null");
-                }
+
                 break;
         }
     }
@@ -150,12 +145,6 @@ public class ShopFragment extends BaseFragment<ShopView, ShopPresenter<ShopView>
             onReLogin();
         }
 
-    }
-
-    public void onUpdateData(){
-
-        wv_WebView.removeAllViews();
-        wv_WebView.loadUrl(articleUrl);
     }
 
 }

@@ -31,7 +31,8 @@ public class CalendarPopup extends PopupWindow{
     private View popupView;
     private LinearLayout ll_calendar, ll_timer;
     private WheelView wv_year, wv_month, wv_day, wv_hour, wv_minute;
-    private TextView tv_popup_title, tv_cancel;
+    private TextView tv_popup_title, tv_cancel, tv_ok;
+
 
     public static final  int type_all = 0;
     public static final  int type_calendar = 1;
@@ -140,6 +141,8 @@ public class CalendarPopup extends PopupWindow{
         wv_minute = popupView.findViewById(R.id.wv_minute);
         tv_popup_title = popupView.findViewById(R.id.tv_popup_title);
         tv_cancel = popupView.findViewById(R.id.tv_cancel);
+        tv_ok = popupView.findViewById(R.id.tv_ok);
+
 
         if(type == type_all){
             ll_timer.setVisibility(View.VISIBLE);
@@ -185,6 +188,14 @@ public class CalendarPopup extends PopupWindow{
                 curMinute = mListMinute.get(index);
             }
         });
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mCallBack!= null)
+                mCallBack.onCallBack(curYear, curMonth, curDay, curHour, curMinute);
+                dismiss();
+            }
+        });
         tv_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -221,7 +232,6 @@ public class CalendarPopup extends PopupWindow{
         curMinute = mCalendar.get(Calendar.MINUTE);
 
 
-        Logger.d("当前时间： year="+curYear+", month="+curMonth+", day=" +curDay+", hour="+curHour+", minute="+curMinute);
     }
 
     /**

@@ -10,6 +10,7 @@ import com.yc.wsq.app.news.okhttp.CallBackUtil;
 import com.yc.wsq.app.news.okhttp.OkhttpUtil;
 import com.yc.wsq.app.news.tools.ParamFormat;
 
+import java.io.File;
 import java.util.Map;
 
 import okhttp3.Call;
@@ -82,6 +83,48 @@ public class RequestHttpImpl implements RequestHttpInter{
                 Logger.d("Response  "+s);
                 try {
                     Map<String, Object> result = ParamFormat.onAllJsonToMap(s);
+                    int status = (int) result.get(ResponseKey.getInstace().rsp_status);
+                    switch (status){
+                        case -1:
+                            callback.onFailure(result.get(ResponseKey.getInstace().rsp_msg)+"");
+                            break;
+                        case 0:
+                            callback.onOutTime(result.get(ResponseKey.getInstace().rsp_msg)+"");
+                            break;
+                        case 1:
+                            callback.onSuccess(result);
+                            break;
+                        default:
+
+                            break;
+                    }
+
+                } catch (Exception e) {
+                    callback.onFailure("错误的数据格式");
+                    e.printStackTrace();
+                }
+                callback.onComplete();
+            }
+        });
+    }
+
+    @Override
+    public void onUploadImage(String url, File file, String fileKey, String fileType, Map<String, String> param, final Callback<Map<String, Object>> callback) throws Exception {
+
+        Logger.d("请求地址:" + url+", fileKey:"+ fileKey +", fileType: "+fileType);
+
+        OkhttpUtil.okHttpUploadFile(url,file, fileKey, fileType, param, new CallBackUtil.CallBackString(){
+            @Override
+            public void onFailure(Call call, Exception e) {
+                callback.onFailure("请求失败");
+                callback.onComplete();
+            }
+
+            @Override
+            public void onResponse(String response) {
+                Logger.d("Response  "+response);
+                try {
+                    Map<String, Object> result = ParamFormat.onAllJsonToMap(response);
                     int status = (int) result.get(ResponseKey.getInstace().rsp_status);
                     switch (status){
                         case -1:

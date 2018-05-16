@@ -48,6 +48,15 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
 
         Map<String, Object> map = mData.get(position);
         holder.tv_title.setText(map.get(ResponseKey.getInstace().title)+"");
+
+        String isRead = map.get(ResponseKey.getInstace().isRead)+"";
+
+        if(isRead.equals("0")){
+            holder.tv_title.setTextColor(mContext.getResources().getColor(R.color.default_main_font_color));
+        }else{
+            holder.tv_title.setTextColor(mContext.getResources().getColor(R.color.default_color_gray_2));
+        }
+
         String recommend = map.get(ResponseKey.getInstace().is_recommend)+"";
 
         if (recommend.equals("1")){
@@ -65,9 +74,16 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
             for (int i = 0; i < jsona.length(); i++) {
                 imgs[i] = jsona.get(i)+"";
             }
-            Glide.with(mContext).load(Urls.HOST+imgs[0]).into(holder.iv_image_1);
-            Glide.with(mContext).load(Urls.HOST+imgs[1]).into(holder.iv_image_2);
-            Glide.with(mContext).load(Urls.HOST+imgs[2]).into(holder.iv_image_3);
+            if(imgs.length ==3) {
+                Glide.with(mContext).load(Urls.HOST + imgs[0]).into(holder.iv_image_1);
+                Glide.with(mContext).load(Urls.HOST + imgs[1]).into(holder.iv_image_2);
+                Glide.with(mContext).load(Urls.HOST + imgs[2]).into(holder.iv_image_3);
+            }else if(imgs.length == 2){
+                Glide.with(mContext).load(Urls.HOST + imgs[0]).into(holder.iv_image_1);
+                Glide.with(mContext).load(Urls.HOST + imgs[1]).into(holder.iv_image_2);
+            }else if(imgs.length ==1){
+                Glide.with(mContext).load(Urls.HOST + imgs[0]).into(holder.iv_image_1);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -115,6 +131,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
                 case R.id.ll_news_item:
                     if (mOnTitleItemListener != null) {
                         mOnTitleItemListener.onRecyclerItemClickListener(null, getPosition());
+                        mData.get(getPosition()).put(ResponseKey.getInstace().isRead, 1+"");
+                        notifyDataSetChanged();
                     }
                     break;
             }

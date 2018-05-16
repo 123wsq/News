@@ -72,12 +72,20 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/default_height_3"
             android:background="@color/color_white"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
             >
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_RecyclerView_title"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="match_parent"/>
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@mipmap/image_right"
+                />
         </LinearLayout>
         <View
             android:layout_width="match_parent"

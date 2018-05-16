@@ -2,10 +2,12 @@
 <litepal>
     <dbname value="SearchRecord.db" ></dbname>
 
-    <version value="1" ></version>
+    <version value="4" ></version>
 
     <list> <!--这里是类映射-->
         <mapping class="com.yc.wsq.app.news.bean.SearchBean"></mapping>
+        <mapping class="com.yc.wsq.app.news.bean.NewsBean"></mapping>
+        <mapping class="com.yc.wsq.app.news.bean.CatTitleBean"></mapping>
 
     </list>
 </litepal>

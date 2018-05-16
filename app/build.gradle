@@ -53,23 +53,43 @@ dependencies {
     implementation 'com.orhanobut:logger:1.15'
     implementation project(':magicindicator')
     //    implementation 'me.weyye.hipermission:library:1.0.7'
-    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.7'
+    //    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.7'
     implementation 'com.contrarywind:Android-PickerView:4.1.3'
     implementation project(':pay')
     implementation 'com.mylhyl:zxingscanner:2.1.0'
-    //    apply plugin: 'com.mob.sdk'
+        apply plugin: 'com.mob.sdk'
     implementation project(':hipermission')
     implementation files('libs/AMap_Location_V4.0.1_20180426.jar')
     //侧滑菜单
     implementation 'com.yanzhenjie:recyclerview-swipe:1.1.4'
-    implementation files('libs/MobCommons-2018.0308.1404.jar')
-    implementation files('libs/MobTools-2018.0307.2123.jar')
-    implementation files('libs/ShareSDK-Core-3.1.4.jar')
-    implementation files('libs/ShareSDK-QQ-3.1.4.jar')
-    implementation files('libs/ShareSDK-QZone-3.1.4.jar')
-    implementation files('libs/ShareSDK-Wechat-3.1.4.jar')
-    implementation files('libs/ShareSDK-Wechat-Core-3.1.4.jar')
-    implementation files('libs/ShareSDK-Wechat-Moments-3.1.4.jar')
+
+    implementation project(':picture_library')
+    implementation project(':ucrop')
+    //圆形图
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+    //微信授权
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
 }
 
+MobSDK {
+    appKey "259cb7380f4a4"
+    appSecret "1e0371d192e2b4bbea103a80041df064"
 
+    ShareSDK {
+        //平台配置信息
+        devInfo {
+
+            Wechat {
+                appId "wx3b400edca6813668"
+                appSecret "232a199e1113b4e003654627aedc61bd"
+            }
+            QQ {
+                appId "100371282"
+                appKey "aed9b0303e3ed1e27bae87c33761161d"
+            }
+
+        }
+    }
+
+
+}

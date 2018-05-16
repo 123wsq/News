@@ -24,13 +24,19 @@ import com.wsq.library.tools.ToastUtils;
 import com.wsq.library.utils.DensityUtil;
 import com.yc.wsq.app.news.R;
 import com.yc.wsq.app.news.activity.QRcodeScanActivity;
+import com.yc.wsq.app.news.activity.news.NewsDetailsActivity;
+import com.yc.wsq.app.news.activity.news.SearchActivity;
 import com.yc.wsq.app.news.adapter.NewsAdapter;
 import com.yc.wsq.app.news.adapter.TitleAdapter;
 import com.yc.wsq.app.news.base.BaseFragment;
+import com.yc.wsq.app.news.bean.NewsBean;
 import com.yc.wsq.app.news.constant.ResponseKey;
 import com.yc.wsq.app.news.mvp.presenter.NewsPresenter;
+import com.yc.wsq.app.news.mvp.view.HomeNewsView;
 import com.yc.wsq.app.news.mvp.view.NewsView;
 import com.yc.wsq.app.news.tools.SharedTools;
+
+import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,9 +54,6 @@ import me.weyye.hipermission.PermissionItem;
  */
 public class HomeFragment extends BaseFragment<NewsView, NewsPresenter<NewsView>> implements NewsView{
 
-    public static final String TAG =  HomeFragment.class.getName();
-    public static final String INTERFACE_WITHP = TAG+ _INTERFACE_WITHP;
-    public static final String INTERFACE_WITHPS = TAG+ _INTERFACE_WITHP+"_STRING";
 
     @BindView(R.id.rv_RecyclerView_title)
     RecyclerView rv_RecyclerView_title;
@@ -64,7 +67,8 @@ public class HomeFragment extends BaseFragment<NewsView, NewsPresenter<NewsView>
     private NewsAdapter mNewsAdapter;
     private List<Map<String, Object>> mNewsData;
     private int refreshState = 0;  //0 正常  1 刷新  2 加载
-    private String cat_id="";
+    private String cat_id="0";
+    private String oldCat_id = "";
     private String curCity;
 
     //声明AMapLocationClient类对象
@@ -90,7 +94,11 @@ public class HomeFragment extends BaseFragment<NewsView, NewsPresenter<NewsView>
 
         onInitRecyclerView();
         onInitRefreshLayout();
+
+//        List<NewsBean> list = DataSupport.findAll(NewsBean.class);
+//        Logger.d("缓存的新闻："+list.size());
         onUpdateData();
+
     }
 
     private void onStartRequest(){
@@ -108,7 +116,7 @@ public class HomeFragment extends BaseFragment<NewsView, NewsPresenter<NewsView>
             ipresenter.onGetNewsList(param);
 
         } catch (Exception e) {
-            ToastUtils.onToast(e.getMessage());
+//            ToastUtils.onToast(e.getMessage());
             onResetRefreshState();
             e.printStackTrace();
         }
@@ -216,11 +224,13 @@ public class HomeFragment extends BaseFragment<NewsView, NewsPresenter<NewsView>
         @Override
         public void onRecyclerItemClickListener(View view, int i) {
 
-            cat_id = mTitleData.get(i).get(ResponseKey.getInstace().cat_id)+"";
+            oldCat_id = cat_id;
 
+            cat_id = mTitleData.get(i).get(ResponseKey.getInstace().cat_id)+"";
             refreshState = 3;
             mNewsData.clear();
             onStartRequest();
+            rv_RecyclerView_content.scrollToPosition(0);
         }
 
         @Override
@@ -233,8 +243,10 @@ public class HomeFragment extends BaseFragment<NewsView, NewsPresenter<NewsView>
         @Override
         public void onRecyclerItemClickListener(View view, int position) {
 
-            mFunctionsManage.invokeFunction(INTERFACE_WITHPS, mNewsData.get(position).get(ResponseKey.getInstace().article_id)+"",
-                    mNewsData.get(position).get(ResponseKey.getInstace().title)+"");
+            Intent intent = new Intent(getActivity(), NewsDetailsActivity.class);
+            intent.putExtra(ResponseKey.getInstace().article_id, mNewsData.get(position).get(ResponseKey.getInstace().article_id)+"");
+            intent.putExtra(ResponseKey.getInstace().title, mNewsData.get(position).get(ResponseKey.getInstace().title)+"");
+            startActivity(intent);
         }
 
         @Override
@@ -243,11 +255,12 @@ public class HomeFragment extends BaseFragment<NewsView, NewsPresenter<NewsView>
         }
     };
 
+
     @OnClick({R.id.ll_search, R.id.iv_qcode_scan})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.ll_search: //搜索 param= -1
-                mFunctionsManage.invokeFunction(INTERFACE_WITHP, -1);
+               startActivity(new Intent(getActivity(), SearchActivity.class));
                 break;
             case R.id.iv_qcode_scan:
 
@@ -358,4 +371,6 @@ public class HomeFragment extends BaseFragment<NewsView, NewsPresenter<NewsView>
         onGetNewsType();
         onRequestPermission();
     }
+
+
 }

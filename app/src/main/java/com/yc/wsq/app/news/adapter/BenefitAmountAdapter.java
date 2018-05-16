@@ -22,7 +22,6 @@ public class BenefitAmountAdapter extends RecyclerView.Adapter<BenefitAmountAdap
     private int[] drawableId= {R.mipmap.image_0, R.mipmap.image_1, R.mipmap.image_2, R.mipmap.image_3, R.mipmap.image_4, R.mipmap.image_5, R.mipmap.image_6, R.mipmap.image_7, R.mipmap.image_8, R.mipmap.image_9};
     private Context mContext;
     private List<AmountBean> mData;
-    private int selectPosition = 0;
 
     public BenefitAmountAdapter(Context context, List<AmountBean> list){
         this.mContext = context;
@@ -39,12 +38,19 @@ public class BenefitAmountAdapter extends RecyclerView.Adapter<BenefitAmountAdap
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        AmountBean bean = mData.get(position);
-        holder.iv_benefit_amount.setVisibility(bean.isIsnum() ? View.VISIBLE :View.GONE);
-        holder.iv_comma.setVisibility(bean.isIsnum() ? View.GONE : View.VISIBLE);
-        if (bean.isIsnum()){
-            holder.iv_benefit_amount.setImageResource(drawableId[bean.getNum()]);
+
+        if(position ==0){
+            holder.iv_money.setImageResource(R.mipmap.image_money);
+            holder.iv_money.setVisibility(View.VISIBLE);
+        }else{
+            AmountBean bean = mData.get(position);
+            holder.iv_benefit_amount.setVisibility(bean.isIsnum() ? View.VISIBLE :View.GONE);
+            holder.iv_comma.setVisibility(bean.isIsnum() ? View.GONE : View.VISIBLE);
+            if (bean.isIsnum()){
+                holder.iv_benefit_amount.setImageResource(drawableId[bean.getNum()]);
+            }
         }
+
     }
 
     @Override
@@ -57,11 +63,12 @@ public class BenefitAmountAdapter extends RecyclerView.Adapter<BenefitAmountAdap
 
         private ImageView iv_benefit_amount;
         private ImageView iv_comma;
-
+        private ImageView iv_money;
         public ViewHolder(View itemView) {
             super(itemView);
             iv_benefit_amount = itemView.findViewById(R.id.iv_benefit_amount);
             iv_comma = itemView.findViewById(R.id.iv_comma);
+            iv_money = itemView.findViewById(R.id.iv_money);
         }
 
 

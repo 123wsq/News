@@ -22,29 +22,38 @@
         </activity>
         <activity android:name=".activity.WellcomeActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.LoginActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.MainActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.RegisterActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.QRcodeScanActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.ForgetPasswordActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.news.NewsDetailsActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.news.ArticleCommentActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.news.SearchActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.news.SearchResultActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.benefit.BenefitDetailsActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.my.feedback.FeedBackActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.my.feedback.HelpActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.my.setting.AccountCreditedActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.my.wallet.ValidateAccountActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.my.setting.UpdatePasswordActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.my.setting.AccountSettingActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.my.setting.SettingActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.my.wallet.WalletActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.my.wallet.TradeRecordActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.my.wallet.RechargeActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.my.AboutActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.my.ApprenticeActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.my.CollectActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.my.CommentActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.my.DiscountActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.my.IntegralActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.my.InviteCodeActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.my.MemberUpgradeActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.my.wallet.WithdrawActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.MainActivity" android:screenOrientation="portrait" android:launchMode="singleTask"></activity>
 
         <service android:name="com.amap.api.location.APSService"></service>
 
-        <!-- ShareSDK的activity -->
-        <activity
-            android:name="com.mob.tools.MobUIShell"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="stateHidden|adjustResize">
-        </activity>
 
-        <activity android:name="com.yc.wsq.app.news.wxapi.WXEntryActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            />
-
-        <meta-data android:name="Mob-AppKey" android:value="259cb7380f4a4"/>
-        <meta-data android:name="Mob-AppSecret" android:value="1e0371d192e2b4bbea103a80041df064"/>
         <meta-data android:name="com.amap.api.v2.apikey" android:value="9d9ba0a667ab856bde6d0c1e4a62025d">
 
         </meta-data>

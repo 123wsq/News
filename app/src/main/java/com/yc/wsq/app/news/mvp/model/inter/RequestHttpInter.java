@@ -17,7 +17,6 @@ public interface RequestHttpInter {
      */
     void onSendGet(String url, Map<String, String> param, Callback<Map<String, Object>> callback) throws Exception;
 
-
     /**
      * 发送Post请求
      * @param url

@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 
 import com.wsq.library.tools.ToastUtils;
+import com.wsq.library.utils.AppManager;
+import com.wsq.library.utils.Utils;
 import com.yc.wsq.app.news.constant.Constant;
 import com.yc.wsq.app.news.constant.ResponseKey;
 import com.yc.wsq.app.news.constant.Urls;
@@ -15,6 +17,7 @@ import com.yc.wsq.app.news.mvp.model.inter.UserModelInter;
 import com.yc.wsq.app.news.mvp.view.BaseView;
 import com.yc.wsq.app.news.mvp.view.RechargeView;
 import com.yc.wsq.app.news.mvp.view.UpdateUserInfoView;
+import com.yc.wsq.app.news.mvp.view.UserLoginView;
 import com.yc.wsq.app.news.mvp.view.UserMainView;
 import com.yc.wsq.app.news.mvp.view.UserRegisterView;
 import com.yc.wsq.app.news.mvp.view.UserView;
@@ -41,7 +44,7 @@ public class UserPresenter<T extends BaseView> extends BasePresenter<T> {
      */
     public void onUserLogin(Map<String, String> param) throws Exception {
 
-        final UserView view = (UserView) getView();
+        final UserLoginView view = (UserLoginView) getView();
         if (view != null){
             //参数验证
             try {
@@ -82,6 +85,49 @@ public class UserPresenter<T extends BaseView> extends BasePresenter<T> {
             }
         }
     }
+
+    public void onCheckIMEI(Map<String, String> param) throws Exception{
+        final UserLoginView view = (UserLoginView) getView();
+        if(view != null){
+            try {
+                ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().unionid));
+                ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().openid));
+                ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().nickname));
+                ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().headimgurl));
+                ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().imei));
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+//            view.showLoadding();
+            String url = Urls.HOST + Urls.CHECK_IEME;
+            requestHttp.onSendGet(url, param, new Callback<Map<String, Object>>() {
+                @Override
+                public void onSuccess(Map<String, Object> data) {
+                    if(view !=null)
+                    view.onCheckIMEIResponseData(data);
+                }
+
+                @Override
+                public void onFailure(String msg) {
+                    ToastUtils.onToast(msg);
+                }
+
+                @Override
+                public void onOutTime(String msg) {
+
+                }
+
+                @Override
+                public void onComplete() {
+//                    if(view !=null)
+//                        view.dismissLoadding();
+                }
+            });
+        }
+    }
+
 
     /**
      * 用户登出
@@ -304,9 +350,9 @@ public class UserPresenter<T extends BaseView> extends BasePresenter<T> {
 
                 @Override
                 public void onOutTime(String msg) {
-                    ToastUtils.onToast(msg);
-                    if (url != null)
-                        userView.onReLogin();
+//                    ToastUtils.onToast(msg);
+//                    if (url != null)
+//                        userView.onReLogin();
 
                 }
 

@@ -6,6 +6,7 @@
     >
 
     <ImageView
+        android:id="@+id/iv_header"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@mipmap/image_header_default"
@@ -38,11 +39,13 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"></View>
             <ImageView
+                android:id="@+id/iv_zan"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@mipmap/image_praise_icon"
                 />
             <TextView
+                android:id="@+id/tv_zan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"

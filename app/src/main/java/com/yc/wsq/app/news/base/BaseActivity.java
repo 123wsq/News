@@ -79,6 +79,12 @@ public abstract class BaseActivity<V, T extends BasePresenter<V >> extends AppCo
         startActivity(new Intent(this, LoginActivity.class));
     }
 
+    /**
+     * 一个按钮
+     * @param title
+     * @param msg
+     * @param listener
+     */
     public void onShowDialog(String title, String msg, final OnDialogClickListener listener){
 
         DialogTools.showDialog(this, "确定", title, msg, new DialogInterface.OnClickListener() {
@@ -91,6 +97,17 @@ public abstract class BaseActivity<V, T extends BasePresenter<V >> extends AppCo
                 dialog.dismiss();
             }
         });
+    }
+
+    /**
+     * 两个按钮
+     * @param ok
+     * @param cancel
+     * @param title
+     * @param msg
+     */
+    public void onShowDialog(String ok, String cancel, String title, String msg, DialogInterface.OnClickListener okListener, DialogInterface.OnClickListener cancleListener){
+        DialogTools.showDialog(this, ok, cancel, title, msg, okListener, cancleListener);
     }
 
     public interface  OnDialogClickListener{

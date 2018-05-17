@@ -6,12 +6,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.orhanobut.logger.Logger;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.wsq.library.listener.OnRecyclerViewItemClickListener;
 import com.wsq.library.tools.RecyclerViewDivider;
+import com.wsq.library.tools.ToastUtils;
 import com.wsq.library.utils.DensityUtil;
 import com.yc.wsq.app.news.R;
 import com.yc.wsq.app.news.adapter.ArtivleCommentAdapter;
@@ -42,6 +44,7 @@ public class ArticleCommentActivity extends BaseActivity<NewsView, NewsPresenter
     private List<Map<String, Object>> mData;
     private ArtivleCommentAdapter mAdapter;
     private String article_id;
+    private int Selectposition = 0;
 
     @Override
     protected NewsPresenter<NewsView> createPresenter() {
@@ -141,6 +144,14 @@ public class ArticleCommentActivity extends BaseActivity<NewsView, NewsPresenter
         @Override
         public void onRecyclerItemClickListener(View view, int i) {
 
+            Selectposition = i;
+            int is_zan = (int) mData.get(i).get(ResponseKey.getInstace().is_int);
+            if (is_zan ==1){
+                ToastUtils.onToast("已经点过赞了");
+                return;
+            }
+            onAriclePraise(mData.get(i).get(ResponseKey.getInstace().comment_id)+"");
+
         }
 
         @Override
@@ -148,6 +159,18 @@ public class ArticleCommentActivity extends BaseActivity<NewsView, NewsPresenter
 
         }
     };
+
+    private void onAriclePraise(String comment_id){
+        Map<String, String> param = new HashMap<>();
+
+        try {
+            param.put(ResponseKey.getInstace().comment_id, comment_id);
+            param.put(ResponseKey.getInstace().user_id, SharedTools.getInstance(this).onGetString(ResponseKey.getInstace().user_id));
+            ipresenter.onArticlePraise(param);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * 重置刷新状态
@@ -181,5 +204,18 @@ public class ArticleCommentActivity extends BaseActivity<NewsView, NewsPresenter
     @Override
     public void onNewsTypeResponse(Map<String, Object> result) {
 
+        String msg = (String) result.get(ResponseKey.getInstace().rsp_msg);
+        ToastUtils.onToast(msg);
+        try {
+            Map<String, Object> map = mData.get(Selectposition);
+            int zan_num = (int) map.get(ResponseKey.getInstace().zan_num);
+            map.put(ResponseKey.getInstace().is_int, 1);
+            map.put(ResponseKey.getInstace().zan_num, zan_num + 1 );
+//
+            mAdapter.notifyDataSetChanged();
+        }catch (Exception e){
+            Logger.wtf(e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

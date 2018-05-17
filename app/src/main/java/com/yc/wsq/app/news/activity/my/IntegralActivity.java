@@ -4,6 +4,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -40,6 +41,7 @@ public class IntegralActivity extends BaseActivity<UserView, UserPresenter<UserV
     @BindView(R.id.rv_RecyclerView) RecyclerView rv_RecyclerView;
     @BindView(R.id.refreshLayout) SmartRefreshLayout refreshLayout;
     @BindView(R.id.tv_total_integral) TextView tv_total_integral;
+    @BindView(R.id.ll_not_data) LinearLayout ll_not_data;
 
     private IntegralRecodeAdapter mAdapter;
     private List<Map<String, Object>> mData;
@@ -164,7 +166,7 @@ public class IntegralActivity extends BaseActivity<UserView, UserPresenter<UserV
         }else{
             mData.addAll(list);
         }
-
+        ll_not_data.setVisibility(mData.size() ==0 ? View.VISIBLE :View.GONE);
         mAdapter.notifyDataSetChanged();
         onResetRefreshState();
     }

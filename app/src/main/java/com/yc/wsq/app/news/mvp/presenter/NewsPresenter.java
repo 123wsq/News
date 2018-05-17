@@ -681,6 +681,51 @@ public class NewsPresenter<T extends BaseView> extends BasePresenter<T> {
     }
 
 
+    /**
+     * 评论点赞
+     * @param param
+     * @throws Exception
+     */
+    public void onArticlePraise (Map<String, String> param) throws Exception{
+        final NewsView view = (NewsView) getView();
+        if (view != null) {
+
+            try {
+                ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().comment_id));
+                ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().comment_id));
+            }catch (Exception e){
+                throw new Exception(e.getMessage());
+            }
+            String url =Urls.HOST + Urls.ARTICLE_ZAN;
+
+            requestHttp.onSendGet(url, param, new Callback<Map<String, Object>>() {
+                @Override
+                public void onSuccess(Map<String, Object> data) {
+                    if (view !=  null){
+                        view.onNewsTypeResponse(data);
+                    }
+                }
+
+                @Override
+                public void onFailure(String msg) {
+                    ToastUtils.onToast(msg);
+                }
+
+                @Override
+                public void onOutTime(String msg) {
+                    ToastUtils.onToast(msg);
+                    if (view != null){
+                        view.onReLogin();
+                    }
+                }
+
+                @Override
+                public void onComplete() {
+                }
+            });
+
+        }
+    }
 
     /**
      * 删除搜索记录

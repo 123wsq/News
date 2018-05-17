@@ -161,4 +161,14 @@ public class Urls {
      * 忘记密码
      */
     public static final String FORGET_PASSWORD = "api/mobile_user_code";
+
+    /**
+     * 第三方登录时需要检查IMEI
+     */
+    public static final String CHECK_IEME = "user/getImei";
+
+    /**
+     * 点赞
+     */
+    public static final String ARTICLE_ZAN = "topic/addZanByArtid";
 }

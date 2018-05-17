@@ -40,6 +40,7 @@
     <string name="str_recharge_record_text">充值记录</string>
     <string name="str_withdraw_record_text">提现记录</string>
     <string name="str_consume_record_text">消费记录</string>
+    <string name="str_money_record_text">余额记录</string>
     <string name="str_withdraw_text">提现</string>
     <string name="str_trade_record_text">交易记录</string>
     <string name="str_recharge_money_text">充值金额</string>

@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.wsq.library.tools.ToastUtils;
+import com.wsq.library.utils.SystemUtils;
 import com.yc.wsq.app.news.R;
 import com.yc.wsq.app.news.base.BaseActivity;
 import com.yc.wsq.app.news.constant.ResponseKey;
@@ -73,6 +74,7 @@ public class RegisterActivity extends BaseActivity<UserRegisterView, UserPresent
                 param.put(ResponseKey.getInstace().password2, et_password2.getText().toString().trim());
                 param.put(ResponseKey.getInstace().code, et_validate_code.getText().toString().trim());
                 param.put(ResponseKey.getInstace().invite, "");
+                param.put(ResponseKey.getInstace().imei, SystemUtils.getIMEI());
                 try {
                     ipresenter.onUserRegister(param);
                 } catch (Exception e) {

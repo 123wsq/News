@@ -4,6 +4,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -44,6 +45,7 @@ public class ApprenticeActivity extends BaseActivity<UserView, UserPresenter<Use
     @BindView(R.id.rb_general_level) RadioButton rb_general_level;
     @BindView(R.id.refreshLayout) SmartRefreshLayout refreshLayout;
     @BindView(R.id.rv_RecyclerView) RecyclerView rv_RecyclerView;
+    @BindView(R.id.ll_not_data) LinearLayout ll_not_data;
 
     private int oldType = 1;
     private  int type = 1;
@@ -183,6 +185,7 @@ public class ApprenticeActivity extends BaseActivity<UserView, UserPresenter<Use
             mData.clear();
             mData.addAll(list);
         }
+        ll_not_data.setVisibility(mData.size() ==0 ? View.VISIBLE : View.GONE);
 
         oldType = type;
         onResetRefreshState();

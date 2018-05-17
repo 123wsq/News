@@ -30,6 +30,7 @@ import com.yc.wsq.app.news.constant.ResponseKey;
 import com.yc.wsq.app.news.constant.Urls;
 import com.yc.wsq.app.news.mvp.presenter.UserPresenter;
 import com.yc.wsq.app.news.mvp.view.UserMainView;
+import com.yc.wsq.app.news.tools.ParamFormat;
 import com.yc.wsq.app.news.tools.ParamValidate;
 import com.yc.wsq.app.news.tools.ShareTools;
 import com.yc.wsq.app.news.tools.SharedTools;
@@ -147,8 +148,7 @@ public class MyFragment extends BaseFragment<UserMainView, UserPresenter<UserMai
 
                 break;
             case R.id.ll_wechat:  //微信好友邀请
-                Logger.d("微信调用了");
-                ShareTools.onShare(5, "", "");
+//                ShareTools.onShare(5, "", "");
                 break;
             case R.id.ll_qq:  //QQ好友邀请
 //                mFunctionsManage.invokeFunction(INTERFACE_WITHP, 10);
@@ -184,11 +184,15 @@ public class MyFragment extends BaseFragment<UserMainView, UserPresenter<UserMai
         if (TextUtils.isEmpty(head_pic)){
             iv_header.setImageResource(R.mipmap.image_head_default);
         }else {
+
+            String hederImage = SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().head_pic).startsWith("http")
+                    ? SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().head_pic) :
+                    Urls.HOST + SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().head_pic);
             RequestOptions options = new RequestOptions();
             options.error(R.mipmap.image_header_default);
             options.circleCrop();
             Glide.with(getActivity())
-                    .load(Urls.HOST + SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().head_pic))
+                    .load(hederImage)
                     .apply(options)
                     .into(iv_header);
         }
@@ -198,13 +202,21 @@ public class MyFragment extends BaseFragment<UserMainView, UserPresenter<UserMai
         tv_total_integral.setText(SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().pay_points));
         tv_total_money.setText(SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().user_money));
         tv_disciple.setText(SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().disciple));
-        if(nickname.length() ==0){
-            ll_already_login.setVisibility(View.GONE);
-            ll_not_login.setVisibility(View.VISIBLE);
-        }else{
+
+        String uid = SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().user_id);
+        String token = SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().token);
+
+
+        try {
+            ParamValidate.getInstance().onValidateIsNull(uid, token);
             ll_already_login.setVisibility(View.VISIBLE);
             ll_not_login.setVisibility(View.GONE);
+        } catch (Exception e) {
+            ll_already_login.setVisibility(View.GONE);
+            ll_not_login.setVisibility(View.VISIBLE);
+            e.printStackTrace();
         }
+
     }
 
     /**

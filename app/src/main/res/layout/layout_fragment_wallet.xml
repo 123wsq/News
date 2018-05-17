@@ -1,131 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_white"
-    android:id="@+id/rl_layout"
-    >
+    android:background="@color/color_white">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:gravity="center_horizontal"
-        >
+        android:orientation="vertical">
 
-            <include layout="@layout/layout_public_titlebar"></include>
+        <include layout="@layout/layout_public_titlebar"></include>
 
-            <RelativeLayout
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="#fd544b"
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/default_padding_2"
+                android:paddingRight="@dimen/default_padding_2"
+                android:text="@string/str_account_balance_text"
+                android:textColor="@color/color_white" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:background="#fd544b"
+                android:layout_height="50dp"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-                >
+                <TextView
+                    android:id="@+id/tv_account_balance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="12.01"
+                    android:textColor="@color/color_white"
+                    android:textSize="40dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/default_margin_4"
+                    android:gravity="bottom"
+                    android:text="￥"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/default_text_size_1"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tv_withdraw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/default_margin_2"
+                    android:gravity="bottom"
+                    android:text="@string/str_withdraw_text"
+                    android:textColor="@color/color_white" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_alignParentBottom="true"
+                android:background="#55000000"
+                android:gravity="center_vertical"
+                android:visibility="visible">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginLeft="@dimen/default_margin_2"
+                    android:src="@mipmap/image_inform" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/str_account_balance_text"
+                    android:layout_marginLeft="@dimen/default_margin_2"
+                    android:text="冻结金额"
                     android:textColor="@color/color_white"
-                    android:paddingLeft="@dimen/default_padding_2"
-                    android:paddingRight="@dimen/default_padding_2"
+                    android:textSize="@dimen/default_text_size_3" />
+                <TextView
+                    android:id="@+id/tv_frozen_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/default_margin_4"
+                    android:text="0.00"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/default_text_size_2"
                     />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    android:layout_centerInParent="true"
-                    >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/default_margin_4"
+                    android:text="元"
+                    android:textSize="@dimen/default_text_size_3"
+                    android:textColor="@color/color_white"
+                    />
+            </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/tv_account_balance"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="12.01"
-                        android:textSize="40dp"
-                        android:textColor="@color/color_white"
-                        android:gravity="center"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="￥"
-                        android:textColor="@color/color_white"
-                        android:textSize="@dimen/default_text_size_1"
-                        android:gravity="bottom"
-                        android:layout_marginLeft="@dimen/default_margin_4"
-
-                        />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="25dp"
-                    android:background="#55000000"
-                    android:layout_alignParentBottom="true"
-                    android:gravity="center_vertical"
-                    android:visibility="gone"
-                    >
-                    <ImageView
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
-                        android:src="@mipmap/image_inform"
-                        android:layout_marginLeft="@dimen/default_margin_2"
-                        />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="暂无交易记录"
-                        android:textSize="@dimen/default_text_size_3"
-                        android:textColor="@color/color_white"
-                        android:layout_marginLeft="@dimen/default_margin_2"
-                        />
-                </LinearLayout>
-
-            </RelativeLayout>
+        </RelativeLayout>
 
 
         <RadioGroup
             android:id="@+id/rg_vip_level"
             android:layout_width="300dp"
             android:layout_height="@dimen/default_height_4"
-            android:orientation="horizontal"
             android:layout_marginTop="@dimen/default_margin_2"
-            android:visibility="gone"
-            >
+            android:orientation="horizontal"
+            android:visibility="visible">
 
             <RadioButton
                 android:id="@+id/rb_general_level"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:text="@string/str_recharge_record_text"
+                android:layout_weight="1"
+                android:background="@drawable/selector_radiobutton_background_left"
                 android:button="@null"
                 android:gravity="center"
-                android:textColor="@drawable/selector_font_color"
-                android:background="@drawable/selector_radiobutton_background_left"
-                />
+                android:text="@string/str_withdraw_record_text"
+                android:textColor="@drawable/selector_font_color" />
 
             <RadioButton
                 android:id="@+id/rb_vip_level"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:text="@string/str_withdraw_record_text"
+                android:layout_weight="1"
+                android:background="@drawable/selector_radiobutton_background_right"
                 android:button="@null"
                 android:gravity="center"
-                android:textColor="@drawable/selector_font_color"
-                android:background="@drawable/selector_radiobutton_background_center"
-                />
+                android:text="@string/str_money_record_text"
+                android:textColor="@drawable/selector_font_color" />
 
             <RadioButton
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/selector_radiobutton_background_right"
                 android:button="@null"
                 android:gravity="center"
                 android:text="@string/str_consume_record_text"
                 android:textColor="@drawable/selector_font_color"
-                android:background="@drawable/selector_radiobutton_background_right"
+                android:visibility="gone"
                 />
 
         </RadioGroup>
@@ -134,87 +156,92 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:layout_marginTop="@dimen/default_margin_2"
             android:background="@color/color_white"
-            >
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_height_3"
+                android:layout_marginLeft="@dimen/default_margin_2"
+                android:gravity="center_vertical"
                 android:text="提现记录"
                 android:textColor="@color/default_color_gray_1"
-                android:textSize="@dimen/default_text_size_2"
-                android:gravity="center_vertical"
-                android:layout_marginLeft="@dimen/default_margin_2"
-                />
+                android:textSize="@dimen/default_text_size_2" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_line_height"
                 android:background="@color/line_color"></View>
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/default_height_3"
-                >
+                android:layout_height="@dimen/default_height_3">
+
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:text="编号"
-                    android:gravity="center"
                     android:textColor="@color/default_color_gray_1"
-                    android:textSize="@dimen/default_text_size_2"
-                    />
+                    android:textSize="@dimen/default_text_size_2" />
+
                 <View
                     android:layout_width="@dimen/default_line_height"
                     android:layout_height="match_parent"
                     android:background="@color/line_color"></View>
+
                 <TextView
                     android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="3"
-                    android:layout_height="match_parent"
+                    android:gravity="center"
                     android:text="申请日期"
-                    android:gravity="center"
                     android:textColor="@color/default_color_gray_1"
-                    android:textSize="@dimen/default_text_size_2"
-                    />
+                    android:textSize="@dimen/default_text_size_2" />
+
                 <View
                     android:layout_width="@dimen/default_line_height"
                     android:layout_height="match_parent"
                     android:background="@color/line_color"></View>
+
                 <TextView
                     android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:text="金额"
                     android:gravity="center"
+                    android:text="金额"
                     android:textColor="@color/default_color_gray_1"
-                    android:textSize="@dimen/default_text_size_2"
-                    />
+                    android:textSize="@dimen/default_text_size_2" />
+
                 <View
                     android:layout_width="@dimen/default_line_height"
                     android:layout_height="match_parent"
                     android:background="@color/line_color"></View>
+
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="2"
                     android:layout_height="match_parent"
-                    android:text="状态"
+                    android:layout_weight="2"
                     android:gravity="center"
+                    android:text="状态"
                     android:textColor="@color/default_color_gray_1"
-                    android:textSize="@dimen/default_text_size_2"
-                    />
+                    android:textSize="@dimen/default_text_size_2" />
 
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_line_height"
                 android:background="@color/line_color"></View>
+
+            <include layout="@layout/layout_include_not_data"></include>
+
             <com.scwang.smartrefresh.layout.SmartRefreshLayout
                 android:id="@+id/refreshLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
+                android:layout_height="match_parent">
 
 
                 <android.support.v7.widget.RecyclerView
@@ -228,7 +255,6 @@
 
 
     </LinearLayout>
-
 
 
 </RelativeLayout>

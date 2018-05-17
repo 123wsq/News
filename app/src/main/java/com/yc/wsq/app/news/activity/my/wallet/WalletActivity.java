@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -43,11 +44,12 @@ public class WalletActivity extends BaseActivity<UserView, UserPresenter<UserVie
 
 
     @BindView(R.id.tv_title)TextView tv_title;
-    @BindView(R.id.tv_name) TextView tv_name;
     @BindView(R.id.rl_layout) RelativeLayout rl_layout;
     @BindView(R.id.tv_account_balance) TextView tv_account_balance;
     @BindView(R.id.refreshLayout) SmartRefreshLayout refreshLayout;
     @BindView(R.id.rv_RecyclerView) RecyclerView rv_RecyclerView;
+    @BindView(R.id.tv_frozen_money) TextView tv_frozen_money;
+    @BindView(R.id.ll_not_data) LinearLayout ll_not_data;
 
 
     private String withdrawPsd1, withdrawPsd2;
@@ -73,7 +75,6 @@ public class WalletActivity extends BaseActivity<UserView, UserPresenter<UserVie
     protected void initView() {
 
         tv_title.setText(getResources().getString(R.string.str_my_wallet_text));
-        tv_name.setText(getString(R.string.str_withdraw_text));
 
         onInitRecyclerView();
         onInitRefreshLayout();
@@ -83,6 +84,7 @@ public class WalletActivity extends BaseActivity<UserView, UserPresenter<UserVie
     public void onResume() {
         super.onResume();
         tv_account_balance.setText(SharedTools.getInstance(this).onGetString(ResponseKey.getInstace().user_money));
+        tv_frozen_money.setText(SharedTools.getInstance(this).onGetString(ResponseKey.getInstace().frozen_money));
     }
 
     /**
@@ -159,7 +161,7 @@ public class WalletActivity extends BaseActivity<UserView, UserPresenter<UserVie
         }
     };
 
-    @OnClick({R.id.ll_back, R.id.tv_name})
+    @OnClick({R.id.ll_back, R.id.tv_withdraw})
     public void onClick(View view){
 
         switch (view.getId()){
@@ -167,7 +169,7 @@ public class WalletActivity extends BaseActivity<UserView, UserPresenter<UserVie
                 finish();
                 break;
 
-            case R.id.tv_name://param =2 提现
+            case R.id.tv_withdraw://param =2 提现
                 onWithdrawValidate();
                 break;
 
@@ -223,6 +225,7 @@ public class WalletActivity extends BaseActivity<UserView, UserPresenter<UserVie
         }else{
             mData.addAll(list);
         }
+        ll_not_data.setVisibility(mData.size() ==0? View.VISIBLE: View.GONE);
         onResetRefreshState();
         mAdapter.notifyDataSetChanged();
     }

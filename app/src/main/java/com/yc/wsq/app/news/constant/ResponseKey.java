@@ -142,7 +142,14 @@ public class ResponseKey {
     public final String name = "name";
     public final String isRead = "isRead";
     public final String sort_order = "sort_order";
-
+    public final String unionid = "unionid";
+    public final String openid = "openid";
+    public final String headimgurl = "headimgurl";
+    public final String imei = "imei";
+    public final String icon = "icon";
+    public final String is_save = "is_save";
+    public final String zan_num = "zan_num";
+    public final String is_int = "is_int";
     /**
      * ********************************************************************************************
      * 测试key
@@ -159,9 +166,6 @@ public class ResponseKey {
 
 
     public final String trade = "trade";
-    public final String trade_type = "trade_type";
-    public final String trade_money = "trade_money";
-    public final String trade_time = "trade_time";
-    public final String trade_total = "trade_total";
+
 
 }

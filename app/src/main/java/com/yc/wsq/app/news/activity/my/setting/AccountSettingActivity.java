@@ -80,7 +80,10 @@ public class AccountSettingActivity extends BaseActivity<UpdateUserInfoView, Use
         tv_nickname.setText(shared.onGetString(ResponseKey.getInstace().nickname));
         String sex = SharedTools.getInstance(this).onGetString(ResponseKey.getInstace().sex);
         tv_birthday.setText(shared.onGetString(ResponseKey.getInstace().birthday));
-        onShowHeader(Urls.HOST + SharedTools.getInstance(this).onGetString(ResponseKey.getInstace().head_pic));
+        String hederImage = SharedTools.getInstance(this).onGetString(ResponseKey.getInstace().head_pic).startsWith("http")
+                ? SharedTools.getInstance(this).onGetString(ResponseKey.getInstace().head_pic) :
+                Urls.HOST + SharedTools.getInstance(this).onGetString(ResponseKey.getInstace().head_pic);
+        onShowHeader(hederImage);
 
         if (sex.equals("0")){
             tv_sex_secrecy.setText("保密");
@@ -108,7 +111,10 @@ public class AccountSettingActivity extends BaseActivity<UpdateUserInfoView, Use
             case R.id.iv_header:
                 List<LocalMedia> list = new ArrayList<>();
                 LocalMedia media = new LocalMedia();
-                media.setPath(Urls.HOST + SharedTools.getInstance(this).onGetString(ResponseKey.getInstace().head_pic));
+                String hederImage = SharedTools.getInstance(this).onGetString(ResponseKey.getInstace().head_pic).startsWith("http")
+                        ? SharedTools.getInstance(this).onGetString(ResponseKey.getInstace().head_pic) :
+                        Urls.HOST + SharedTools.getInstance(this).onGetString(ResponseKey.getInstace().head_pic);
+                media.setPath(hederImage);
                 list.add(media);
                 PictureSelector.create(this).externalPicturePreview(0, list);
                 break;

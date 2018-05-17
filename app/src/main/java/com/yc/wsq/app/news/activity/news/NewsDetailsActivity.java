@@ -24,6 +24,7 @@ import com.yc.wsq.app.news.base.BaseActivity;
 import com.yc.wsq.app.news.bean.NewsBean;
 import com.yc.wsq.app.news.constant.ResponseKey;
 import com.yc.wsq.app.news.constant.Urls;
+import com.yc.wsq.app.news.loader.OnAuthLoginListener;
 import com.yc.wsq.app.news.mvp.presenter.NewsPresenter;
 import com.yc.wsq.app.news.mvp.view.NewsDetailsView;
 import com.yc.wsq.app.news.tools.ShareTools;
@@ -41,6 +42,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.sharesdk.framework.Platform;
 
 public class NewsDetailsActivity extends BaseActivity<NewsDetailsView, NewsPresenter<NewsDetailsView>> implements NewsDetailsView, View.OnFocusChangeListener {
 
@@ -231,7 +233,23 @@ public class NewsDetailsActivity extends BaseActivity<NewsDetailsView, NewsPrese
         sharePopup = new SharePopup(this, new SharePopup.OnShareResultListener() {
             @Override
             public void onClickResult(int platform) {
-                ShareTools.onShare(platform, article_title, articleUrl);
+                ShareTools.onShare(platform, article_title, articleUrl, new OnAuthLoginListener() {
+                    @Override
+                    public void onAuthState(int state, Platform platform) {
+
+                        switch (state){
+                            case 0:
+                                ToastUtils.onToast("分享成功");
+                                break;
+                            case 1:
+                                ToastUtils.onToast("分享失败");
+                                break;
+                            case 2:
+                                ToastUtils.onToast("取消分享");
+                                break;
+                        }
+                    }
+                });
             }
         });
         sharePopup.showAtLocation(ll_layout, Gravity.BOTTOM|Gravity.CENTER, 0, 0);

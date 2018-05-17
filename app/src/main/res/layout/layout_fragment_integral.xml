@@ -33,7 +33,7 @@
 
             />
     </LinearLayout>
-
+    <include layout="@layout/layout_include_not_data"></include>
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"

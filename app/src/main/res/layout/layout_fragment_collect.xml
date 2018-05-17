@@ -14,6 +14,7 @@
         android:layout_marginTop="@dimen/default_margin_3"
         android:orientation="vertical"
         >
+        <include layout="@layout/layout_include_not_data"></include>
         <com.scwang.smartrefresh.layout.SmartRefreshLayout
             android:id="@+id/refreshLayout"
             android:layout_width="match_parent"

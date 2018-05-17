@@ -181,6 +181,9 @@ public class WithdrawActivity extends BaseActivity<UserView, UserPresenter<UserV
     public void onResponseData(Map<String, Object> result) {
 
         SharedTools.getInstance(this).onPutData(ResponseKey.getInstace().user_money, (amount-withdrawMoney-withdrawMoney*0.05)+"");
+        String frozen_money = SharedTools.getInstance(this).onGetString(ResponseKey.getInstace().frozen_money);
+        double frozen = Double.parseDouble(frozen_money)+withdrawMoney-withdrawMoney*0.05;
+        SharedTools.getInstance(this).onPutData(ResponseKey.getInstace().frozen_money, frozen+"");
         String msg = (String) result.get(ResponseKey.getInstace().rsp_msg);
         ToastUtils.onToast(msg);
         finish();

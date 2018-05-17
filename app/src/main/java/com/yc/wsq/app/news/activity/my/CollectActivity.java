@@ -5,6 +5,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -40,10 +41,12 @@ public class CollectActivity extends BaseActivity<CollectView, NewsPresenter<Col
     @BindView(R.id.tv_title) TextView tv_title;
     @BindView(R.id.refreshLayout) SmartRefreshLayout refreshLayout;
     @BindView(R.id.rv_RecyclerView) RecyclerView rv_RecyclerView;
+    @BindView(R.id.ll_not_data) LinearLayout ll_not_data;
 
     private int refreshState = 0;
     private List<Map<String, Object>> mData;
     private NewsAdapter mAdapter;
+
 
 
     @Override
@@ -187,6 +190,7 @@ public class CollectActivity extends BaseActivity<CollectView, NewsPresenter<Col
         }else{
             mData.addAll(list);
         }
+        ll_not_data.setVisibility(mData.size() == 0 ? View.VISIBLE: View.GONE);
         onResetRefreshState();
         mAdapter.notifyDataSetChanged();
     }

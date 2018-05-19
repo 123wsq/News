@@ -1,1 +1,1 @@
-include ':app',':magicindicator', ':pay', ':hipermission', ':ucrop', ':picture_library'
+include ':app',':magicindicator', ':pay', ':hipermission', ':ucrop', ':picture_library', ':shop', ':benefit', ':news2'

@@ -132,8 +132,9 @@ public class SettingWithdrawPasswordActivity extends BaseActivity<UserView, User
         String msg = (String) result.get(ResponseKey.getInstace().rsp_msg);
         ToastUtils.onToast(msg);
         SharedTools.getInstance(this).onPutData(ResponseKey.getInstace().paypwd, et_psdInput.getText().toString());
-        Intent intent = new Intent(this, SettingActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
+//        Intent intent = new Intent(this, SettingActivity.class);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        startActivity(intent);
+        finish();
     }
 }

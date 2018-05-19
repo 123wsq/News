@@ -145,6 +145,7 @@ public class WithdrawActivity extends BaseActivity<UserView, UserPresenter<UserV
         Map<String, String> param = new HashMap<>();
         try {
             param.put(ResponseKey.getInstace().user_id, SharedTools.getInstance(this).onGetString(ResponseKey.getInstace().user_id));
+            param.put(ResponseKey.getInstace().token, SharedTools.getInstance(this).onGetString(ResponseKey.getInstace().token));
             param.put(ResponseKey.getInstace().bank_type, 1+"");
             param.put(ResponseKey.getInstace().money, withdrawMoney+"");
             param.put(ResponseKey.getInstace().paypwd, password);
@@ -182,7 +183,7 @@ public class WithdrawActivity extends BaseActivity<UserView, UserPresenter<UserV
 
         SharedTools.getInstance(this).onPutData(ResponseKey.getInstace().user_money, (amount-withdrawMoney-withdrawMoney*0.05)+"");
         String frozen_money = SharedTools.getInstance(this).onGetString(ResponseKey.getInstace().frozen_money);
-        double frozen = Double.parseDouble(frozen_money)+withdrawMoney-withdrawMoney*0.05;
+        double frozen = Double.parseDouble(frozen_money)+withdrawMoney+withdrawMoney*0.05;
         SharedTools.getInstance(this).onPutData(ResponseKey.getInstace().frozen_money, frozen+"");
         String msg = (String) result.get(ResponseKey.getInstace().rsp_msg);
         ToastUtils.onToast(msg);

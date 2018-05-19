@@ -79,6 +79,8 @@ public class ResponseKey {
     public final String result = "result";
     public final String cat_name = "cat_name";
     public final String cat_id = "cat_id";
+    public final String cat_ids = "cat_ids";
+    public final String position = "position";
     public final String user_id = "user_id";
     public final String email = "email";
     public final String paypwd = "paypwd";
@@ -150,6 +152,13 @@ public class ResponseKey {
     public final String is_save = "is_save";
     public final String zan_num = "zan_num";
     public final String is_int = "is_int";
+    public final String in = "in";
+    public final String out = "out";
+    public final String cat_type = "cat_type";
+    public final String list = "list";
+
+
+
     /**
      * ********************************************************************************************
      * 测试key

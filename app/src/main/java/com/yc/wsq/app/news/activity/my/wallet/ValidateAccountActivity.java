@@ -111,6 +111,7 @@ public class ValidateAccountActivity extends BaseActivity<UserRegisterView, User
     public void onRegisterData(Map<String, Object> result) {
 
         startActivity(new Intent(this, SettingWithdrawPasswordActivity.class));
+        finish();
     }
 
     Handler handler = new Handler(){};

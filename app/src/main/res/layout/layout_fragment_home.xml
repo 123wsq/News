@@ -82,9 +82,10 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"/>
             <ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:src="@mipmap/image_right"
+                android:id="@+id/iv_tag_more"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@mipmap/image_tag_more_icon"
                 />
         </LinearLayout>
         <View

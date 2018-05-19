@@ -34,8 +34,9 @@
     <string name="str_setting_cash_password_text">设置支付密码</string>
     <string name="str_update_cash_password_text">修改支付密码</string>
     <string name="str_forget_cash_password_text">忘记支付密码</string>
-    <string name="str_setting_login_text">设置登录密码</string>
+    <string name="str_setting_login_text">修改登录密码</string>
     <string name="str_account_credited_text">收款账户</string>
+    <string name="str_binding_account_text">绑定账号</string>
     <string name="str_recharge_wallet_text">充值</string>
     <string name="str_recharge_record_text">充值记录</string>
     <string name="str_withdraw_record_text">提现记录</string>
@@ -99,6 +100,7 @@
     <string name="str_not_data_text">暂无数据!</string>
     <string name="str_clear_search_record_text">清空搜索记录</string>
     <string name="str_search_result_text">搜索结果</string>
+    <string name="str_all_tag_text">所有栏目</string>
     <string name="str_about_text">关于</string>
     <string name="str_app_name_text">应用名称：</string>
     <string name="str_app_version_text">应用版本：</string>
@@ -106,6 +108,7 @@
     <string name="str_setting_account_text">账户设置</string>
     <string name="str_clear_cache_text">清理缓存</string>
     <string name="str_night_pattern_text">夜间模式</string>
+    <string name="str_check_update_text">检查更新</string>
     <string name="str_auto_night_pattern_text">自动设置夜间模式</string>
     <string name="str_off_line_text">离线模式</string>
     <string name="str_setting_text">设置</string>

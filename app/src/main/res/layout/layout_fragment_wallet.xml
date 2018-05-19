@@ -109,7 +109,7 @@
 
 
         <RadioGroup
-            android:id="@+id/rg_vip_level"
+            android:id="@+id/rg_record"
             android:layout_width="300dp"
             android:layout_height="@dimen/default_height_4"
             android:layout_marginTop="@dimen/default_margin_2"
@@ -117,7 +117,7 @@
             android:visibility="visible">
 
             <RadioButton
-                android:id="@+id/rb_general_level"
+                android:id="@+id/rb_withdraw_record"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -128,7 +128,7 @@
                 android:textColor="@drawable/selector_font_color" />
 
             <RadioButton
-                android:id="@+id/rb_vip_level"
+                android:id="@+id/rb_balance_record"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -156,18 +156,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/default_margin_2"
+            android:layout_marginTop="@dimen/default_margin_3"
             android:background="@color/color_white"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/default_height_3"
-                android:layout_marginLeft="@dimen/default_margin_2"
-                android:gravity="center_vertical"
-                android:text="提现记录"
-                android:textColor="@color/default_color_gray_1"
-                android:textSize="@dimen/default_text_size_2" />
 
             <View
                 android:layout_width="match_parent"

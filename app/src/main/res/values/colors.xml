@@ -7,6 +7,7 @@
 
 
     <color name="line_color">#22000000</color>
+    <color name="line_color_s">@color/default_backgroud_color</color>
     <color name="color_blue">#0076FF</color>
     <color name="color_blue2">#AD0076FF</color>
     <color name="color_gray">#909191</color>

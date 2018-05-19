@@ -31,11 +31,20 @@ import com.mylhyl.zxing.scanner.result.ProductResult;
 import com.orhanobut.logger.Logger;
 import com.wsq.library.tools.ToastUtils;
 import com.yc.wsq.app.news.R;
+import com.yc.wsq.app.news.activity.my.QRcodeActivity;
 import com.yc.wsq.app.news.base.BaseActivity;
+import com.yc.wsq.app.news.constant.ResponseKey;
+import com.yc.wsq.app.news.constant.Urls;
 import com.yc.wsq.app.news.mvp.presenter.BasePresenter;
+import com.yc.wsq.app.news.mvp.presenter.UserPresenter;
+import com.yc.wsq.app.news.mvp.view.UserView;
+import com.yc.wsq.app.news.tools.SharedTools;
+import com.yc.wsq.app.news.tools.UrlUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -43,7 +52,7 @@ import me.weyye.hipermission.HiPermission;
 import me.weyye.hipermission.PermissionCallback;
 import me.weyye.hipermission.PermissionItem;
 
-public class QRcodeScanActivity extends BaseActivity{
+public class QRcodeScanActivity extends BaseActivity<UserView, UserPresenter<UserView>> implements UserView{
 
     @BindView(R.id.tv_title) TextView tv_title;
     @BindView(R.id.scanner_view) ScannerView scanner_view;
@@ -54,8 +63,8 @@ public class QRcodeScanActivity extends BaseActivity{
 
 
     @Override
-    protected BasePresenter createPresenter() {
-        return null;
+    protected UserPresenter<UserView> createPresenter() {
+        return new UserPresenter<>();
     }
 
     @Override
@@ -149,10 +158,15 @@ public class QRcodeScanActivity extends BaseActivity{
                     case URI:
                         URIParsedResult uri = (URIParsedResult) parsedResult;
 //                        bundle.putSerializable(Scanner.Scan.RESULT, new URIResult(uri));
+                        String url = Urls.HOST +Urls.SET_INVITE;
                         intent.setAction("android.intent.action.VIEW");
-                        Uri content_url = Uri.parse(uri.getURI());
-                        intent.setData(content_url);
-                        startActivity(intent);
+                        if(uri.getURI().startsWith(url)){
+                            onMaster(uri.getURI());
+                        }else {
+                            Uri content_url = Uri.parse(uri.getURI());
+                            intent.setData(content_url);
+                            startActivity(intent);
+                        }
                         break;
                     case TEXT:
                         ToastUtils.onToast(rawResult.getText());
@@ -167,7 +181,7 @@ public class QRcodeScanActivity extends BaseActivity{
                         break;
                 }
                 vibrate();
-                scanner_view.restartPreviewAfterDelay(500);
+                scanner_view.restartPreviewAfterDelay(1000);
 //                showProgressDialog();
 //                if (showThumbnail) {
 //                    onResultActivity(rawResult, type, bundle);
@@ -221,11 +235,6 @@ public class QRcodeScanActivity extends BaseActivity{
         });
     }
 
-    void showProgressDialog() {
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("请稍候...");
-        progressDialog.show();
-    }
 
     @Override
     protected void onResume() {
@@ -237,5 +246,28 @@ public class QRcodeScanActivity extends BaseActivity{
     protected void onPause() {
         super.onPause();
         scanner_view.onPause();
+    }
+
+    private void onMaster(String url){
+
+        Map<String, String> param = null;
+
+        try {
+           param = UrlUtils.urlSplit(url);
+           param.put(ResponseKey.getInstace().user_id, SharedTools.getInstance(this).onGetString(ResponseKey.getInstace().user_id));
+
+           Logger.d(param);
+            ipresenter.onSubmitInviteCode(param);
+
+        } catch (Exception e) {
+            ToastUtils.onToast(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onResponseData(Map<String, Object> result) {
+
+        onShowDialog("拜师提示","您已经拜师成功！", null);
     }
 }

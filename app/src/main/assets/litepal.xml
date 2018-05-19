@@ -2,7 +2,7 @@
 <litepal>
     <dbname value="SearchRecord.db" ></dbname>
 
-    <version value="4" ></version>
+    <version value="5" ></version>
 
     <list> <!--这里是类映射-->
         <mapping class="com.yc.wsq.app.news.bean.SearchBean"></mapping>

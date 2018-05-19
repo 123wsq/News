@@ -69,6 +69,8 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     //微信授权
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
+
+
 }
 
 MobSDK {

@@ -81,6 +81,7 @@ public class NewsModelImpl implements NewsModelInter {
             map.put(ResponseKey.getInstace().cat_id, bean.getCat_id());
             map.put(ResponseKey.getInstace().cat_name, bean.getCat_name());
             map.put(ResponseKey.getInstace().id, bean.getId());
+            map.put(ResponseKey.getInstace().cat_type, bean.getCat_type());
             list1.add(map);
         }
         data.put(ResponseKey.getInstace().result, list1);
@@ -120,7 +121,7 @@ public class NewsModelImpl implements NewsModelInter {
             int count = DataSupport.where(ResponseKey.getInstace().cat_id+" = "+ cat_id).count(CatTitleBean.class);
             if(count==0){
                 CatTitleBean bean = new CatTitleBean(cat_id, map.get(ResponseKey.getInstace().cat_name)+"",
-                        map.get(ResponseKey.getInstace().id)+"", map.get(ResponseKey.getInstace().sort_order)+"");
+                        map.get(ResponseKey.getInstace().id)+"", map.get(ResponseKey.getInstace().sort_order)+"", (int)map.get(ResponseKey.getInstace().cat_type));
                 bean.save();
             }
         }

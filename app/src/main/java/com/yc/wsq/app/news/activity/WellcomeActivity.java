@@ -58,7 +58,7 @@ public class WellcomeActivity extends BaseActivity implements ViewPager.OnPageCh
         mDate=  new ArrayList<>();
         LayoutInflater inflater = LayoutInflater.from(this);
 
-        for (int i = 0 ; i < 4; i++){
+        for (int i = 0 ; i < 3; i++){
 
             mDate.add(inflater.inflate(R.layout.layout_activity_start, null));
         }

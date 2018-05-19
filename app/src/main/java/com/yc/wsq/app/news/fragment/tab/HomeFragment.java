@@ -2,10 +2,12 @@ package com.yc.wsq.app.news.fragment.tab;
 
 import android.Manifest;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.RecyclerView.OnScrollListener;
 import android.view.View;
 import android.widget.TextView;
 
@@ -26,6 +28,7 @@ import com.yc.wsq.app.news.R;
 import com.yc.wsq.app.news.activity.QRcodeScanActivity;
 import com.yc.wsq.app.news.activity.news.NewsDetailsActivity;
 import com.yc.wsq.app.news.activity.news.SearchActivity;
+import com.yc.wsq.app.news.activity.news.TagActivity;
 import com.yc.wsq.app.news.adapter.NewsAdapter;
 import com.yc.wsq.app.news.adapter.TitleAdapter;
 import com.yc.wsq.app.news.base.BaseFragment;
@@ -70,6 +73,8 @@ public class HomeFragment extends BaseFragment<NewsView, NewsPresenter<NewsView>
     private String cat_id="0";
     private String oldCat_id = "";
     private String curCity;
+    private int selectPosition = 0;
+    private LinearLayoutManager mLayoutManager;
 
     //声明AMapLocationClient类对象
     public AMapLocationClient mLocationClient = null;
@@ -125,6 +130,7 @@ public class HomeFragment extends BaseFragment<NewsView, NewsPresenter<NewsView>
     private void onGetNewsType(){
         Map<String, String> param = new HashMap<>();
         try {
+            param.put(ResponseKey.getInstace().user_id, SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().user_id));
             ipresenter.onGetNewsType(param);
         } catch (Exception e) {
             e.printStackTrace();
@@ -135,11 +141,18 @@ public class HomeFragment extends BaseFragment<NewsView, NewsPresenter<NewsView>
     public void onNewsResponse(Map<String, Object> result) {
 
         List<Map<String, Object>> newsData = (List<Map<String, Object>>) result.get(ResponseKey.getInstace().data);
-        if (refreshState ==1) {
-            mNewsData.addAll(0, newsData);
-        }else {
+        if (oldCat_id.equals(cat_id)){
+            if (refreshState ==1) {
+                mNewsData.addAll(0, newsData);
+            }else {
+                mNewsData.addAll(newsData);
+            }
+        }else{
+            mNewsData.clear();
             mNewsData.addAll(newsData);
+            oldCat_id = cat_id;
         }
+
         mNewsAdapter.notifyDataSetChanged();
         tv_not_data.setVisibility(mNewsData.size()==0 ? View.VISIBLE : View.GONE);
 
@@ -154,9 +167,9 @@ public class HomeFragment extends BaseFragment<NewsView, NewsPresenter<NewsView>
         }
         List<Map<String, Object>> list = (List<Map<String, Object>>) result.get(ResponseKey.getInstace().result);
 
-
         mTitleData.addAll(list);
-        mTitleAdapter.notifyDataSetChanged();
+        mTitleAdapter.onSelectoPosition(selectPosition);
+        onTitleCenterShow();
     }
 
     /**
@@ -178,9 +191,9 @@ public class HomeFragment extends BaseFragment<NewsView, NewsPresenter<NewsView>
     private void  onInitRecyclerView(){
 
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        rv_RecyclerView_title.setLayoutManager(layoutManager);
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        rv_RecyclerView_title.setLayoutManager(mLayoutManager);
         rv_RecyclerView_title.setHasFixedSize(true);
 
         mTitleAdapter = new TitleAdapter(getActivity(), mTitleData, onTitleItemListener);
@@ -225,12 +238,14 @@ public class HomeFragment extends BaseFragment<NewsView, NewsPresenter<NewsView>
         public void onRecyclerItemClickListener(View view, int i) {
 
             oldCat_id = cat_id;
+            selectPosition = i;
 
             cat_id = mTitleData.get(i).get(ResponseKey.getInstace().cat_id)+"";
             refreshState = 3;
             mNewsData.clear();
             onStartRequest();
-            rv_RecyclerView_content.scrollToPosition(0);
+            rv_RecyclerView_content.scrollToPosition(selectPosition);
+            onTitleCenterShow();
         }
 
         @Override
@@ -256,7 +271,7 @@ public class HomeFragment extends BaseFragment<NewsView, NewsPresenter<NewsView>
     };
 
 
-    @OnClick({R.id.ll_search, R.id.iv_qcode_scan})
+    @OnClick({R.id.ll_search, R.id.iv_qcode_scan, R.id.iv_tag_more})
     public void onClick(View view){
         switch (view.getId()){
             case R.id.ll_search: //搜索 param= -1
@@ -266,9 +281,26 @@ public class HomeFragment extends BaseFragment<NewsView, NewsPresenter<NewsView>
 
                 startActivity(new Intent(getActivity(), QRcodeScanActivity.class));
                 break;
+            case R.id.iv_tag_more:
+                Intent intent = new Intent(getActivity(), TagActivity.class);
+                startActivityForResult(intent, 200);
+                break;
         }
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (resultCode){
+            case TagActivity.RESULT_CODE:
+                cat_id = data.getStringExtra(ResponseKey.getInstace().cat_id);
+                selectPosition = data.getIntExtra(ResponseKey.getInstace().position, 0);
+                onGetNewsType();
+                onStartRequest();
+                break;
+        }
+    }
 
     private void onInitLocation(){
 
@@ -372,5 +404,15 @@ public class HomeFragment extends BaseFragment<NewsView, NewsPresenter<NewsView>
         onRequestPermission();
     }
 
+    private void onTitleCenterShow(){
+        //取第一个可见条目和最后一个可见条目下标
+        int firstPosition = mLayoutManager.findFirstVisibleItemPosition();
+        int lastPosition = mLayoutManager.findLastVisibleItemPosition();
+        //获取left和right:
+        int left = rv_RecyclerView_title.getChildAt(selectPosition - firstPosition).getLeft();
+        int right = rv_RecyclerView_title.getChildAt(lastPosition - selectPosition).getLeft();
+
+        rv_RecyclerView_title.scrollBy((left-right) /2, 0);
+    }
 
 }

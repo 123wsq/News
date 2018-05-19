@@ -52,6 +52,7 @@
         <activity android:name=".activity.MainActivity" android:screenOrientation="portrait" android:launchMode="singleTask"></activity>
         <activity android:name=".activity.my.wallet.SettingWithdrawPasswordActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".activity.my.QRcodeActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.news.TagActivity" android:screenOrientation="portrait"></activity>
 
         <service android:name="com.amap.api.location.APSService"></service>
 

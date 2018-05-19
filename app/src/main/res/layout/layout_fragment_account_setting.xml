@@ -76,12 +76,12 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_line_height"
-                android:background="@color/line_color"
+                android:background="@color/line_color_s"
                 ></View>
             <LinearLayout
                 android:id="@+id/ll_nickname"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/default_height_2"
+                android:layout_height="@dimen/default_height_3"
                 android:background="@color/color_white"
                 android:gravity="center_vertical"
                 android:paddingLeft="@dimen/default_padding_2"
@@ -108,12 +108,12 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_line_height"
-                android:background="@color/line_color"
+                android:background="@color/line_color_s"
                 ></View>
             <LinearLayout
                 android:id="@+id/ll_birthday"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/default_height_2"
+                android:layout_height="@dimen/default_height_3"
                 android:background="@color/color_white"
                 android:gravity="center_vertical"
                 android:paddingLeft="@dimen/default_padding_2"
@@ -140,12 +140,12 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_line_height"
-                android:background="@color/line_color"
+                android:background="@color/line_color_s"
                 ></View>
             <LinearLayout
                 android:id="@+id/ll_selector_sex"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/default_height_2"
+                android:layout_height="@dimen/default_height_3"
                 android:background="@color/color_white"
                 android:gravity="center_vertical"
                 android:paddingLeft="@dimen/default_padding_2"
@@ -173,13 +173,15 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_line_height"
-                android:background="@color/line_color"
+                android:background="@color/line_color_s"
+
                 ></View>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_line_height"
-                android:background="@color/line_color"
-                android:layout_marginTop="@dimen/default_margin_3"
+                android:background="@color/line_color_s"
+                android:layout_marginTop="@dimen/default_margin_2"
                 ></View>
             <LinearLayout
                 android:id="@+id/ll_setting_withdraw_password"
@@ -199,14 +201,14 @@
                     android:text="@string/str_setting_cash_password_text" />
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
                     android:src="@mipmap/image_right" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_line_height"
-                android:background="@color/line_color"
+                android:background="@color/line_color_s"
                 ></View>
             <LinearLayout
                 android:id="@+id/ll_setting_login_password"
@@ -225,14 +227,14 @@
                     android:text="@string/str_setting_login_text" />
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
                     android:src="@mipmap/image_right" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_line_height"
-                android:background="@color/line_color"
+                android:background="@color/line_color_s"
                 ></View>
             <LinearLayout
                 android:id="@+id/ll_setting_withdraw_account"
@@ -251,66 +253,40 @@
                     android:text="@string/str_account_credited_text" />
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
                     android:src="@mipmap/image_right" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_line_height"
-                android:background="@color/line_color"
+                android:background="@color/line_color_s"
                 ></View>
             <LinearLayout
+                android:id="@+id/ll_binding_account"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_height_3"
                 android:background="@color/color_white"
                 android:gravity="center_vertical"
                 android:paddingLeft="@dimen/default_padding_2"
-                android:paddingRight="@dimen/default_padding_2"
-                android:visibility="gone">
+                android:paddingRight="@dimen/default_padding_2">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="@string/str_update_cash_password_text" />
+                    android:text="@string/str_binding_account_text" />
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
                     android:src="@mipmap/image_right" />
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_line_height"
-                android:background="@color/line_color"
-                ></View>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/default_height_3"
-                android:background="@color/color_white"
-                android:gravity="center_vertical"
-                android:paddingLeft="@dimen/default_padding_2"
-                android:paddingRight="@dimen/default_padding_2"
-                android:visibility="gone">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:text="@string/str_forget_cash_password_text" />
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@mipmap/image_right" />
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/default_line_height"
-                android:background="@color/line_color"
+                android:background="@color/line_color_s"
                 ></View>
 
             <TextView

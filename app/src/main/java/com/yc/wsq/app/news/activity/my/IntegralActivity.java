@@ -79,7 +79,7 @@ public class IntegralActivity extends BaseActivity<UserView, UserPresenter<UserV
 
 
         rv_RecyclerView.addItemDecoration(new RecyclerViewDivider(
-                this, LinearLayoutManager.HORIZONTAL, DensityUtil.dp2px(this, 2),
+                this, LinearLayoutManager.HORIZONTAL, DensityUtil.dp2px(this, 1),
                 ContextCompat.getColor(this, R.color.default_backgroud_color)));
         rv_RecyclerView.setLayoutManager(new LinearLayoutManager(this));
         rv_RecyclerView.setHasFixedSize(true);

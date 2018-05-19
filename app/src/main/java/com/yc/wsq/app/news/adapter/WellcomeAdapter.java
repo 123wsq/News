@@ -14,7 +14,7 @@ import java.util.List;
 
 public class WellcomeAdapter extends PagerAdapter {
 
-    private int drawables[] = {R.mipmap.wellcome_1, R.mipmap.wellcome_2, R.mipmap.wellcome_3, R.mipmap.wellcome_4};
+    private int drawables[] = {R.mipmap.wellcome_1, R.mipmap.wellcome_2, R.mipmap.wellcome_3};
     private Context mContext;
     private List<View> mData;
 

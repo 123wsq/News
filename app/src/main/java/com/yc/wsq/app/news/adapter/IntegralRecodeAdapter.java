@@ -45,7 +45,7 @@ public class IntegralRecodeAdapter extends RecyclerView.Adapter<IntegralRecodeAd
         holder.tv_trade_time.setText(mData.get(position).get(ResponseKey.getInstace().change_time)+"");
         holder.tv_total_money.setText(mData.get(position).get(ResponseKey.getInstace().user_points)+"");
 
-        holder.tv_trade_type.setTextColor(pay_points.startsWith("-") ? mContext.getResources().getColor(R.color.red) : mContext.getResources().getColor(R.color.color_blue));
+//        holder.tv_trade_type.setTextColor(pay_points.startsWith("-") ? mContext.getResources().getColor(R.color.red) : mContext.getResources().getColor(R.color.color_blue));
 //            holder.tv_trade_type.setTextColor(mContext.getResources().getColor(R.color.color_blue));
     }
 

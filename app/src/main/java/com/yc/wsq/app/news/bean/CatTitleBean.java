@@ -9,7 +9,7 @@ public class CatTitleBean extends DataSupport{
 
     String cat_name;
 
-    String cat_type;
+    int cat_type;
 
     String parent_id;
 
@@ -31,6 +31,8 @@ public class CatTitleBean extends DataSupport{
 
     String name;
 
+
+
     public int getCat_id() {
         return cat_id;
     }
@@ -47,11 +49,11 @@ public class CatTitleBean extends DataSupport{
         this.cat_name = cat_name;
     }
 
-    public String getCat_type() {
+    public int getCat_type() {
         return cat_type;
     }
 
-    public void setCat_type(String cat_type) {
+    public void setCat_type(int cat_type) {
         this.cat_type = cat_type;
     }
 
@@ -135,15 +137,18 @@ public class CatTitleBean extends DataSupport{
         this.name = name;
     }
 
+
+
     public CatTitleBean() {
 
     }
 
-    public CatTitleBean(int cat_id, String cat_name,String id, String sort_order ) {
+    public CatTitleBean(int cat_id, String cat_name,String id, String sort_order , int cat_type) {
         this.cat_id = cat_id;
         this.cat_name = cat_name;
         this.c_id = id;
         this.sort_order =sort_order;
+        this.cat_type = cat_type;
     }
 
 

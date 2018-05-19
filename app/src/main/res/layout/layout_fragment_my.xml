@@ -186,31 +186,50 @@
                         android:layout_marginTop="@dimen/default_margin_4"
                         android:gravity="center_vertical">
 
-                        <ImageView
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:background="@mipmap/image_apprentice_icon" />
-
-                        <TextView
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/default_margin_4"
-                            android:gravity="center"
-                            android:text="徒弟数:"
+                            android:gravity="center_vertical"
+                            >
+
+                            <ImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:background="@mipmap/image_apprentice_icon" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/default_margin_4"
+                                android:gravity="center"
+                                android:text="徒弟数:"
+                                android:textColor="@color/color_white"
+                                android:textSize="@dimen/default_text_size_3"
+
+                                />
+
+                            <TextView
+                                android:id="@+id/tv_disciple"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/default_margin_3"
+                                android:text="1"
+                                android:textColor="@color/color_white"
+                                android:textSize="@dimen/default_text_size_3" />
+                        </LinearLayout>
+                        <TextView
+                            android:id="@+id/tv_generalize_code"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="推广码"
                             android:textColor="@color/color_white"
                             android:textSize="@dimen/default_text_size_3"
-
+                            android:layout_marginLeft="@dimen/default_margin_2"
                             />
-
-                        <TextView
-                            android:id="@+id/tv_disciple"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/default_margin_3"
-                            android:text="1"
-                            android:textColor="@color/color_white"
-                            android:textSize="@dimen/default_text_size_3" />
                     </LinearLayout>
+
+
 
 
                 </LinearLayout>
@@ -424,51 +443,13 @@
                     android:src="@mipmap/image_right" />
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/default_height_line"
-                android:layout_marginLeft="@dimen/default_padding_2"
-                android:layout_marginRight="@dimen/default_padding_2"
-                android:background="@color/line_color"></View>
-
-            <LinearLayout
-                android:id="@+id/ll_generalize_code"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/default_height_3"
-                android:layout_marginTop="@dimen/default_height_line"
-                android:background="@color/color_white"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingLeft="@dimen/default_padding_2"
-                android:paddingRight="@dimen/default_padding_2">
-
-                <ImageView
-                    android:layout_width="@dimen/default_icon_size_5"
-                    android:layout_height="@dimen/default_icon_size_5"
-                    android:layout_marginLeft="@dimen/default_margin_3"
-                    android:layout_marginRight="@dimen/default_margin_2"
-                    android:src="@mipmap/image_generalize_icon" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="推广码"
-                    android:textColor="@color/default_color_gray_2"
-                    android:textSize="@dimen/default_text_size_3" />
-
-                <ImageView
-                    android:layout_width="@dimen/default_icon_size_6"
-                    android:layout_height="@dimen/default_icon_size_6"
-                    android:src="@mipmap/image_right" />
-            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_height_line"
                 android:layout_marginLeft="@dimen/default_padding_2"
                 android:layout_marginRight="@dimen/default_padding_2"
-                android:background="@color/line_color"></View>
+                android:background="@color/line_color_s"></View>
 
             <LinearLayout
                 android:id="@+id/ll_invite"
@@ -507,7 +488,7 @@
                 android:layout_height="@dimen/default_height_line"
                 android:layout_marginLeft="@dimen/default_padding_2"
                 android:layout_marginRight="@dimen/default_padding_2"
-                android:background="@color/line_color"></View>
+                android:background="@color/line_color_s"></View>
 
             <LinearLayout
                 android:id="@+id/ll_collect"
@@ -546,7 +527,7 @@
                 android:layout_height="@dimen/default_height_line"
                 android:layout_marginLeft="@dimen/default_padding_2"
                 android:layout_marginRight="@dimen/default_padding_2"
-                android:background="@color/line_color"></View>
+                android:background="@color/line_color_s"></View>
 
 
             <LinearLayout
@@ -586,7 +567,7 @@
                 android:layout_height="@dimen/default_height_line"
                 android:layout_marginLeft="@dimen/default_padding_2"
                 android:layout_marginRight="@dimen/default_padding_2"
-                android:background="@color/line_color"></View>
+                android:background="@color/line_color_s"></View>
 
             <LinearLayout
                 android:id="@+id/ll_about"
@@ -626,7 +607,7 @@
                 android:layout_height="@dimen/default_height_line"
                 android:layout_marginLeft="@dimen/default_padding_2"
                 android:layout_marginRight="@dimen/default_padding_2"
-                android:background="@color/line_color"></View>
+                android:background="@color/line_color_s"></View>
 
             <LinearLayout
                 android:id="@+id/ll_setting"
@@ -664,7 +645,7 @@
                 android:layout_height="@dimen/default_height_line"
                 android:layout_marginLeft="@dimen/default_padding_2"
                 android:layout_marginRight="@dimen/default_padding_2"
-                android:background="@color/line_color"
+                android:background="@color/line_color_s"
                 android:layout_marginBottom="@dimen/default_height_3"
                 ></View>
 

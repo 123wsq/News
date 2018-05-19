@@ -85,7 +85,7 @@ public class MyFragment extends BaseFragment<UserMainView, UserPresenter<UserMai
         onUserStatusChangeListener();
     }
 
-    @OnClick({ R.id.ll_my_wallet, R.id.ll_integral, R.id.ll_member_upgrade,R.id.ll_invite,R.id.ll_generalize_code,
+    @OnClick({ R.id.ll_my_wallet, R.id.ll_integral, R.id.ll_member_upgrade,R.id.ll_invite,R.id.tv_generalize_code,
             R.id.ll_apprentice, R.id.ll_about, R.id.ll_setting, R.id.ll_collect,  R.id.ll_discount,
             R.id.ll_help_feedback, R.id.ll_wechat, R.id.ll_qq, R.id.ll_qcode, R.id.tv_login, R.id.iv_header})
     public void onClick(View view){
@@ -163,7 +163,7 @@ public class MyFragment extends BaseFragment<UserMainView, UserPresenter<UserMai
             case R.id.ll_help_feedback: //帮助与反馈 param =13;
                 startActivity( new Intent(getActivity(), HelpActivity.class));
                 break;
-            case R.id.ll_generalize_code:  //推广码
+            case R.id.tv_generalize_code:  //推广码
                 String generalize_code = SharedTools.getInstance(getActivity()).onGetString(ResponseKey.getInstace().user_id);
                 onShowDialog("提示", "您的推广码是: " + generalize_code, null);
                 break;

@@ -74,4 +74,9 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.ViewHolder>{
             }
         }
     }
+
+    public void onSelectoPosition(int position){
+        this.selectPosition = position;
+        notifyDataSetChanged();
+    }
 }

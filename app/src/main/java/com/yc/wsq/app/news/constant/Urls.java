@@ -171,4 +171,14 @@ public class Urls {
      * 点赞
      */
     public static final String ARTICLE_ZAN = "topic/addZanByArtid";
+
+    /**
+     * 获取所有标签
+     */
+    public static final String GET_ALL_CAT = "Article/catlist";
+
+    /**
+     * 排序标签
+     */
+    public static final String SORT_TAG = "Article/updatecatlist";
 }

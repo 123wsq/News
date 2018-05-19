@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -39,7 +41,7 @@ import butterknife.OnClick;
 /**
  * 我的钱包
  */
-public class WalletActivity extends BaseActivity<UserView, UserPresenter<UserView>> implements UserView{
+public class WalletActivity extends BaseActivity<UserView, UserPresenter<UserView>> implements UserView, RadioGroup.OnCheckedChangeListener {
 
 
 
@@ -50,7 +52,8 @@ public class WalletActivity extends BaseActivity<UserView, UserPresenter<UserVie
     @BindView(R.id.rv_RecyclerView) RecyclerView rv_RecyclerView;
     @BindView(R.id.tv_frozen_money) TextView tv_frozen_money;
     @BindView(R.id.ll_not_data) LinearLayout ll_not_data;
-
+    @BindView(R.id.rg_record) RadioGroup rg_record;
+    @BindView(R.id.rb_withdraw_record) RadioButton rb_withdraw_record;
 
     private String withdrawPsd1, withdrawPsd2;
     private CustomPsdKeyboardPopup keyboardPopup;
@@ -60,6 +63,9 @@ public class WalletActivity extends BaseActivity<UserView, UserPresenter<UserVie
     private int refreshState = 0;
     private List<Map<String, Object>> mData;
     private TradeRecodeAdapter mAdapter;
+    private int selectType= 1;
+    private int selectOldType= 1;
+
 
     @Override
     protected UserPresenter<UserView> createPresenter() {
@@ -104,7 +110,9 @@ public class WalletActivity extends BaseActivity<UserView, UserPresenter<UserVie
 
         mAdapter = new TradeRecodeAdapter(this, mData, listener);
         rv_RecyclerView.setAdapter(mAdapter);
-//
+
+        rb_withdraw_record.setChecked(true);
+        rg_record.setOnCheckedChangeListener(this);
         onStartRequest();
 
     }
@@ -220,14 +228,22 @@ public class WalletActivity extends BaseActivity<UserView, UserPresenter<UserVie
     public void onResponseData(Map<String, Object> result) {
 
         List<Map<String, Object>> list = (List<Map<String, Object>>) result.get(ResponseKey.getInstace().data);
-        if (refreshState ==1){
-            mData.addAll(0, list);
+        if(selectType ==selectOldType){
+            if (refreshState ==1){
+                mData.addAll(0, list);
+            }else{
+                mData.addAll(list);
+            }
         }else{
+            mData.clear();
             mData.addAll(list);
         }
+
         ll_not_data.setVisibility(mData.size() ==0? View.VISIBLE: View.GONE);
         onResetRefreshState();
         mAdapter.notifyDataSetChanged();
+
+        selectOldType = selectType;
     }
 
     /**
@@ -242,4 +258,18 @@ public class WalletActivity extends BaseActivity<UserView, UserPresenter<UserVie
         refreshState =0;
     }
 
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+        switch (checkedId){
+            case R.id.rb_withdraw_record:
+                selectType = 1;
+                onStartRequest();
+                break;
+            case R.id.rb_balance_record:
+                selectType = 2;
+                onStartRequest();
+                break;
+        }
+    }
 }

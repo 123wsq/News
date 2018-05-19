@@ -293,6 +293,97 @@ public class NewsPresenter<T extends BaseView> extends BasePresenter<T> {
         }
     }
 
+    /**
+     * 获取所有标签
+     * @param param
+     * @throws Exception
+     */
+    public void onGetAllTag (Map<String, String> param) throws Exception{
+        final NewsView view = (NewsView) getView();
+        if (view != null) {
+
+            try {
+                ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().user_id));
+            }catch (Exception e){
+                throw new Exception(e.getMessage());
+            }
+            String url =Urls.HOST + Urls.GET_ALL_CAT;
+
+            requestHttp.onSendGet(url, param, new Callback<Map<String, Object>>() {
+                @Override
+                public void onSuccess(Map<String, Object> data) {
+                    if (view !=  null){
+                        view.onNewsResponse(data);
+                    }
+                }
+
+                @Override
+                public void onFailure(String msg) {
+                    ToastUtils.onToast(msg);
+                }
+
+                @Override
+                public void onOutTime(String msg) {
+                    ToastUtils.onToast(msg);
+                    if (view != null){
+                        view.onReLogin();
+                    }
+                }
+
+                @Override
+                public void onComplete() {
+                }
+            });
+
+        }
+    }
+
+    /**
+     *
+     * 排序标签
+     * @param param
+     * @throws Exception
+     */
+    public void onUpdateSortTag (Map<String, String> param) throws Exception{
+        final NewsView view = (NewsView) getView();
+        if (view != null) {
+
+            try {
+                ParamValidate.getInstance().onValidateIsNull(param.get(ResponseKey.getInstace().user_id));
+            }catch (Exception e){
+                throw new Exception(e.getMessage());
+            }
+            String url =Urls.HOST + Urls.SORT_TAG;
+
+            requestHttp.onSendGet(url, param, new Callback<Map<String, Object>>() {
+                @Override
+                public void onSuccess(Map<String, Object> data) {
+                    if (view !=  null){
+                        view.onNewsTypeResponse(data);
+                    }
+                }
+
+                @Override
+                public void onFailure(String msg) {
+                    ToastUtils.onToast(msg);
+                }
+
+                @Override
+                public void onOutTime(String msg) {
+                    ToastUtils.onToast(msg);
+                    if (view != null){
+                        view.onReLogin();
+                    }
+                }
+
+                @Override
+                public void onComplete() {
+                }
+            });
+
+        }
+    }
+
 
     /**
      * 搜索新闻
